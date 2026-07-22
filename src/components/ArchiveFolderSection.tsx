@@ -1,31 +1,52 @@
 "use client";
 
-import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
+import { FaqNudge } from "@/components/FaqNudge";
 import { ProjectFolder } from "@/components/folder/ProjectFolder";
 import { Reveal } from "@/components/Reveal";
 
 export function ArchiveFolderSection() {
+  const reduce = useReducedMotion();
+
   return (
-    <section className="mt-12 border-t border-border pt-10 md:mt-14 md:pt-12">
-      <Reveal>
-        <div className="grid items-start gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-10">
-          <div>
-            <p className="editorial-label mb-3">Ещё работы</p>
-            <p className="max-w-sm text-base leading-relaxed text-muted md:text-lg">
-              Небольшие проекты, интерфейсы и эксперименты лежат в архиве.
+    <section className="relative flex snap-start flex-col justify-center overflow-hidden border-b border-border/60 py-10 md:py-12 lg:py-14">
+      {!reduce ? (
+        <motion.div
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[22rem] w-[22rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#2f86f5]/10 blur-3xl"
+          animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.65, 0.4] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          aria-hidden
+        />
+      ) : null}
+
+      <FaqNudge
+        q="Что внутри архива?"
+        a="Короткие идеи и интерфейсы, которые не вошли в избранное."
+        className="absolute left-3 top-[18%] z-20 hidden max-w-[8rem] xl:left-6 xl:block 2xl:left-10"
+      />
+      <FaqNudge
+        q="Можно взять идею как основу?"
+        a="Да. Адаптируем под ваш оффер и аудиторию."
+        className="absolute right-3 top-[18%] z-20 hidden max-w-[8rem] xl:right-6 xl:block 2xl:right-10"
+      />
+
+      <div className="relative mx-auto flex w-full max-w-[1400px] flex-col items-center justify-center px-4 md:px-6 lg:px-8">
+        <Reveal>
+          <div className="mx-auto max-w-lg text-center">
+            <h2 className="text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
+              Еще идеи в архиве
+            </h2>
+            <p className="mx-auto mt-1.5 max-w-md text-[13px] leading-relaxed text-muted">
+              Короткие сайты, интерфейсы и эксперименты. Откройте папку и
+              загляните в полный архив.
             </p>
-            <Link
-              href="/archive"
-              className="btn-secondary mt-5 inline-flex h-11 items-center rounded-full border border-foreground/20 px-5 text-sm"
-            >
-              Открыть архив
-            </Link>
           </div>
-          <div className="mx-auto w-full max-w-md scale-[0.92] overflow-x-hidden lg:mx-0 lg:justify-self-end">
-            <ProjectFolder />
-          </div>
-        </div>
-      </Reveal>
+        </Reveal>
+
+        <Reveal delay={0.06} className="mt-3 w-full md:mt-4">
+          <ProjectFolder compact />
+        </Reveal>
+      </div>
     </section>
   );
 }

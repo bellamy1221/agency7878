@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Onest, Source_Serif_4 } from "next/font/google";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
+import { Inter_Tight, JetBrains_Mono, Source_Serif_4 } from "next/font/google";
+import { SiteShell } from "@/components/SiteShell";
 import "./globals.css";
 
-const onest = Onest({
-  variable: "--font-onest",
+const interTight = Inter_Tight({
+  variable: "--font-sans-display",
   subsets: ["latin", "cyrillic"],
   display: "swap",
 });
 
 const sourceSerif = Source_Serif_4({
-  variable: "--font-newsreader",
+  variable: "--font-serif-accent",
   subsets: ["latin", "cyrillic"],
   style: ["normal", "italic"],
   display: "swap",
@@ -29,11 +28,11 @@ export const metadata: Metadata = {
     template: "%s · TSBLV",
   },
   description:
-    "Дизайн и разработка лендингов, сайтов, Telegram Mini Apps и интерфейсов для малого бизнеса, экспертов и частных проектов.",
+    "Дизайн и разработка сайтов, лендингов и Telegram Mini Apps, которые помогают малому бизнесу получать заявки.",
   openGraph: {
     title: "TSBLV - сайты для малого бизнеса",
     description:
-      "Сайты и цифровые продукты, которые помогают получать заявки. Дизайн и разработка в одном месте.",
+      "Сайт, который приводит клиентов. Дизайн и разработка в одних руках.",
     locale: "ru_RU",
     type: "website",
   },
@@ -47,13 +46,10 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${onest.variable} ${sourceSerif.variable} ${jetbrains.variable} h-full antialiased`}
+      className={`${interTight.variable} ${sourceSerif.variable} ${jetbrains.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-background text-foreground">
-        <div className="grain" aria-hidden />
-        <Header />
-        <main className="w-full max-w-full overflow-x-hidden">{children}</main>
-        <Footer />
+      <body className="min-h-full bg-background font-sans text-foreground">
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   );

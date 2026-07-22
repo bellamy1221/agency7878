@@ -1,12 +1,12 @@
 export const site = {
   name: "TSBLV",
-  tagline: "Сайты для малого бизнеса и частных проектов",
-  email: "hello@tsblv.ru",
-  telegram: "https://t.me/tsblv",
-  telegramHandle: "@tsblv",
+  tagline: "Сайты, которые помогают малому бизнесу получать заявки",
+  email: "biznes2001md@gmail.com",
+  telegram: "https://t.me/moralyss",
+  telegramHandle: "@moralyss",
   github: "https://github.com/tsblv",
-  availability: "Открыт для новых проектов",
-  year: new Date().getFullYear(),
+  availability: "Есть место для нового проекта",
+  year: 2026,
 } as const;
 
 export const navLinks = [
