@@ -22,6 +22,12 @@ export async function generateMetadata({
   return {
     title: project.title,
     description: project.summary,
+    openGraph: {
+      title: `${project.title} · TSBLV`,
+      description: project.summary,
+      type: "article",
+      images: [{ url: project.cover }],
+    },
   };
 }
 

@@ -5,7 +5,7 @@ import { projects } from "@/data/projects";
 export const metadata: Metadata = {
   title: "Архив",
   description:
-    "Полный архив работ TSBLV: сайты, Telegram Mini Apps, интерфейсы и эксперименты.",
+    "Архив работ TSBLV: концепции сайтов, интерфейсы, Telegram Mini Apps и визуальные эксперименты.",
 };
 
 export default function ArchivePage() {
@@ -14,9 +14,8 @@ export default function ArchivePage() {
       <div className="mb-10 max-w-3xl">
         <h1 className="text-4xl font-medium tracking-tight md:text-6xl">Архив</h1>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
-          Здесь собраны концепции, эксперименты и менее коммерческие работы.
-          Статус у каждой позиции честный: коммерческий проект, концепция или
-          эксперимент.
+          Концепции, эксперименты и работы вне избранного. У каждой позиции
+          честный статус: коммерческий проект, концепт или эксперимент.
         </p>
       </div>
       <ArchiveView projects={projects} />

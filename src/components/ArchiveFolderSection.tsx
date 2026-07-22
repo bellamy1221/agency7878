@@ -34,11 +34,11 @@ export function ArchiveFolderSection() {
         <Reveal>
           <div className="mx-auto max-w-lg text-center">
             <h2 className="text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
-              Еще идеи в архиве
+              Ещё идеи в архиве
             </h2>
             <p className="mx-auto mt-1.5 max-w-md text-[13px] leading-relaxed text-muted">
-              Короткие сайты, интерфейсы и эксперименты. Откройте папку и
-              загляните в полный архив.
+              Короткие сайты, интерфейсы и эксперименты. Откройте папку или
+              перейдите в полный архив.
             </p>
           </div>
         </Reveal>

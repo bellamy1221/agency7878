@@ -32,48 +32,48 @@ export function Hero() {
             className="mb-3 font-mono text-[11px] uppercase tracking-[0.16em] text-[#c9b8a8]"
             {...line(0.05)}
           >
-            Дизайн и разработка для малого бизнеса
+            Независимый дизайнер и разработчик
           </motion.p>
 
           <motion.h1
-            className="max-w-[14ch] font-serif text-[clamp(2.2rem,4.4vw,3.4rem)] font-medium leading-[1.05] tracking-[-0.03em] text-[#f7f2ea]"
+            className="max-w-[16ch] font-serif text-[clamp(2.2rem,4.4vw,3.4rem)] font-medium leading-[1.05] tracking-[-0.03em] text-[#f7f2ea]"
             {...line(0.1)}
           >
-            Больше заявок. Меньше хаоса в продажах.
+            Дизайн и разработка сайтов для бизнеса
           </motion.h1>
 
           <motion.p
-            className="mt-4 max-w-[38ch] text-[15px] leading-relaxed text-[#b7a99a] md:text-base"
+            className="mt-4 max-w-[40ch] text-[15px] leading-relaxed text-[#b7a99a] md:text-base"
             {...line(0.16)}
           >
-            Делаю сайты, лендинги и Telegram Mini Apps, которые ясно показывают
-            оффер и ведут гостя к заявке.
+            Создаю выразительные лендинги и сайты с понятной структурой,
+            продуманной анимацией и аккуратной технической реализацией.
           </motion.p>
 
           <motion.div className="mt-6 flex flex-wrap items-center gap-3" {...line(0.22)}>
-            <MagneticLink
-              href={site.telegram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-cta-primary inline-flex h-12 items-center gap-2 rounded-full px-6 text-sm font-semibold"
-            >
-              Обсудить проект
-              <ArrowRight size={16} weight="bold" />
-            </MagneticLink>
             <Link
               href="/#work"
-              className="btn-cta-ghost inline-flex h-12 items-center gap-2 rounded-full px-5 text-sm font-medium"
+              className="btn-cta-primary inline-flex h-12 items-center gap-2 rounded-full px-6 text-sm font-semibold"
             >
               Смотреть работы
               <ArrowDownRight size={16} weight="bold" />
             </Link>
+            <MagneticLink
+              href={site.telegram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-cta-ghost inline-flex h-12 items-center gap-2 rounded-full px-5 text-sm font-medium"
+            >
+              Обсудить проект
+              <ArrowRight size={16} weight="bold" />
+            </MagneticLink>
           </motion.div>
 
           <motion.ul
             className="mt-6 grid gap-2 border-t border-white/10 pt-4 sm:grid-cols-3"
             {...line(0.28)}
           >
-            {["Дизайн и код вместе", "Прямой контакт", "Запуск под ключ"].map(
+            {["Дизайн и код вместе", "Прямой контакт", "Готовый к запуску сайт"].map(
               (item) => (
                 <li
                   key={item}
@@ -156,13 +156,13 @@ export function Hero() {
                   aria-hidden
                 />
                 <p className="relative font-mono text-[10px] uppercase tracking-[0.14em] text-[#2a2825]/70">
-                  Результат для бизнеса
+                  Подход
                 </p>
                 <p className="relative mt-2 text-[1.05rem] font-semibold leading-snug tracking-[-0.02em] text-[#161513]">
-                  Понятный оффер и быстрый путь к заявке
+                  Структура, визуал и код в одних руках
                 </p>
                 <p className="relative mt-2 text-[12px] leading-snug text-[#2a2825]/75">
-                  Структура, дизайн и запуск в одних руках
+                  От идеи до рабочей реализации
                 </p>
               </div>
             </motion.div>
@@ -172,7 +172,7 @@ export function Hero() {
 
       <FaqNudge
         q="С чего обычно начинаем?"
-        a="С цели: кому продаём и что должно случиться после визита."
+        a="С цели: кому сайт и какой следующий шаг должен сделать посетитель."
         className="absolute bottom-4 right-3 z-20 hidden max-w-[8rem] sm:block md:bottom-8 md:right-6 lg:bottom-12 lg:right-10"
       />
     </section>

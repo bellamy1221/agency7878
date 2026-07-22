@@ -15,7 +15,7 @@ export function SelectedWork() {
     >
       <FaqNudge
         q="Почему концепции, а не кейсы?"
-        a="Показываю подход. Живой проект собираю уже под вашу задачу."
+        a="Показываю подход к работе. Живой проект собираю уже под вашу задачу."
         className="absolute right-3 top-16 z-20 hidden max-w-[8rem] xl:block xl:right-6 xl:top-20 2xl:right-10"
       />
 
@@ -23,11 +23,11 @@ export function SelectedWork() {
         <Reveal>
           <div className="mb-4 shrink-0 text-center lg:mb-5 lg:max-w-[70%] lg:text-left">
             <h2 className="text-xl font-semibold tracking-[-0.035em] md:text-2xl lg:text-[1.65rem]">
-              Работы, которые продают сами себя
+              Избранные работы
             </h2>
             <p className="mx-auto mt-1 max-w-2xl text-[13px] leading-relaxed text-muted lg:mx-0">
-              Пять концепций для реального малого бизнеса: от бронирования стола
-              до мебельного конфигуратора.
+              Несколько проектов, показывающих мой подход к дизайну, структуре и
+              разработке.
             </p>
           </div>
         </Reveal>

@@ -22,7 +22,7 @@ const steps = [
   {
     icon: CalendarBlank,
     title: "Фиксируем сроки и бюджет",
-    text: "Согласуем объем, дедлайн и стоимость до старта. Без сюрпризов по ходу.",
+    text: "Согласуем объём, дедлайн и стоимость до старта. Без сюрпризов по ходу.",
   },
   {
     icon: RocketLaunch,
@@ -72,11 +72,11 @@ export function FinalCta() {
                   style={{ transform: "translateZ(28px)" }}
                 >
                   <h2 className="max-w-xl text-[1.5rem] font-semibold tracking-[-0.035em] text-[#f4efe7] md:text-[1.85rem] md:leading-[1.08]">
-                    Расскажите о задаче. Покажу, как получить из нее заявки.
+                    Есть задача? Обсудим формат, сроки и подход.
                   </h2>
                   <p className="mt-3 max-w-lg text-sm leading-relaxed text-[#b7a99a] md:text-[15px]">
                     Без длинных брифов. Напишите в Telegram: что нужно, для кого и
-                    какой результат хотите.
+                    какой результат хотите получить.
                   </p>
 
                   <motion.div
@@ -95,7 +95,9 @@ export function FinalCta() {
                         Написать в Telegram
                       </MagneticLink>
                       <MagneticLink
-                        href={`mailto:${site.email}`}
+                        href={site.emailCompose}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="btn-cta-ghost inline-flex h-12 items-center gap-2 rounded-full px-5 text-sm font-semibold"
                       >
                         <EnvelopeSimple size={16} weight="bold" />

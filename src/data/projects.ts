@@ -1,4 +1,4 @@
-export type ProjectStatus = "Коммерческий проект" | "Концепция" | "Эксперимент";
+export type ProjectStatus = "Коммерческий проект" | "Концепт" | "Эксперимент";
 
 export type ArchiveCategory = "Сайты" | "Telegram" | "Интерфейсы" | "Эксперименты";
 
@@ -47,7 +47,7 @@ export const projects: Project[] = [
     category: "Сайт / Ресторан",
     archiveCategory: "Сайты",
     year: 2026,
-    status: "Концепция",
+    status: "Концепт",
     featured: true,
     featuredOrder: 1,
     layout: "full",
@@ -82,7 +82,7 @@ export const projects: Project[] = [
     development:
       "Быстрый адаптивный сайт, оптимизация изображений, форма заявки без тяжёлой админки.",
     outcome:
-      "Гость за минуту понимает формат места, смотрит меню и оставляет бронь. Концепция готова к наполнению реальными фото.",
+      "В результате получилась цельная дизайн-концепция с выразительной визуальной системой, понятной структурой и адаптивной реализацией.",
     isConcept: true,
   },
   {
@@ -92,7 +92,7 @@ export const projects: Project[] = [
     category: "Сайт / Отель",
     archiveCategory: "Сайты",
     year: 2026,
-    status: "Концепция",
+    status: "Концепт",
     featured: true,
     featuredOrder: 2,
     layout: "split-left",
@@ -127,7 +127,7 @@ export const projects: Project[] = [
     development:
       "Многостраничный адаптивный сайт, галереи номеров, валидация дат в форме.",
     outcome:
-      "Гость сравнивает номера, находит ответы и оставляет запрос без лишней переписки.",
+      "Дизайн-концепция с ясной структурой: номера, ответы на вопросы и короткий путь к запросу бронирования.",
     isConcept: true,
   },
   {
@@ -137,7 +137,7 @@ export const projects: Project[] = [
     category: "Сайт / Косметолог",
     archiveCategory: "Сайты",
     year: 2026,
-    status: "Концепция",
+    status: "Концепт",
     featured: true,
     featuredOrder: 3,
     layout: "editorial",
@@ -172,7 +172,7 @@ export const projects: Project[] = [
     development:
       "Лёгкий сайт, адаптив, форма с уведомлением в Telegram.",
     outcome:
-      "Клиент понимает услуги и оставляет запись без долгой переписки.",
+      "Независимая концепция личного сайта: услуги, доверие и понятный сценарий записи без лишней переписки.",
     isConcept: true,
   },
   {
@@ -182,7 +182,7 @@ export const projects: Project[] = [
     category: "Mini App / Кафе",
     archiveCategory: "Telegram",
     year: 2026,
-    status: "Концепция",
+    status: "Концепт",
     featured: true,
     featuredOrder: 4,
     layout: "split-right",
@@ -217,7 +217,7 @@ export const projects: Project[] = [
     development:
       "Интерфейс Mini App, валидация форм, прототип статусов и уведомлений.",
     outcome:
-      "Гость оформляет действие за минуту, администратор получает структурированную заявку.",
+      "Концепт Mini App: структурированные сценарии брони, заказа и лояльности рядом с привычным чатом.",
     isConcept: true,
   },
   {
@@ -227,7 +227,7 @@ export const projects: Project[] = [
     category: "Веб-сервис / Конфигуратор",
     archiveCategory: "Интерфейсы",
     year: 2026,
-    status: "Концепция",
+    status: "Концепт",
     featured: true,
     featuredOrder: 5,
     layout: "compact",
@@ -247,11 +247,11 @@ export const projects: Project[] = [
     objective:
       "Помочь мебельной студии вовлечь клиента в выбор, наглядно показать будущий интерьер и получить более подготовленную заявку.",
     solution:
-      "Конфигуратор комнаты: план, каталог мебели, материалы, живая оценка стоимости и сохранение сценария перед заявкой. В портфолио - превью интерфейса, не полный продукт.",
+      "Конфигуратор комнаты: план, каталог мебели, материалы, живая оценка стоимости и сохранение сценария перед заявкой. В портфолио показано превью интерфейса, не полный продукт.",
     functionality: [
       "План комнаты",
       "Каталог мебели",
-      "Drag and drop",
+      "Перетаскивание объектов",
       "Поворот и масштаб",
       "Выбор материалов и цвета",
       "Живая оценка стоимости",
@@ -259,20 +259,20 @@ export const projects: Project[] = [
       "Отправка заявки",
     ],
     contribution:
-      "Проектирование сценария, UI конфигуратора, слои интерфейса и каркас взаимодействия для портфолио-концепции.",
-    services: ["Product UI", "Конфигуратор", "Frontend-концепт"],
+      "Проектирование сценария, интерфейс конфигуратора, слои экранов и каркас взаимодействия для дизайн-концепции.",
+    services: ["Интерфейс продукта", "Конфигуратор", "Frontend-концепт"],
     visualDirection:
       "Светлый продуктовый интерфейс, спокойная сетка, акценты на инструментах и превью комнаты.",
     development:
-      "Слои UI и интерактивное превью без полной логики конфигуратора. Акцент на ясности сценария.",
+      "Слои интерфейса и интерактивное превью без полной логики конфигуратора. Акцент на ясности сценария.",
     outcome:
-      "Клиент видит, как студия может вовлечь покупателя в выбор и получить более точную заявку.",
+      "Дизайн-концепция, показывающая, как студия может вовлечь клиента в выбор и получить более точную заявку.",
     isConcept: true,
   },
   {
     slug: "type-rhythm",
     title: "Ритм набора",
-    category: "Эксперимент / Typography",
+    category: "Эксперимент / Типографика",
     archiveCategory: "Эксперименты",
     year: 2026,
     status: "Эксперимент",
@@ -282,7 +282,7 @@ export const projects: Project[] = [
     cover: "https://picsum.photos/seed/tsblv-type-rhythm/1200/900",
     gallery: ["https://picsum.photos/seed/tsblv-type-rhythm-2/1200/900"],
     summary: "Эксперимент с крупной типографикой и модульными отступами для лендингов.",
-    context: "Внутренний визуальный эксперимент студии.",
+    context: "Внутренний визуальный эксперимент.",
     problem: "Нужно проверить читаемость крупного текста на телефоне.",
     objective: "Собрать рабочие приёмы шкалы и интерлиньяжа.",
     solution: "Серия экранов с разными ритмами строк.",
@@ -291,7 +291,7 @@ export const projects: Project[] = [
     services: ["Эксперимент"],
     visualDirection: "Монохром, акцент на ритме.",
     development: "Статичные экраны.",
-    outcome: "Приёмы для будущих клиентских лендингов.",
+    outcome: "Набор приёмов для будущих лендингов.",
     isConcept: true,
   },
   {
@@ -300,7 +300,7 @@ export const projects: Project[] = [
     category: "Сайт / Локальный бизнес",
     archiveCategory: "Сайты",
     year: 2026,
-    status: "Концепция",
+    status: "Концепт",
     featured: false,
     layout: "compact",
     accent: "#8B5E3C",
@@ -316,7 +316,7 @@ export const projects: Project[] = [
     services: ["Лендинг"],
     visualDirection: "Тёплый локальный характер.",
     development: "Статический лендинг.",
-    outcome: "Простой шаблон для локального места.",
+    outcome: "Компактная дизайн-концепция для локального места.",
     isConcept: true,
   },
   {
@@ -339,7 +339,7 @@ export const projects: Project[] = [
     functionality: ["Список статусов"],
     contribution: "UI-прототип.",
     services: ["Прототип"],
-    visualDirection: "Плотный utility-интерфейс.",
+    visualDirection: "Плотный утилитарный интерфейс.",
     development: "Статичный прототип.",
     outcome: "Заготовка сценария для Mini App.",
     isConcept: true,
@@ -364,9 +364,9 @@ export const projects: Project[] = [
     functionality: ["Поля", "Ошибки", "Успех"],
     contribution: "Переиспользуемый UI-слой.",
     services: ["UI"],
-    visualDirection: "Светлый editorial UI.",
+    visualDirection: "Светлый editorial-интерфейс.",
     development: "Компоненты без бэкенда.",
-    outcome: "База для форм в проектах студии.",
+    outcome: "База для форм в будущих проектах.",
     isConcept: true,
   },
 ];

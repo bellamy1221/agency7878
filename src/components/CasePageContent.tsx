@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "@phosphor-icons/react/dist/ssr";
+import { ArrowLeft, ArrowRight, PaperPlaneTilt } from "@phosphor-icons/react/dist/ssr";
 import type { Project } from "@/data/projects";
 import { getAdjacentProjects } from "@/data/projects";
+import { site } from "@/data/site";
 
 type CasePageProps = {
   project: Project;
@@ -17,7 +18,7 @@ export function CasePageContent({ project }: CasePageProps) {
         <div className="mx-auto max-w-[1400px] px-4 pb-12 pt-10 md:px-6 md:pb-16 md:pt-14 lg:px-8">
           <Link
             href="/#work"
-            className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
+            className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
             <ArrowLeft size={14} weight="bold" />
             К работам
@@ -59,7 +60,7 @@ export function CasePageContent({ project }: CasePageProps) {
           </p>
         </section>
         <section className="md:col-span-6 md:col-start-7">
-          <h2 className="text-2xl font-medium tracking-tight">Проблема</h2>
+          <h2 className="text-2xl font-medium tracking-tight">Задача</h2>
           <p className="mt-4 text-sm leading-relaxed text-muted md:text-base">
             {project.problem}
           </p>
@@ -69,7 +70,7 @@ export function CasePageContent({ project }: CasePageProps) {
       <div className="border-y border-border bg-surface">
         <div className="mx-auto grid max-w-[1400px] gap-10 px-4 py-14 md:grid-cols-2 md:px-6 lg:px-8 lg:py-20">
           <section>
-            <h2 className="text-2xl font-medium tracking-tight">Цель проекта</h2>
+            <h2 className="text-2xl font-medium tracking-tight">Подход</h2>
             <p className="mt-4 text-sm leading-relaxed text-muted md:text-base">
               {project.objective}
             </p>
@@ -154,7 +155,7 @@ export function CasePageContent({ project }: CasePageProps) {
 
       <div className="mx-auto grid max-w-[1400px] gap-6 px-4 py-14 md:grid-cols-3 md:px-6 lg:px-8 lg:py-16">
         <section className="rounded-[var(--radius-editorial)] border border-border bg-surface p-6 md:p-7">
-          <h2 className="text-lg font-medium tracking-tight">Вклад TSBLV</h2>
+          <h2 className="text-lg font-medium tracking-tight">Вклад</h2>
           <p className="mt-3 text-sm leading-relaxed text-muted">
             {project.contribution}
           </p>
@@ -166,7 +167,7 @@ export function CasePageContent({ project }: CasePageProps) {
           </p>
         </section>
         <section className="rounded-[var(--radius-editorial)] border border-border bg-surface p-6 md:p-7">
-          <h2 className="text-lg font-medium tracking-tight">Итог</h2>
+          <h2 className="text-lg font-medium tracking-tight">Результат</h2>
           <p className="mt-3 text-sm leading-relaxed text-muted">{project.outcome}</p>
           {project.isConcept ? (
             <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-accent">
@@ -176,12 +177,29 @@ export function CasePageContent({ project }: CasePageProps) {
         </section>
       </div>
 
+      <div className="border-t border-border bg-surface">
+        <div className="mx-auto flex max-w-[1400px] flex-col items-start justify-between gap-5 px-4 py-10 md:flex-row md:items-center md:px-6 md:py-12 lg:px-8">
+          <h2 className="max-w-md text-xl font-medium tracking-tight md:text-2xl">
+            Нужен сайт с похожим уровнем проработки?
+          </h2>
+          <a
+            href={site.telegram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary inline-flex h-12 items-center gap-2 rounded-full px-6 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            <PaperPlaneTilt size={16} weight="bold" />
+            Обсудить проект
+          </a>
+        </div>
+      </div>
+
       <nav aria-label="Соседние проекты" className="border-t border-border">
         <div className="mx-auto grid max-w-[1400px] md:grid-cols-2">
           {prev ? (
             <Link
               href={`/work/${prev.slug}`}
-              className="group flex items-center gap-4 border-b border-border px-4 py-8 transition-colors hover:bg-muted-soft md:border-b-0 md:border-r md:px-6 lg:px-8"
+              className="group flex items-center gap-4 border-b border-border px-4 py-8 transition-colors hover:bg-muted-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent md:border-b-0 md:border-r md:px-6 lg:px-8"
             >
               <ArrowLeft size={18} className="text-muted" weight="bold" />
               <div>
@@ -197,7 +215,7 @@ export function CasePageContent({ project }: CasePageProps) {
           {next ? (
             <Link
               href={`/work/${next.slug}`}
-              className="group flex items-center justify-end gap-4 px-4 py-8 text-right transition-colors hover:bg-muted-soft md:px-6 lg:px-8"
+              className="group flex items-center justify-end gap-4 px-4 py-8 text-right transition-colors hover:bg-muted-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent md:px-6 lg:px-8"
             >
               <div>
                 <p className="editorial-label mb-2">Следующий</p>

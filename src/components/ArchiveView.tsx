@@ -126,7 +126,7 @@ export function ArchiveView({ projects }: ArchiveViewProps) {
             <Link
               key={project.slug}
               href={`/work/${project.slug}`}
-              className="group overflow-hidden rounded-[var(--radius-editorial)] border border-border bg-surface transition-colors hover:border-foreground/30"
+              className="group cursor-pointer overflow-hidden rounded-[var(--radius-editorial)] border border-border bg-surface transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-0.5 hover:border-foreground/30 hover:shadow-[0_12px_28px_rgba(22,21,19,0.08)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
@@ -153,7 +153,7 @@ export function ArchiveView({ projects }: ArchiveViewProps) {
             <li key={project.slug}>
               <Link
                 href={`/work/${project.slug}`}
-                className="grid grid-cols-[72px_1fr] items-center gap-4 py-4 transition-colors hover:bg-muted-soft/60 md:grid-cols-[88px_1.4fr_1fr_0.8fr_0.7fr]"
+                className="grid cursor-pointer grid-cols-[72px_1fr] items-center gap-4 py-4 transition-colors hover:bg-muted-soft/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent md:grid-cols-[88px_1.4fr_1fr_0.8fr_0.7fr]"
               >
                 <div className="relative h-14 w-[72px] overflow-hidden rounded-md border border-border md:h-16 md:w-[88px]">
                   <Image

@@ -10,7 +10,7 @@ const SHEETS = [
     label: "Сайт",
     title: "Сайт для сервиса",
     year: 2026,
-    status: "Концепция",
+    status: "Концепт",
   },
   {
     id: "b",
@@ -24,14 +24,14 @@ const SHEETS = [
     label: "Промо",
     title: "Сайт события",
     year: 2026,
-    status: "Концепция",
+    status: "Концепт",
   },
   {
     id: "d",
     label: "Форма",
     title: "Быстрая запись",
     year: 2026,
-    status: "Концепция",
+    status: "Концепт",
   },
 ] as const;
 

@@ -139,7 +139,7 @@ export function WorkShowcase({ projects }: { projects: Project[] }) {
                 aria-selected={isActive}
                 onMouseEnter={() => setActive(index)}
                 onFocus={() => setActive(index)}
-                className={`group flex w-full items-center justify-between gap-3 border-b border-border py-2.5 text-left transition-colors ${
+                className={`group flex w-full cursor-pointer items-center justify-between gap-3 border-b border-border py-2.5 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
                   isActive ? "text-foreground" : "text-muted hover:text-foreground"
                 }`}
               >
@@ -174,7 +174,7 @@ export function WorkShowcase({ projects }: { projects: Project[] }) {
             >
               <Link
                 href={`/work/${project.slug}`}
-                className={`group flex h-full flex-col overflow-hidden rounded-[12px] border border-[#141210]/10 ${tint} p-3 text-[#141210] shadow-[0_18px_40px_rgba(0,0,0,0.28)] transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_48px_rgba(0,0,0,0.34)]`}
+                className={`group flex h-full cursor-pointer flex-col overflow-hidden rounded-[12px] border border-[#141210]/10 ${tint} p-3 text-[#141210] shadow-[0_18px_40px_rgba(0,0,0,0.28)] transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_48px_rgba(0,0,0,0.34)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent`}
               >
                 <div className="min-h-0 flex-1 overflow-hidden">
                   <PreviewVisual project={project} />
@@ -192,7 +192,7 @@ export function WorkShowcase({ projects }: { projects: Project[] }) {
                     </p>
                   </div>
                   <span className="btn-cta-primary inline-flex h-10 items-center gap-1.5 self-start rounded-full px-4 text-[13px] font-semibold md:self-end">
-                    Смотреть кейс
+                    Открыть проект
                     <ArrowUpRight size={14} weight="bold" />
                   </span>
                 </div>
@@ -232,7 +232,7 @@ export function WorkShowcase({ projects }: { projects: Project[] }) {
             <Link
               key={item.slug}
               href={`/work/${item.slug}`}
-              className={`w-[88%] shrink-0 snap-center rounded-[10px] border border-[#141210]/10 p-3 text-[#141210] transition-transform active:scale-[0.99] ${
+              className={`w-[88%] shrink-0 cursor-pointer snap-center rounded-[10px] border border-[#141210]/10 p-3 text-[#141210] transition-transform active:scale-[0.99] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
                 tintBySlug[item.slug] ?? "bg-[#f3eee8]"
               }`}
             >
@@ -255,7 +255,7 @@ export function WorkShowcase({ projects }: { projects: Project[] }) {
               </h3>
               <p className="mt-1.5 line-clamp-2 text-[13px] text-[#5a544c]">{item.objective}</p>
               <span className="btn-cta-primary mt-3 inline-flex min-h-10 items-center gap-1.5 rounded-full px-4 text-[13px] font-semibold">
-                Смотреть кейс
+                Открыть проект
                 <ArrowUpRight size={13} weight="bold" />
               </span>
             </Link>

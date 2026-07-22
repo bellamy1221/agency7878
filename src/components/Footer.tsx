@@ -8,8 +8,8 @@ export function Footer() {
         <div className="space-y-4">
           <p className="text-2xl font-medium tracking-tight">{site.name}</p>
           <p className="max-w-sm text-sm leading-relaxed text-muted">
-            Выразительные сайты и лёгкие цифровые продукты для малого бизнеса,
-            экспертов и частных проектов.
+            Выразительные лендинги и сайты с понятной структурой, продуманной
+            анимацией и аккуратной технической реализацией.
           </p>
           <p className="note-chip !normal-case tracking-normal">
             {site.availability}
@@ -49,20 +49,12 @@ export function Footer() {
             </li>
             <li>
               <a
-                href={`mailto:${site.email}`}
-                className="transition-colors hover:text-accent"
-              >
-                {site.email}
-              </a>
-            </li>
-            <li>
-              <a
-                href={site.github}
+                href={site.emailCompose}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-colors hover:text-accent"
               >
-                GitHub
+                {site.email}
               </a>
             </li>
           </ul>
@@ -74,7 +66,7 @@ export function Footer() {
           <p>
             © {site.year} {site.name}
           </p>
-          <p>Дизайн и разработка - независимо</p>
+          <p>Независимый дизайнер и разработчик</p>
         </div>
       </div>
     </footer>
