@@ -74,7 +74,7 @@ export function Header() {
             ))}
             <Link
               href="/#contact"
-              className="mt-3 inline-flex h-12 items-center justify-center rounded-full bg-foreground px-5 text-background"
+              className="btn-primary mt-3 inline-flex h-12 items-center justify-center rounded-full px-5 text-sm"
               onClick={() => setOpen(false)}
             >
               Обсудить проект

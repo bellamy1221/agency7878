@@ -13,6 +13,9 @@ import Link from "next/link";
 import { useRef, type PointerEvent, type ReactNode } from "react";
 import type { Project } from "@/data/projects";
 
+const sceneShell =
+  "relative flex w-full max-w-full flex-col justify-center overflow-x-hidden py-10 lg:min-h-[calc(100svh-4.25rem)] lg:justify-center lg:py-6 lg:pb-10";
+
 function useTilt() {
   const reduce = useReducedMotion();
   const x = useMotionValue(0);
@@ -25,8 +28,8 @@ function useTilt() {
     const rect = event.currentTarget.getBoundingClientRect();
     const px = (event.clientX - rect.left) / rect.width - 0.5;
     const py = (event.clientY - rect.top) / rect.height - 0.5;
-    x.set(px * 10);
-    y.set(py * 7);
+    x.set(px * 8);
+    y.set(py * 5);
   };
 
   const onLeave = () => {
@@ -42,13 +45,11 @@ function MaskImage({
   alt,
   className,
   sizes,
-  priority,
 }: {
   src: string;
   alt: string;
   className?: string;
   sizes: string;
-  priority?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
@@ -65,7 +66,6 @@ function MaskImage({
         src={src}
         alt={alt}
         fill
-        priority={priority}
         sizes={sizes}
         className="object-cover contrast-[1.03]"
       />
@@ -75,16 +75,16 @@ function MaskImage({
 
 function BrowserPreview({
   project,
-  tall,
+  compact,
 }: {
   project: Project;
-  tall?: boolean;
+  compact?: boolean;
 }) {
   const { reduce, rx, ry, onMove, onLeave } = useTilt();
 
   return (
     <div
-      className="group overflow-hidden rounded-[var(--radius-editorial)] border border-border bg-surface shadow-[0_18px_50px_rgba(22,21,19,0.07)] transition-transform duration-500 hover:-translate-y-1"
+      className="group overflow-hidden rounded-[var(--radius-editorial)] border border-border bg-surface shadow-[0_14px_40px_rgba(22,21,19,0.07)] transition-transform duration-500 hover:-translate-y-0.5"
       onPointerMove={onMove}
       onPointerLeave={onLeave}
       style={{ borderColor: `${project.accent}33` }}
@@ -100,7 +100,7 @@ function BrowserPreview({
       <motion.div
         style={reduce ? undefined : { x: rx, y: ry }}
         className={`relative w-full overflow-hidden ${
-          tall ? "aspect-[16/12]" : "aspect-[16/10]"
+          compact ? "aspect-[16/9] lg:aspect-[16/8.5]" : "aspect-[16/10] lg:aspect-[16/9]"
         }`}
       >
         <Image
@@ -108,9 +108,9 @@ function BrowserPreview({
           alt={`Превью ${project.title}`}
           fill
           sizes="(max-width: 768px) 100vw, 70vw"
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-foreground/20 via-transparent to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-foreground/15 via-transparent to-transparent" />
       </motion.div>
     </div>
   );
@@ -118,36 +118,30 @@ function BrowserPreview({
 
 function LayeredUiPreview({ project }: { project: Project }) {
   return (
-    <div className="relative min-h-[320px] md:min-h-[420px]">
-      <div className="absolute left-0 top-6 w-[68%] overflow-hidden rounded-xl border border-border bg-surface shadow-[0_16px_40px_rgba(22,21,19,0.08)] transition-transform duration-500 hover:-translate-y-1 md:top-10">
+    <div className="relative min-h-[260px] md:min-h-[320px] lg:min-h-[360px]">
+      <div className="absolute left-0 top-4 w-[68%] overflow-hidden rounded-xl border border-border bg-surface shadow-[0_14px_34px_rgba(22,21,19,0.08)] transition-transform duration-500 hover:-translate-y-1 md:top-6">
         <div className="browser-chrome">
           <span className="browser-dot" />
           <span className="browser-dot" />
           <span className="browser-dot" />
         </div>
-        <div className="relative aspect-[16/11]">
-          <Image
-            src={project.cover}
-            alt=""
-            fill
-            sizes="50vw"
-            className="object-cover"
-          />
+        <div className="relative aspect-[16/10] lg:aspect-[16/9]">
+          <Image src={project.cover} alt="" fill sizes="50vw" className="object-cover" />
         </div>
       </div>
-      <div className="absolute bottom-0 right-0 w-[42%] overflow-hidden rounded-[1.4rem] border border-border bg-background shadow-[0_20px_40px_rgba(22,21,19,0.12)] transition-transform duration-500 hover:-translate-y-2">
-        <div className="relative aspect-[9/16]">
+      <div className="absolute bottom-0 right-0 w-[40%] overflow-hidden rounded-[1.25rem] border border-border bg-background shadow-[0_16px_34px_rgba(22,21,19,0.12)] transition-transform duration-500 hover:-translate-y-1">
+        <div className="relative aspect-[9/15]">
           <Image
             src={project.gallery[2] ?? project.cover}
             alt=""
             fill
-            sizes="30vw"
+            sizes="28vw"
             className="object-cover"
           />
         </div>
       </div>
       <div
-        className="absolute right-[8%] top-0 rounded-lg border border-border bg-background px-3 py-2 shadow-sm"
+        className="absolute right-[6%] top-0 rounded-lg border border-border bg-background px-3 py-2 shadow-sm"
         style={{ borderColor: project.accent }}
       >
         <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">
@@ -159,39 +153,46 @@ function LayeredUiPreview({ project }: { project: Project }) {
   );
 }
 
-function StackedPreview({ project }: { project: Project }) {
+function ConfiguratorPreview({ project }: { project: Project }) {
   return (
     <div className="grid gap-3">
       <div className="overflow-hidden rounded-[var(--radius-editorial)] border border-border bg-surface">
         <div className="flex items-center justify-between border-b border-border px-3 py-2">
-          <p className="editorial-label">Панель</p>
-          <p className="font-mono text-[10px] text-muted">day view</p>
+          <p className="editorial-label">Комната</p>
+          <p className="font-mono text-[10px] text-muted">live estimate</p>
         </div>
-        <div className="relative aspect-[16/9]">
+        <div className="relative aspect-[16/9] lg:aspect-[16/8]">
           <Image
             src={project.cover}
             alt=""
             fill
-            sizes="50vw"
+            sizes="55vw"
             className="object-cover"
           />
+          <div className="absolute bottom-3 left-3 rounded-md border border-border bg-background/90 px-2.5 py-1.5 backdrop-blur-sm">
+            <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">
+              Оценка
+            </p>
+            <p className="text-sm font-medium">от 186 000 ₽</p>
+          </div>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-3">
-        {[project.gallery[0], project.gallery[1]].map((src, i) => (
+      <div className="grid grid-cols-3 gap-2 md:gap-3">
+        {[
+          { src: project.gallery[0], label: "Каталог" },
+          { src: project.gallery[1], label: "Материалы" },
+          { src: project.gallery[2] ?? project.cover, label: "Сохранение" },
+        ].map((item) => (
           <div
-            key={src ?? i}
-            className="overflow-hidden rounded-lg border border-border transition-transform duration-500 hover:-translate-y-1"
+            key={item.label}
+            className="overflow-hidden rounded-lg border border-border transition-transform duration-500 hover:-translate-y-0.5"
           >
             <div className="relative aspect-[4/3]">
-              <Image
-                src={src ?? project.cover}
-                alt=""
-                fill
-                sizes="25vw"
-                className="object-cover"
-              />
+              <Image src={item.src ?? project.cover} alt="" fill sizes="18vw" className="object-cover" />
             </div>
+            <p className="border-t border-border bg-background px-2 py-1.5 font-mono text-[10px] uppercase tracking-[0.1em] text-muted">
+              {item.label}
+            </p>
           </div>
         ))}
       </div>
@@ -203,20 +204,20 @@ function EditorialPreview({ project }: { project: Project }) {
   return (
     <div className="relative">
       <div
-        className="mb-4 max-w-[16ch] text-4xl font-medium leading-[1.05] tracking-tight md:text-5xl"
+        className="mb-3 max-w-[14ch] text-3xl font-medium leading-[1.05] tracking-tight md:text-4xl lg:text-[2.75rem]"
         style={{ color: project.accent }}
       >
         {project.shortTitle ?? project.title}
       </div>
-      <div className="relative ml-auto w-[88%] overflow-hidden rounded-[var(--radius-editorial)] border border-border md:w-[92%]">
+      <div className="relative ml-auto w-[88%] overflow-hidden rounded-[var(--radius-editorial)] border border-border md:w-[90%]">
         <MaskImage
           src={project.cover}
           alt={`Превью ${project.title}`}
-          className="aspect-[5/4]"
+          className="aspect-[5/3.6] lg:aspect-[5/3.2]"
           sizes="50vw"
         />
       </div>
-      <div className="absolute -left-1 bottom-8 hidden w-40 -rotate-2 rounded-lg border border-border bg-background p-3 shadow-sm md:block">
+      <div className="absolute -left-1 bottom-6 hidden w-36 -rotate-2 rounded-lg border border-border bg-background p-2.5 shadow-sm md:block">
         <p className="editorial-label mb-1">Фрагмент</p>
         <p className="text-xs leading-snug text-muted">
           {project.services.slice(0, 2).join(" · ")}
@@ -244,37 +245,29 @@ function Meta({ project }: { project: Project }) {
 
 function CopyBlock({
   project,
-  compact,
+  dense,
 }: {
   project: Project;
-  compact?: boolean;
+  dense?: boolean;
 }) {
   return (
     <>
       <Meta project={project} />
       <h3
-        className={`mt-3 font-medium tracking-tight ${
-          compact ? "text-2xl md:text-3xl" : "text-3xl md:text-4xl"
+        className={`mt-2 font-medium tracking-tight ${
+          dense ? "text-2xl md:text-3xl lg:text-[2rem]" : "text-3xl md:text-4xl lg:text-[2.5rem]"
         }`}
       >
         {project.title}
       </h3>
-      <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted md:text-base">
+      <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted md:text-[15px]">
         {project.summary}
       </p>
-      {!compact ? (
-        <>
-          <p className="mt-4 text-sm text-foreground/80">
-            <span className="text-muted">Цель: </span>
-            {project.objective}
-          </p>
-          <p className="mt-2 text-sm text-foreground/80">
-            <span className="text-muted">Что сделано: </span>
-            {project.services.join(", ")}
-          </p>
-        </>
-      ) : null}
-      <span className="mt-6 inline-flex items-center gap-2 text-sm text-accent transition-transform duration-300 group-hover/link:translate-x-0.5">
+      <p className="mt-3 line-clamp-2 text-sm text-foreground/80">
+        <span className="text-muted">Цель: </span>
+        {project.objective}
+      </p>
+      <span className="mt-4 inline-flex items-center gap-2 text-sm text-accent transition-transform duration-300 group-hover/link:translate-x-0.5 lg:mt-5">
         Смотреть кейс
         <ArrowUpRight size={16} weight="bold" />
       </span>
@@ -309,19 +302,19 @@ export function ProjectFeature({
 
   if (project.layout === "full") {
     return (
-      <article className="relative">
-        <p className="editorial-label mb-4">{n} / Immersive</p>
+      <article className={sceneShell}>
+        <p className="editorial-label mb-3">{n} / Immersive</p>
         <CaseLink href={`/work/${project.slug}`}>
-          <BrowserPreview project={project} tall />
+          <BrowserPreview project={project} compact />
         </CaseLink>
-        <div className="mt-7 grid gap-6 md:grid-cols-[1.2fr_0.8fr] md:items-end">
+        <div className="mt-5 grid gap-4 md:grid-cols-[1.25fr_0.75fr] md:items-end">
           <CaseLink href={`/work/${project.slug}`}>
-            <CopyBlock project={project} />
+            <CopyBlock project={project} dense />
           </CaseLink>
-          <div className="justify-self-start rounded-lg border border-dashed border-border bg-surface px-4 py-3 md:justify-self-end">
+          <div className="justify-self-start rounded-lg border border-dashed border-border bg-surface px-3 py-2.5 md:justify-self-end">
             <p className="editorial-label mb-1">Фокус</p>
             <p className="text-sm text-foreground/80">
-              Атмосфера + меню + бронь в одном спокойном потоке.
+              Атмосфера, меню и бронь в одном спокойном потоке.
             </p>
           </div>
         </div>
@@ -331,16 +324,16 @@ export function ProjectFeature({
 
   if (project.layout === "split-left") {
     return (
-      <article className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
+      <article className={`${sceneShell} lg:grid lg:grid-cols-12 lg:items-center lg:gap-10`}>
         <div className="lg:col-span-7">
-          <p className="editorial-label mb-4">{n} / Split</p>
+          <p className="editorial-label mb-3">{n} / Split</p>
           <CaseLink href={`/work/${project.slug}`}>
-            <BrowserPreview project={project} />
+            <BrowserPreview project={project} compact />
           </CaseLink>
         </div>
-        <div className="lg:col-span-5 lg:pt-10">
+        <div className="mt-5 lg:col-span-5 lg:mt-0">
           <CaseLink href={`/work/${project.slug}`}>
-            <CopyBlock project={project} />
+            <CopyBlock project={project} dense />
           </CaseLink>
         </div>
       </article>
@@ -349,14 +342,14 @@ export function ProjectFeature({
 
   if (project.layout === "editorial") {
     return (
-      <article className="border-y border-border py-12 md:py-16">
-        <div className="mb-8 flex items-end justify-between gap-4">
+      <article className={`${sceneShell} border-y border-border`}>
+        <div className="mb-5 flex items-end justify-between gap-4">
           <p className="editorial-label">{n} / Editorial</p>
           <span className="note-chip">личный бренд</span>
         </div>
-        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14">
-          <CaseLink href={`/work/${project.slug}`} className="lg:pt-4">
-            <CopyBlock project={project} />
+        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-12">
+          <CaseLink href={`/work/${project.slug}`}>
+            <CopyBlock project={project} dense />
           </CaseLink>
           <CaseLink href={`/work/${project.slug}`}>
             <EditorialPreview project={project} />
@@ -368,14 +361,14 @@ export function ProjectFeature({
 
   if (project.layout === "split-right") {
     return (
-      <article className="grid items-center gap-10 lg:grid-cols-12">
-        <div className="lg:col-span-5 lg:order-1">
-          <p className="editorial-label mb-4">{n} / Layers</p>
+      <article className={`${sceneShell} lg:grid lg:grid-cols-12 lg:items-center lg:gap-10`}>
+        <div className="lg:col-span-5">
+          <p className="editorial-label mb-3">{n} / Layers</p>
           <CaseLink href={`/work/${project.slug}`}>
-            <CopyBlock project={project} />
+            <CopyBlock project={project} dense />
           </CaseLink>
         </div>
-        <div className="lg:col-span-7 lg:order-2">
+        <div className="mt-6 lg:col-span-7 lg:mt-0">
           <CaseLink href={`/work/${project.slug}`}>
             <LayeredUiPreview project={project} />
           </CaseLink>
@@ -385,18 +378,20 @@ export function ProjectFeature({
   }
 
   return (
-    <article className="rounded-[var(--radius-editorial)] border border-border bg-surface p-5 md:p-8">
-      <div className="mb-6 flex items-center justify-between gap-3">
-        <p className="editorial-label">{n} / Interface</p>
-        <p className="font-mono text-[11px] text-muted">stacked UI</p>
-      </div>
-      <div className="grid gap-8 md:grid-cols-[1.05fr_0.95fr] md:items-center">
-        <CaseLink href={`/work/${project.slug}`}>
-          <StackedPreview project={project} />
-        </CaseLink>
-        <CaseLink href={`/work/${project.slug}`}>
-          <CopyBlock project={project} compact />
-        </CaseLink>
+    <article className={`${sceneShell}`}>
+      <div className="rounded-[var(--radius-editorial)] border border-border bg-surface p-4 md:p-6 lg:p-7">
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <p className="editorial-label">{n} / Configurator</p>
+          <p className="font-mono text-[11px] text-muted">product UI</p>
+        </div>
+        <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr] md:items-center lg:gap-8">
+          <CaseLink href={`/work/${project.slug}`}>
+            <ConfiguratorPreview project={project} />
+          </CaseLink>
+          <CaseLink href={`/work/${project.slug}`}>
+            <CopyBlock project={project} dense />
+          </CaseLink>
+        </div>
       </div>
     </article>
   );
