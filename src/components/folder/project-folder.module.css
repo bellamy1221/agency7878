@@ -1,24 +1,26 @@
 .layout {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.4rem;
   width: 100%;
-  max-width: 20rem;
+  max-width: 34rem;
+  gap: 1rem;
   margin-inline: auto;
 }
 
 .stage {
+  --folder-x: 0deg;
+  --folder-y: 0deg;
   position: relative;
+  min-height: clamp(23rem, 48vw, 32rem);
   width: 100%;
-  min-height: clamp(14.5rem, 30vw, 18.5rem);
-  touch-action: pan-y;
   overflow: visible;
+  perspective: 70rem;
+  touch-action: pan-y;
 }
 
 .halo {
   position: absolute;
   inset: 32% 12% 10%;
-  background: radial-gradient(ellipse, rgb(47 134 245 / 18%), transparent 72%);
+  background: radial-gradient(ellipse, rgb(47 134 245 / 20%), transparent 72%);
   filter: blur(1.5rem);
   pointer-events: none;
 }
@@ -26,23 +28,27 @@
 .folder {
   position: absolute;
   inset: 16% 7% 6%;
-  perspective: 800px;
+  transform: rotateX(var(--folder-y)) rotateY(var(--folder-x)) rotateZ(-1deg);
+  transform-style: preserve-3d;
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .back {
   position: absolute;
   inset: 7% 0 0;
+  overflow: visible;
   border: 1px solid rgb(255 255 255 / 26%);
   border-radius: 1rem;
   background: linear-gradient(155deg, #6bb3ff 0%, #2f86f5 48%, #1a64e0 100%);
-  box-shadow: 0 1.2rem 2.4rem rgb(20 80 180 / 22%);
-  overflow: visible;
+  box-shadow: 0 1.2rem 2.4rem rgb(20 80 180 / 28%);
+  transform: translateZ(-0.4rem);
 }
 
 .back::before {
   position: absolute;
   top: -2.25rem;
   left: 0;
+  z-index: 0;
   width: 34%;
   height: 2.5rem;
   border: 1px solid rgb(255 255 255 / 26%);
@@ -50,18 +56,17 @@
   border-radius: 0.75rem 1rem 0 0;
   background: linear-gradient(180deg, #7ec0ff, #3d93f7);
   content: "";
-  z-index: 0;
 }
 
 .backLabel {
   position: absolute;
   top: 1rem;
   right: 1.15rem;
-  color: rgb(255 255 255 / 32%);
+  z-index: 1;
+  color: rgb(255 255 255 / 42%);
+  font-family: var(--font-jetbrains), monospace;
   font-size: 0.52rem;
   letter-spacing: 0.14em;
-  pointer-events: none;
-  z-index: 1;
 }
 
 .sheets {
@@ -70,7 +75,7 @@
   z-index: 2;
   overflow: hidden;
   border-radius: 0.4rem 0.4rem 0 0;
-  pointer-events: none;
+  transform-style: preserve-3d;
 }
 
 .stage[data-open="true"] .sheets {
@@ -79,178 +84,115 @@
 
 .sheet {
   position: absolute;
-  top: var(--sheet-nest, 0);
-  right: calc(var(--sheet-nest, 0) * 0.4);
-  left: var(--sheet-nest, 0);
+  top: var(--sheet-top);
+  right: var(--sheet-right);
+  left: var(--sheet-left);
   display: flex;
-  height: 78%;
   min-height: 10.5rem;
+  height: 78%;
   justify-content: space-between;
   padding: 1rem;
   border: 1px solid rgb(15 16 21 / 10%);
   border-radius: 0.55rem 0.55rem 0.1rem 0.1rem;
   background: linear-gradient(145deg, #f8f5ee, #d8d4ca);
   color: #12110f;
-  transform: translate3d(0, 18%, 0);
-  transform-origin: bottom center;
-  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
-  pointer-events: none;
+  transform: translate3d(0, -5%, 0);
+  transform-origin: top center;
+  transition: transform 480ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
 }
 
 .stage[data-open="true"] .sheet {
-  transform: translate3d(var(--sheet-x), var(--sheet-y), 0)
-    rotateZ(var(--sheet-rotate));
+  transform: translate3d(var(--sheet-x), var(--sheet-y), 0) rotateZ(var(--sheet-rotate));
   transition-delay: var(--sheet-delay);
-}
-
-/* Only first sheet can receive pointer when open (visual highlight) */
-.stage[data-open="true"] .sheet[data-first="true"] {
-  pointer-events: auto;
-  cursor: default;
-  box-shadow: 0 0.75rem 1.4rem rgb(0 0 0 / 16%);
 }
 
 .sheetLabel,
 .sheetMeta {
+  max-width: 55%;
+  overflow: hidden;
+  font-family: var(--font-jetbrains), monospace;
   font-size: 0.56rem;
   font-weight: 600;
   letter-spacing: 0.1em;
+  text-overflow: ellipsis;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .sheetMeta {
   align-self: flex-end;
-  opacity: 0.42;
+  opacity: 0.46;
+  text-align: right;
 }
 
 .front {
   position: absolute;
   inset: 42% 0 0;
   z-index: 12;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.45rem;
+  overflow: hidden;
+  padding: clamp(1.1rem, 2.2vw, 1.65rem);
   border: 1px solid rgb(255 255 255 / 26%);
   border-radius: 0.75rem 0.75rem 0.95rem 0.95rem;
   background: linear-gradient(155deg, #5aa8ff 0%, #2a7aef 55%, #1859c9 100%);
-  box-shadow: 0 1rem 2rem rgb(20 80 180 / 22%);
+  box-shadow: 0 1rem 2rem rgb(20 80 180 / 26%);
   color: #fff;
-  transform: rotateX(0deg);
-  transform-origin: bottom center;
-  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.stage[data-open="true"] .front {
-  transform: rotateX(-11deg) translateY(2%);
-}
-
-.frontHit {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  border: 0;
-  padding: 0;
-  background: transparent;
-  cursor: pointer;
-  pointer-events: auto;
-}
-
-.frontArrow {
-  position: absolute;
-  right: 1.1rem;
-  bottom: 1rem;
-  z-index: 2;
-  font-size: 1rem;
-  line-height: 1;
-  color: rgb(255 255 255 / 88%);
-  pointer-events: none;
-}
-
-.caption {
-  display: grid;
-  gap: 0.28rem;
-  text-align: center;
-  padding: 0.2rem 0.5rem 0;
-}
-
-.captionCompact {
-  gap: 0.1rem;
-}
-
-.captionCompact .captionTitle {
-  font-size: 0.95rem;
-}
-
-.captionCompact .archiveCta {
-  margin-top: 0.35rem;
-  height: 2.35rem;
-  font-size: 0.8125rem;
-}
-
-.captionLabel {
-  margin: 0;
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent, #c65d3a);
-}
-
-.captionTitle {
-  margin: 0;
-  font-size: 1.15rem;
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  color: var(--foreground, #161513);
-}
-
-.archiveCta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 0.75rem;
-  height: 2.75rem;
-  padding: 0 1.35rem;
-  border-radius: 999px;
-  border: 1.5px solid #c45632;
-  background: #c45632;
-  color: #141210;
-  font-size: 0.875rem;
-  font-weight: 600;
+  isolation: isolate;
+  text-align: left;
   text-decoration: none;
-  box-shadow: 0 12px 28px rgba(196, 86, 50, 0.4);
-  transition:
-    filter 180ms ease,
-    transform 180ms ease,
-    box-shadow 180ms ease;
+  transform: translateZ(1rem) rotateX(-0.5deg);
+  transform-origin: bottom center;
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1), filter 180ms ease;
 }
 
-.archiveCta:hover {
-  filter: brightness(1.08);
-  box-shadow: 0 16px 36px rgba(196, 86, 50, 0.5);
+.front:hover { filter: brightness(1.05); }
+.front:focus-visible { outline: 3px solid #f8f5ee; outline-offset: 0.35rem; }
+.stage[data-open="true"] .front { transform: translateZ(1rem) rotateX(-12deg) translateY(3%); }
+
+.frontEyebrow {
+  position: relative;
+  z-index: 2;
+  color: rgb(255 255 255 / 66%);
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
-.archiveCta:active {
-  transform: scale(0.98);
+.frontRow {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem;
 }
+
+.frontTitle {
+  font-size: clamp(1.35rem, 2.5vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.frontArrow { flex-shrink: 0; font-size: 1.15rem; line-height: 1; }
+
+.caption { display: grid; gap: 0.32rem; padding: 0.2rem 0.5rem 0; text-align: center; }
+.captionLabel { margin: 0; color: #6bb3ff; font-family: var(--font-jetbrains), monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; }
+.captionTitle { margin: 0; color: #f5f0e8; font-size: 1.15rem; font-weight: 600; letter-spacing: -0.03em; }
+.captionText { margin: 0 auto; max-width: 38ch; color: rgb(245 240 232 / 62%); font-size: 0.86rem; line-height: 1.5; }
 
 @media (max-width: 47.99rem) {
-  .stage {
-    min-height: 18rem;
-  }
-  .folder {
-    inset: 14% 2% 5%;
-  }
-  .sheet {
-    min-height: 9.5rem;
-  }
-  .front {
-    top: 44%;
-  }
+  .stage { min-height: 21rem; }
+  .folder { inset: 14% 2% 5%; }
+  .sheet { min-height: 9.5rem; }
+  .front { top: 44%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sheet,
-  .front {
-    transition: none;
-  }
+  .folder, .sheet, .front { transition: none; }
 }

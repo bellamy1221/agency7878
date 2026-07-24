@@ -24,16 +24,12 @@ export function LoadingScreen({ onDone }: LoadingScreenProps) {
     if (typeof window !== "undefined") {
       const seen = sessionStorage.getItem(STORAGE_KEY);
       if (seen === "1" || reduce) {
-        setPhase("gone");
-        onDone?.();
-        return;
+        const skipTimer = window.setTimeout(() => {
+          setPhase("gone");
+          onDone?.();
+        }, 0);
+        return () => window.clearTimeout(skipTimer);
       }
-    }
-
-    if (reduce) {
-      setPhase("gone");
-      onDone?.();
-      return;
     }
 
     const openTimer = window.setTimeout(() => setPhase("open"), 480);

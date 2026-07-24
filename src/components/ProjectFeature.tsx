@@ -1,44 +1,14 @@
 "use client";
 
 import { ArrowUpRight } from "@phosphor-icons/react";
-import {
-  motion,
-  useMotionValue,
-  useReducedMotion,
-  useSpring,
-  useInView,
-} from "motion/react";
+import { useInView, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, type PointerEvent, type ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 import type { Project } from "@/data/projects";
 
 const sceneShell =
   "relative flex w-full max-w-full flex-col justify-center overflow-x-hidden py-10 lg:min-h-[calc(100svh-4.25rem)] lg:justify-center lg:py-6 lg:pb-10";
-
-function useTilt() {
-  const reduce = useReducedMotion();
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rx = useSpring(x, { stiffness: 140, damping: 18 });
-  const ry = useSpring(y, { stiffness: 140, damping: 18 });
-
-  const onMove = (event: PointerEvent<HTMLDivElement>) => {
-    if (reduce) return;
-    const rect = event.currentTarget.getBoundingClientRect();
-    const px = (event.clientX - rect.left) / rect.width - 0.5;
-    const py = (event.clientY - rect.top) / rect.height - 0.5;
-    x.set(px * 8);
-    y.set(py * 5);
-  };
-
-  const onLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  return { reduce, rx, ry, onMove, onLeave };
-}
 
 function MaskImage({
   src,
@@ -80,13 +50,9 @@ function BrowserPreview({
   project: Project;
   compact?: boolean;
 }) {
-  const { reduce, rx, ry, onMove, onLeave } = useTilt();
-
   return (
     <div
       className="group overflow-hidden rounded-[var(--radius-editorial)] border border-border bg-surface shadow-[0_14px_40px_rgba(22,21,19,0.07)] transition-transform duration-500 hover:-translate-y-0.5"
-      onPointerMove={onMove}
-      onPointerLeave={onLeave}
       style={{ borderColor: `${project.accent}33` }}
     >
       <div className="browser-chrome">
@@ -97,8 +63,7 @@ function BrowserPreview({
           {project.slug}.tsblv.studio
         </span>
       </div>
-      <motion.div
-        style={reduce ? undefined : { x: rx, y: ry }}
+      <div
         className={`relative w-full overflow-hidden ${
           compact ? "aspect-[16/9] lg:aspect-[16/8.5]" : "aspect-[16/10] lg:aspect-[16/9]"
         }`}
@@ -111,7 +76,7 @@ function BrowserPreview({
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-foreground/15 via-transparent to-transparent" />
-      </motion.div>
+      </div>
     </div>
   );
 }

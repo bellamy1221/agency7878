@@ -1,56 +1,44 @@
 "use client";
 
-import { ArrowRight, ArrowDownRight } from "@phosphor-icons/react";
-import { motion, useReducedMotion } from "motion/react";
-import Image from "next/image";
+import { ArrowDownRight, ArrowRight } from "@phosphor-icons/react";
+import { motion } from "motion/react";
 import Link from "next/link";
+import { HeroComposition } from "@/components/HeroComposition";
 import { MagneticLink } from "@/components/MagneticLink";
-import { FaqNudge } from "@/components/FaqNudge";
 import { site } from "@/data/site";
 
 export function Hero() {
-  const reduce = useReducedMotion();
-
-  const line = (delay: number) =>
-    reduce
-      ? {}
-      : {
-          initial: { opacity: 0, y: 16 },
-          animate: { opacity: 1, y: 0 },
-          transition: {
-            duration: 0.5,
-            delay,
-            ease: [0.16, 1, 0.3, 1] as const,
-          },
-        };
+  // Keep the first viewport visible before Motion has hydrated. The directional
+  // preview still animates when its active tab changes.
+  const line = () => ({});
 
   return (
-    <section className="relative flex min-h-[100dvh] snap-start flex-col justify-center overflow-hidden text-[#f4efe7]">
-      <div className="relative z-[2] mx-auto grid w-full max-w-[1400px] items-center gap-6 px-4 py-10 md:px-6 lg:grid-cols-12 lg:gap-5 lg:px-8 lg:py-6">
-        <div className="lg:col-span-5">
-          <motion.p
-            className="mb-3 font-mono text-[11px] uppercase tracking-[0.16em] text-[#c9b8a8]"
-            {...line(0.05)}
-          >
-            Независимый дизайнер и разработчик
-          </motion.p>
+    <section className="relative flex min-h-[100dvh] snap-start items-center overflow-hidden pb-16 pt-20 text-[#f4efe7] md:pb-20 md:pt-24 lg:py-20">
+      <div className="relative z-[2] mx-auto grid w-full max-w-[1460px] items-center gap-10 px-5 md:px-8 lg:grid-cols-12 lg:gap-8 lg:px-10">
+        <div className="lg:col-span-5 lg:pr-4">
+          <motion.div className="mb-6 flex items-center gap-3" {...line()}>
+            <span className="h-px w-8 bg-[#cd6a4b]" aria-hidden />
+            <p className="font-mono text-[10px] uppercase tracking-[0.17em] text-[#b7aba0]">
+              Независимая digital-студия
+            </p>
+          </motion.div>
 
           <motion.h1
-            className="max-w-[16ch] font-serif text-[clamp(2.2rem,4.4vw,3.4rem)] font-medium leading-[1.05] tracking-[-0.03em] text-[#f7f2ea]"
-            {...line(0.1)}
+            className="max-w-[15ch] text-[clamp(2.75rem,4.35vw,4.4rem)] font-semibold leading-[0.94] tracking-[-0.055em] text-[#f7f2ea]"
+            {...line()}
           >
-            Дизайн и разработка сайтов для бизнеса
+            Сильный визуал. Рабочий продукт.
           </motion.h1>
 
           <motion.p
-            className="mt-4 max-w-[40ch] text-[15px] leading-relaxed text-[#b7a99a] md:text-base"
-            {...line(0.16)}
+            className="mt-6 max-w-[39ch] text-[15px] leading-[1.65] text-[#aaa096] md:text-base"
+            {...line()}
           >
-            Создаю выразительные лендинги и сайты с понятной структурой,
-            продуманной анимацией и аккуратной технической реализацией.
+            Проектирую бизнес-сайты и цифровые продукты: структура, арт-дирекшн и
+            рабочий frontend в одном процессе.
           </motion.p>
 
-          <motion.div className="mt-6 flex flex-wrap items-center gap-3" {...line(0.22)}>
+          <motion.div className="mt-8 flex flex-wrap items-center gap-3" {...line()}>
             <Link
               href="/#work"
               className="btn-cta-primary inline-flex h-12 items-center gap-2 rounded-full px-6 text-sm font-semibold"
@@ -64,117 +52,20 @@ export function Hero() {
               rel="noopener noreferrer"
               className="btn-cta-ghost inline-flex h-12 items-center gap-2 rounded-full px-5 text-sm font-medium"
             >
-              Обсудить проект
+              Начать проект
               <ArrowRight size={16} weight="bold" />
             </MagneticLink>
           </motion.div>
 
-          <motion.ul
-            className="mt-6 grid gap-2 border-t border-white/10 pt-4 sm:grid-cols-3"
-            {...line(0.28)}
-          >
-            {["Дизайн и код вместе", "Прямой контакт", "Готовый к запуску сайт"].map(
-              (item) => (
-                <li
-                  key={item}
-                  className="text-[12px] font-medium leading-snug text-[#c9b8a8]"
-                >
-                  {item}
-                </li>
-              ),
-            )}
-          </motion.ul>
         </div>
 
-        <div className="relative lg:col-span-7">
-          <motion.div
-            className="relative mx-auto max-w-xl lg:ml-auto lg:max-w-none"
-            initial={reduce ? false : { opacity: 0, scale: 0.97 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.65, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-            whileHover={reduce ? undefined : { scale: 1.01 }}
-          >
-            <div className="pointer-events-none absolute -inset-5 rounded-[40%_48%_42%_50%] bg-[rgba(232,196,158,0.12)] blur-3xl" />
-
-            <div className="relative overflow-hidden rounded-[38%_46%_40%_48%/42%_38%_48%_40%] border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.45)]">
-              <div className="relative aspect-[5/4]">
-                <Image
-                  src="https://picsum.photos/seed/tsblv-hero-studio/2400/1900"
-                  alt="Пример визуальной подачи проекта"
-                  fill
-                  priority
-                  quality={95}
-                  sizes="(max-width: 1024px) 92vw, 52vw"
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-tr from-black/35 via-transparent to-transparent" />
-              </div>
-            </div>
-
-            <motion.div
-              className="absolute -bottom-2 left-2 z-10 w-[min(100%,280px)] sm:bottom-4 sm:left-4 md:w-[300px]"
-              style={{ perspective: 1100, transformStyle: "preserve-3d" }}
-              initial={reduce ? false : { opacity: 0, y: 18, rotateX: 18 }}
-              animate={
-                reduce
-                  ? undefined
-                  : {
-                      opacity: 1,
-                      y: [0, -5, 0],
-                      rotateX: [10, 6, 10],
-                      rotateY: [-10, -6, -10],
-                    }
-              }
-              transition={{
-                opacity: { duration: 0.55, delay: 0.35 },
-                y: { duration: 5.5, repeat: Infinity, ease: "easeInOut" },
-                rotateX: { duration: 5.5, repeat: Infinity, ease: "easeInOut" },
-                rotateY: { duration: 5.5, repeat: Infinity, ease: "easeInOut" },
-              }}
-              drag={!reduce}
-              dragConstraints={{ left: -16, right: 16, top: -10, bottom: 10 }}
-              dragElastic={0.14}
-              whileHover={reduce ? undefined : { scale: 1.03, rotateY: -4 }}
-            >
-              <div
-                className="relative overflow-hidden rounded-[1.35rem] border border-white/30 px-4 py-4"
-                style={{
-                  background:
-                    "linear-gradient(145deg, #e4e0db 0%, #a8a49e 38%, #6a6661 72%, #d2cec8 100%)",
-                  transform: "translateZ(24px)",
-                  transformStyle: "preserve-3d",
-                  boxShadow:
-                    "0 22px 50px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -2px 0 rgba(0,0,0,0.18)",
-                }}
-              >
-                <div
-                  className="pointer-events-none absolute -right-6 -top-8 h-24 w-24 rounded-full bg-white/40 blur-2xl"
-                  aria-hidden
-                />
-                <div
-                  className="pointer-events-none absolute inset-x-3 top-1 h-px bg-white/50"
-                  aria-hidden
-                />
-                <p className="relative font-mono text-[10px] uppercase tracking-[0.14em] text-[#2a2825]/70">
-                  Подход
-                </p>
-                <p className="relative mt-2 text-[1.05rem] font-semibold leading-snug tracking-[-0.02em] text-[#161513]">
-                  Структура, визуал и код в одних руках
-                </p>
-                <p className="relative mt-2 text-[12px] leading-snug text-[#2a2825]/75">
-                  От идеи до рабочей реализации
-                </p>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
+        <motion.div
+          className="relative lg:col-span-7"
+          initial={false}
+        >
+          <HeroComposition />
+        </motion.div>
       </div>
-
-      <FaqNudge
-        q="С чего обычно начинаем?"
-        a="С цели: кому сайт и какой следующий шаг должен сделать посетитель."
-        className="absolute bottom-4 right-3 z-20 hidden max-w-[8rem] sm:block md:bottom-8 md:right-6 lg:bottom-12 lg:right-10"
-      />
     </section>
   );
 }

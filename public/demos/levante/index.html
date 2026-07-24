@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<!-- ============================================================
+     LEVANTE · production metadata
+     CONFIGURE BEFORE DEPLOY: replace https://www.levante.example
+     with the real production domain (canonical, og:url, og:image,
+     JSON-LD url/image). Address, phone and email below are brand-
+     concept placeholders (email uses the reserved .example TLD) —
+     verify them before going live.
+     ============================================================ -->
+<title>LEVANTE — Restaurant of Daylight · Menorca</title>
+<meta name="description" content="Levante — a restaurant of daylight on Menorca's south coast. Twelve tables cut into pale limestone above the Balearic Sea. One seating each day; the menu follows the sun from first light to last ember.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Levante">
+<link rel="canonical" href="https://www.levante.example/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="restaurant">
+<meta property="og:site_name" content="Levante">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="LEVANTE — Restaurant of Daylight · Menorca">
+<meta property="og:description" content="Twelve tables above the Balearic Sea. One seating each day, while the light lasts.">
+<meta property="og:url" content="https://www.levante.example/">
+<meta property="og:image" content="https://www.levante.example/assets/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The limestone terrace at Levante above the Balearic Sea, Menorca">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LEVANTE — Restaurant of Daylight · Menorca">
+<meta name="twitter:description" content="Twelve tables above the Balearic Sea. One seating each day, while the light lasts.">
+<meta name="twitter:image" content="https://www.levante.example/assets/images/og-image.jpg">
+<meta name="twitter:image:alt" content="The limestone terrace at Levante above the Balearic Sea, Menorca">
+
+<meta name="theme-color" content="#F4EFE4">
+<meta name="color-scheme" content="light">
+
+<!-- Favicon (inline SVG: limestone field + clay sun over a horizon line) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23F4EFE4'/%3E%3Ccircle cx='32' cy='29' r='11' fill='%23A0512D'/%3E%3Crect x='13' y='45' width='38' height='2.5' fill='%23221D16'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23F4EFE4'/%3E%3Ccircle cx='32' cy='29' r='11' fill='%23A0512D'/%3E%3Crect x='13' y='45' width='38' height='2.5' fill='%23221D16'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Fragment+Mono&display=swap" rel="stylesheet">
+
+<!-- LCP: preload the hero poster still -->
+<link rel="preload" as="image" href="assets/images/hero-poster.webp" type="image/webp" fetchpriority="high">
+
+<script>if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('anim')}</script>
+<style>
+/* ==========================================================
+   LEVANTE — design tokens
+   ========================================================== */
+:root{
+  --pearl:#FAF7F0;
+  --ivory:#F4EFE4;
+  --limestone:#ECE4D2;
+  --sand:#E2D6BE;
+  --ink:#221D16;
+  --ink-2:rgba(34,29,22,.66);
+  --ink-3:rgba(34,29,22,.52);
+  --line:rgba(34,29,22,.16);
+  --clay:#A0512D;
+  --clay-deep:#84421F;
+  --champagne:#B3945F;
+  --ember:#161210;
+  --ember-ink:#F1E8D8;
+  --serif:'Instrument Serif',Georgia,serif;
+  --sans:'Instrument Sans',system-ui,sans-serif;
+  --mono:'Fragment Mono',monospace;
+  --gutter:clamp(20px,4.6vw,76px);
+  --ease:cubic-bezier(.22,1,.36,1);
+  --r:3px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{
+  background:var(--ivory);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:400;
+  font-size:clamp(1rem,.3vw + .93rem,1.11rem);
+  line-height:1.66;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+::selection{background:var(--clay);color:var(--pearl)}
+img,video{display:block;max-width:100%}
+picture{display:contents}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--clay);outline-offset:3px;border-radius:2px}
+main{display:block}
+
+/* visually-hidden (screen-reader only) */
+.vh{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* skip link */
+.skip{position:fixed;top:10px;left:10px;z-index:200;transform:translateY(-160%);
+  background:var(--ink);color:var(--ivory);padding:.7rem 1.1rem;border-radius:var(--r);
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;transition:transform .3s var(--ease)}
+.skip:focus{transform:translateY(0)}
+
+/* type helpers */
+.mono{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;line-height:1.8}
+.eyebrow{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-2);display:flex;align-items:center;gap:.9rem;
+}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--champagne);flex:none}
+.statement{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(2.1rem,4.3vw,4.1rem);
+  line-height:1.1;letter-spacing:-.01em;text-wrap:balance;
+}
+.statement em{font-style:italic;color:var(--clay)}
+.body-l{font-size:clamp(1.04rem,1.2vw,1.22rem);line-height:1.72;color:var(--ink-2)}
+.dim{color:var(--ink-2)}
+
+/* layout */
+.wrap{padding-inline:var(--gutter)}
+section{position:relative}
+.sec{padding-block:clamp(96px,13vh,176px)}
+
+/* links & buttons */
+.lnk{position:relative;padding-bottom:2px}
+.lnk::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:currentColor;
+  transform:scaleX(0);transform-origin:right;transition:transform .45s var(--ease)}
+.lnk:hover::after,.lnk:focus-visible::after{transform:scaleX(1);transform-origin:left}
+.btn{
+  display:inline-flex;align-items:center;gap:.65rem;
+  font-family:var(--sans);font-weight:500;font-size:.92rem;letter-spacing:.01em;
+  padding:.95rem 1.7rem;border-radius:999px;border:1px solid var(--ink);
+  transition:background .4s var(--ease),color .4s var(--ease),border-color .4s var(--ease),transform .4s var(--ease);
+}
+.btn .ar{transition:transform .4s var(--ease)}
+.btn:hover .ar{transform:translateX(4px)}
+.btn-clay{background:var(--clay);border-color:var(--clay);color:var(--pearl)}
+.btn-clay:hover{background:var(--clay-deep);border-color:var(--clay-deep)}
+.btn-ghost:hover{background:var(--ink);color:var(--ivory)}
+.btn-ivory{border-color:rgba(250,247,240,.85);color:var(--pearl)}
+.btn-ivory:hover{background:var(--pearl);color:var(--ink)}
+
+/* media frames */
+.media{position:relative;overflow:hidden;border-radius:var(--r);background:var(--sand)}
+.media img,.media video{position:absolute;left:0;top:-6%;width:100%;height:112%;object-fit:cover}
+.media .cap{
+  position:absolute;left:14px;bottom:12px;z-index:2;color:rgba(250,247,240,.92);
+  font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.35rem .7rem;border:1px solid rgba(250,247,240,.35);border-radius:999px;
+  background:rgba(22,18,16,.28);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+}
+
+/* ==========================================================
+   NAV
+   ========================================================== */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:100;
+  transition:transform .55s var(--ease),background .45s ease,border-color .45s ease;
+  border-bottom:1px solid transparent;
+}
+.nav-in{
+  padding:1.05rem var(--gutter);
+  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+}
+.nav .wordmark{font-family:var(--serif);font-size:1.42rem;letter-spacing:.045em;line-height:1}
+.nav-links{display:flex;gap:2.2rem;align-items:center}
+.nav-links a{font-size:.92rem;font-weight:500;opacity:.85}
+.nav-links a:hover,.nav-links a:focus-visible{opacity:1}
+.nav-cta{font-size:.88rem;padding:.72rem 1.35rem}
+.nav.on-hero{color:var(--pearl)}
+.nav.scrolled{
+  background:rgba(250,247,240,.86);color:var(--ink);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border-color:var(--line);
+}
+.nav.scrolled .btn-ivory{border-color:var(--ink);color:var(--ink)}
+.nav.scrolled .btn-ivory:hover{background:var(--ink);color:var(--ivory)}
+.nav.hide{transform:translateY(-102%)}
+.burger{display:none;align-items:center;gap:.6rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase}
+.burger .bi{display:flex;flex-direction:column;gap:5px;width:26px}
+.burger .bi span{height:1.5px;background:currentColor;transition:transform .4s var(--ease),opacity .3s}
+
+/* mobile menu */
+.mmenu{
+  position:fixed;inset:0;z-index:99;background:var(--pearl);color:var(--ink);
+  display:flex;flex-direction:column;justify-content:center;padding:0 var(--gutter);
+  opacity:0;pointer-events:none;transition:opacity .45s ease;
+}
+html.menu-open .mmenu{opacity:1;pointer-events:auto}
+html.menu-open{overflow:hidden}
+html.menu-open .burger .bi span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+html.menu-open .burger .bi span:nth-child(2){opacity:0}
+html.menu-open .burger .bi span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+html.menu-open .nav{color:var(--ink);background:transparent;border-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
+.mmenu a.big{
+  font-family:var(--serif);font-size:clamp(2.4rem,9vw,4rem);line-height:1.22;
+  border-bottom:1px solid var(--line);padding:.55rem 0;display:flex;justify-content:space-between;align-items:baseline;
+}
+.mmenu a.big .no{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:var(--ink-3)}
+.mmenu .mfoot{margin-top:2.4rem;color:var(--ink-2)}
+
+/* ==========================================================
+   HERO
+   ========================================================== */
+#hero{position:relative;height:100svh;min-height:600px;overflow:hidden;background:var(--sand);color:var(--pearl)}
+.hero-media{position:absolute;inset:0;will-change:transform}
+.hero-media video,.hero-media img.hero-poster{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 56%;
+}
+img.hero-poster{z-index:2}
+.hero-scrim{position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:
+    linear-gradient(to top,rgba(22,17,11,.40) 0%,rgba(22,17,11,.10) 22%,transparent 40%),
+    linear-gradient(104deg,rgba(22,17,11,.30) 0%,rgba(22,17,11,.06) 40%,transparent 58%),
+    linear-gradient(to bottom,rgba(22,17,11,.20),transparent 15%);
+}
+.hero-content{
+  position:absolute;inset:auto 0 0 0;z-index:4;
+  padding:0 var(--gutter) clamp(84px,11vh,130px);
+  will-change:transform;
+}
+.hero-kicker{margin-bottom:clamp(1rem,2vh,1.6rem);color:rgba(250,247,240,.9);text-shadow:0 1px 18px rgba(20,14,8,.35)}
+.hero-kicker .eyebrow{color:inherit}
+.hero-kicker .eyebrow::before{background:rgba(250,247,240,.65)}
+.hero-title{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(3.6rem,13.5vw,12.5rem);
+  line-height:.92;letter-spacing:.012em;white-space:nowrap;
+  margin-left:-.04em;user-select:none;
+  text-shadow:0 2px 40px rgba(20,14,8,.28);
+}
+.hm{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em;margin-bottom:-.08em}
+.hl{display:inline-block;will-change:transform}
+.hero-sub{
+  max-width:34ch;margin-top:clamp(1.1rem,2.4vh,1.9rem);
+  font-size:clamp(1.02rem,1.25vw,1.24rem);line-height:1.6;color:rgba(250,247,240,.94);
+  text-shadow:0 1px 20px rgba(20,14,8,.35);
+}
+.hero-foot{
+  position:absolute;left:0;right:0;bottom:0;z-index:5;
+  display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  padding:1.15rem var(--gutter);
+  border-top:1px solid rgba(250,247,240,.24);
+  color:rgba(250,247,240,.88);
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;
+}
+.hero-foot .scr{display:flex;align-items:center;gap:.7rem}
+.hero-foot .scr i{position:relative;display:block;width:1px;height:34px;background:rgba(250,247,240,.3);overflow:hidden}
+.hero-foot .scr i::after{content:"";position:absolute;left:0;top:-100%;width:100%;height:100%;background:var(--pearl);animation:drip 2.2s var(--ease) infinite}
+@keyframes drip{0%{top:-100%}55%{top:0}100%{top:100%}}
+
+/* ==========================================================
+   SCENE 2 — THE RESTAURANT
+   ========================================================== */
+#restaurant{background:var(--ivory)}
+.rest-head{max-width:1200px}
+.rest-head .statement{margin-top:1.6rem;max-width:24ch}
+.rest-grid{
+  margin-top:clamp(3.4rem,7vh,5.8rem);
+  display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,40px);align-items:start;
+}
+.rest-grid>*{min-width:0}
+.rest-main{grid-column:1/8}
+.rest-main .media{aspect-ratio:16/10.6}
+.rest-side{grid-column:8/13;display:flex;flex-direction:column;gap:clamp(1.8rem,3vh,2.6rem);padding-top:clamp(.5rem,4vh,3.4rem)}
+.rest-side .media{aspect-ratio:3/2;width:min(100%,440px)}
+.stats{
+  margin-top:clamp(3.2rem,7vh,5.4rem);
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--line);
+}
+.stat{padding:1.5rem 1.4rem 1.6rem 0;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(2rem,3vw,2.9rem);line-height:1.05}
+.stat span{display:block;margin-top:.5rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-2)}
+
+/* ==========================================================
+   SCENE 3 — THE DAY
+   ========================================================== */
+#day{background:var(--pearl)}
+.day-head{padding-top:clamp(96px,13vh,176px);padding-bottom:clamp(56px,8vh,96px)}
+.day-head .statement{margin-top:1.6rem}
+.day-intro{
+  margin-top:1.8rem;display:flex;justify-content:space-between;align-items:flex-end;gap:2.5rem;flex-wrap:wrap;
+}
+.day-intro p{max-width:52ch}
+.day-price{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);
+  border:1px solid var(--line);border-radius:999px;padding:.7rem 1.2rem;white-space:nowrap}
+
+/* desktop stage */
+.day-stage{
+  position:relative;height:100vh;min-height:640px;display:none;
+  color:var(--ink);transition:color .6s ease;
+  background:var(--pearl);
+  overflow:hidden;
+}
+.day-stage.is-dark{color:var(--ember-ink)}
+.stage-grid{
+  position:relative;z-index:2;height:100%;
+  display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,40px);
+  align-items:center;padding-inline:var(--gutter);
+}
+.stage-grid>*{min-width:0}
+.stage-copy{grid-column:1/7;position:relative;padding-right:2rem}
+.act-over{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;opacity:.62;display:flex;gap:1.6rem}
+.act-name{font-family:var(--serif);font-weight:400;font-size:clamp(3rem,5.6vw,5.6rem);line-height:1;margin:1.3rem 0 1.5rem;letter-spacing:-.01em}
+.act-dish{font-size:clamp(1.05rem,1.3vw,1.3rem);font-weight:500;max-width:36ch}
+.act-note{margin-top:.65rem;color:currentColor;opacity:.62;max-width:44ch}
+.act-ghost{
+  position:absolute;right:-1rem;top:50%;transform:translateY(-50%);z-index:1;pointer-events:none;
+  font-family:var(--serif);font-size:clamp(10rem,17vw,17rem);line-height:1;opacity:.055;user-select:none;
+}
+.stage-media{grid-column:7/12;position:relative;height:min(74vh,760px);align-self:center}
+.act-media{
+  position:absolute;inset:0;overflow:hidden;border-radius:var(--r);background:var(--sand);
+  will-change:clip-path,transform;
+}
+.act-media img,.act-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.stage-ticks{
+  position:absolute;right:var(--gutter);top:50%;transform:translateY(-50%);z-index:3;
+  display:flex;flex-direction:column;gap:1.15rem;
+}
+.tick{display:flex;align-items:center;gap:.7rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;opacity:.4;transition:opacity .4s;background:none}
+.tick::before{content:"";width:22px;height:1px;background:currentColor;transform:scaleX(.45);transform-origin:right;transition:transform .45s var(--ease)}
+.tick.on{opacity:1;color:var(--clay)}
+.day-stage.is-dark .tick.on{color:var(--champagne)}
+.tick.on::before{transform:scaleX(1)}
+.stage-hint{
+  position:absolute;left:var(--gutter);bottom:1.4rem;z-index:3;
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;opacity:.45;
+}
+
+/* mobile cards */
+.day-cards{display:grid}
+.act-card{padding:clamp(52px,8vh,84px) var(--gutter)}
+.act-card.dark{color:var(--ember-ink)}
+.act-card .media{aspect-ratio:4/5;max-width:520px}
+.ac-over{margin-top:1.5rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;opacity:.6;display:flex;gap:1.4rem}
+.ac-name{font-family:var(--serif);font-size:clamp(2.3rem,8.5vw,3.2rem);line-height:1.05;margin:.7rem 0 .8rem}
+.ac-dish{font-weight:500}
+.ac-note{margin-top:.4rem;opacity:.62}
+
+/* ==========================================================
+   SCENE 4 — THE HOUSE
+   ========================================================== */
+#house{background:var(--limestone)}
+.house-head{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,40px)}
+.house-head>*{min-width:0}
+.house-head .hl-l{grid-column:1/6}
+.house-head .hl-l .statement{margin-top:1.6rem}
+.house-head .hl-r{grid-column:7/12;align-self:end}
+.house-media{margin-top:clamp(3rem,6vh,4.6rem)}
+.house-media .media{aspect-ratio:21/10}
+.materials{
+  margin-top:clamp(2.6rem,5vh,4rem);
+  display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(34,29,22,.2);
+}
+.mat{padding:1.4rem 1.4rem 1.5rem 0;border-right:1px solid rgba(34,29,22,.13)}
+.mat:last-child{border-right:0}
+.mat b{display:block;font-weight:600;font-size:.98rem}
+.mat span{display:block;margin-top:.35rem;font-family:var(--serif);font-style:italic;color:var(--ink-2);font-size:1.02rem;line-height:1.4}
+
+/* chef */
+.chef{margin-top:clamp(5rem,10vh,8rem);display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,40px);align-items:center}
+.chef>*{min-width:0}
+.chef-txt{grid-column:1/7;padding-right:min(3vw,3rem)}
+.chef-txt .statement{margin-top:1.5rem;font-size:clamp(1.9rem,3.4vw,3.2rem)}
+.chef-quote{
+  margin-top:2rem;font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:clamp(1.5rem,2.4vw,2.2rem);line-height:1.3;max-width:24ch;
+}
+.chef-quote::before{content:"\201C";color:var(--champagne)}
+.chef-quote::after{content:"\201D";color:var(--champagne)}
+.chef-body{margin-top:1.6rem;max-width:48ch}
+.chef-sig{margin-top:1.7rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.chef-pic{grid-column:8/13}
+.chef-pic .media{aspect-ratio:4/5;max-width:480px;margin-left:auto}
+
+/* ==========================================================
+   SCENE 5 — RESERVE
+   ========================================================== */
+#reserve{background:var(--ivory)}
+.res-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,40px)}
+.res-grid>*{min-width:0}
+.res-copy{grid-column:1/6;padding-right:min(3vw,2.5rem)}
+.res-copy .statement{margin-top:1.6rem}
+.res-copy .body-l{margin-top:1.6rem;max-width:44ch}
+.res-facts{margin-top:2.2rem;border-top:1px solid var(--line)}
+.res-facts li{
+  list-style:none;display:flex;justify-content:space-between;gap:1rem;
+  padding:.85rem 0;border-bottom:1px solid var(--line);
+  font-size:.95rem;
+}
+.res-facts li span:last-child{color:var(--ink-2);font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;align-self:center;text-align:right}
+.res-copy .media{margin-top:2.4rem;aspect-ratio:3/2}
+
+.res-card{
+  grid-column:6/13;background:var(--pearl);border:1px solid var(--line);border-radius:6px;
+  padding:clamp(1.6rem,3vw,3rem);position:relative;overflow:hidden;
+}
+.fld{margin-bottom:2rem;border:0;padding:0;min-width:0}
+.fld > .lab{
+  display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);
+  margin-bottom:1rem;width:100%;
+}
+.fld > .lab .err-note{color:var(--clay);letter-spacing:.06em;text-transform:none;display:none;text-align:right}
+.fld.err > .lab .err-note{display:inline}
+
+.d-scroll{display:flex;gap:.6rem;overflow-x:auto;padding-bottom:.5rem;scrollbar-width:none;
+  -webkit-mask-image:linear-gradient(to right,#000 92%,transparent);mask-image:linear-gradient(to right,#000 92%,transparent)}
+.d-scroll::-webkit-scrollbar{display:none}
+.d-pill{
+  flex:none;width:74px;padding:.8rem 0 .9rem;text-align:center;border:1px solid var(--line);border-radius:var(--r);
+  transition:border-color .3s,background .3s,color .3s,transform .3s var(--ease);
+}
+.d-pill:hover,.d-pill:focus-visible{border-color:var(--ink)}
+.d-pill .dw{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.d-pill .dn{display:block;font-family:var(--serif);font-size:1.7rem;line-height:1.25}
+.d-pill .dm{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.d-pill.sel{background:var(--ink);border-color:var(--ink);color:var(--ivory)}
+.d-pill.sel .dw,.d-pill.sel .dm{color:rgba(244,239,228,.6)}
+.d-pill:disabled{opacity:.32;cursor:not-allowed}
+.d-pill:disabled:hover{border-color:var(--line)}
+
+.g-row{display:flex;align-items:center;gap:1.6rem;flex-wrap:wrap}
+.g-btn{
+  width:46px;height:46px;border:1px solid var(--line);border-radius:50%;
+  font-size:1.25rem;line-height:1;display:grid;place-items:center;
+  transition:border-color .3s,background .3s,color .3s,opacity .3s;
+}
+.g-btn:hover:not(:disabled),.g-btn:focus-visible{border-color:var(--ink)}
+.g-btn:active:not(:disabled){background:var(--ink);color:var(--ivory)}
+.g-btn:disabled{opacity:.3;cursor:not-allowed}
+.g-num{font-family:var(--serif);font-size:2.2rem;min-width:2ch;text-align:center}
+.g-cap{color:var(--ink-3);font-size:.85rem}
+
+.t-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.t-card{
+  text-align:left;border:1px solid var(--line);border-radius:var(--r);padding:1.05rem 1.1rem 1.15rem;
+  transition:border-color .3s,background .3s,color .3s;
+}
+.t-card:hover,.t-card:focus-visible{border-color:var(--ink)}
+.t-card b{display:block;font-weight:600;font-size:.95rem}
+.t-card span{display:block;margin-top:.3rem;font-size:.82rem;color:var(--ink-2);line-height:1.45}
+.t-card.sel{background:var(--ink);border-color:var(--ink);color:var(--ivory)}
+.t-card.sel span{color:rgba(244,239,228,.62)}
+
+.res-inputs{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem}
+.res-inputs .inp{display:block;width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);
+  padding:.65rem 0;font-size:1rem;border-radius:0;transition:border-color .3s}
+.res-inputs .inp::placeholder{color:var(--ink-3)}
+.res-inputs .inp:focus{outline:none;border-color:var(--clay)}
+.fld.err .inp{border-color:var(--clay)}
+
+.res-submit{width:100%;justify-content:center;padding:1.15rem;font-size:1rem}
+.res-submit[aria-busy="true"]{opacity:.72;cursor:progress}
+.spinner{width:15px;height:15px;border:2px solid rgba(250,247,240,.4);border-top-color:var(--pearl);
+  border-radius:50%;display:inline-block;animation:spin .7s linear infinite;vertical-align:-2px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.res-small{margin-top:1rem;text-align:center;font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;color:var(--ink-3);text-transform:uppercase}
+
+/* form-level notice: dev-safe + error (never a fake success) */
+.res-note{margin-top:1.2rem;padding:.95rem 1.1rem;border:1px solid var(--line);border-radius:var(--r);
+  font-size:.9rem;line-height:1.55;color:var(--ink-2);display:none}
+.res-note.show{display:block}
+.res-note.is-err{border-color:var(--clay);color:var(--clay-deep)}
+.res-note strong{color:var(--ink);font-weight:600}
+
+.res-done{display:none;flex-direction:column;justify-content:center;min-height:520px;text-align:left}
+.res-done .statement{margin:1.4rem 0 2rem;font-size:clamp(2.2rem,3.6vw,3.4rem)}
+.sum{border-top:1px solid var(--line)}
+.sum li{list-style:none;display:flex;justify-content:space-between;gap:1rem;padding:.9rem 0;border-bottom:1px solid var(--line)}
+.sum li span:first-child{font-family:var(--mono);font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-2);align-self:center}
+.sum li span:last-child{font-weight:500}
+.res-done .note{margin-top:1.6rem;color:var(--ink-2);max-width:52ch}
+.res-done .amend{margin-top:2rem;align-self:flex-start}
+
+/* ==========================================================
+   FOOTER
+   ========================================================== */
+.foot{background:#1D1811;color:rgba(244,239,228,.9)}
+.foot-top{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:2.5rem;flex-wrap:wrap;
+  padding:clamp(80px,11vh,140px) var(--gutter) clamp(48px,7vh,80px);
+}
+.foot-line{font-family:var(--serif);font-size:clamp(2.4rem,5.4vw,5rem);line-height:1.06;max-width:14ch;letter-spacing:-.01em}
+.foot-line em{font-style:italic;color:var(--champagne)}
+.foot-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:clamp(20px,3vw,48px);
+  padding:0 var(--gutter) clamp(56px,8vh,88px);
+}
+.foot-grid>*{min-width:0}
+.foot-grid .fw{font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.4rem);line-height:1;letter-spacing:.04em}
+.fcol h4{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,239,228,.5);margin-bottom:1rem;font-weight:400}
+.fcol p,.fcol a,.fcol address{display:block;font-style:normal;font-size:.95rem;line-height:1.75;color:rgba(244,239,228,.82);overflow-wrap:anywhere}
+.fcol a{width:fit-content}
+.foot-btm{
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  padding:1.3rem var(--gutter) 1.5rem;border-top:1px solid rgba(244,239,228,.14);
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(244,239,228,.5);
+}
+
+/* ==========================================================
+   ANIMATION INITIAL STATES (JS-gated via html.anim)
+   If JS/GSAP never runs, html.anim is absent/removed and all
+   content is visible by default.
+   ========================================================== */
+html.anim [data-rv]{opacity:0;visibility:hidden}
+html.anim [data-words] .wi{display:inline-block;transform:translateY(118%)}
+[data-words] .wm{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.09em;margin-bottom:-.09em}
+html.anim .hero-kicker,html.anim .hero-sub{opacity:0;transform:translateY(18px)}
+html.anim .hero-foot{opacity:0}
+html.anim .hl{transform:translateY(114%)}
+html.anim .media[data-mrv]{clip-path:inset(12% 0 12% 0)}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+@media(min-width:901px){
+  .day-stage{display:block}
+  .day-cards{display:none}
+}
+@media(max-width:1100px){
+  .t-cards{grid-template-columns:1fr}
+  .res-copy{grid-column:1/13;padding-right:0}
+  .res-card{grid-column:1/13}
+  .res-copy .media{max-width:560px}
+}
+@media(max-width:900px){
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .burger{display:flex}
+  .rest-main{grid-column:1/13}
+  .rest-side{grid-column:1/13;flex-direction:row;align-items:flex-start;gap:1.2rem;padding-top:0}
+  .rest-side .media{width:44%;flex:none}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:nth-child(2){border-right:0}
+  .stat{border-bottom:1px solid var(--line)}
+  .stat:nth-child(3),.stat:nth-child(4){border-bottom:0}
+  .house-head .hl-l{grid-column:1/13}
+  .house-head .hl-r{grid-column:1/13;margin-top:1.4rem}
+  .materials{grid-template-columns:1fr 1fr}
+  .mat:nth-child(2){border-right:0}
+  .mat{border-bottom:1px solid rgba(34,29,22,.13)}
+  .mat:nth-child(3),.mat:nth-child(4){border-bottom:0}
+  .chef-txt{grid-column:1/13;padding-right:0}
+  .chef-pic{grid-column:1/13;margin-top:2.4rem}
+  .chef-pic .media{margin-left:0}
+  .hero-foot .hleft{display:none}
+  .res-inputs{grid-template-columns:1fr}
+  .day-price{white-space:normal}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .foot-grid .fw{grid-column:1/-1}
+}
+@media(max-width:560px){
+  .rest-side{flex-direction:column}
+  .rest-side .media{width:min(100%,340px)}
+  .day-intro{flex-direction:column;align-items:flex-start}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat b{font-size:1.7rem}
+  .hero-sub{max-width:30ch}
+  .d-pill{width:66px}
+  .foot-top{gap:1.6rem}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:1.6rem 1.2rem}
+}
+@media(max-width:400px){
+  .foot-grid{grid-template-columns:1fr}
+}
+
+/* ==========================================================
+   REDUCED MOTION
+   ========================================================== */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  .day-stage{display:none!important}
+  .day-cards{display:grid!important}
+  html.anim [data-rv]{opacity:1;visibility:visible}
+  html.anim [data-words] .wi{transform:none}
+  html.anim .hero-kicker,html.anim .hero-sub{opacity:1;transform:none}
+  html.anim .hero-foot{opacity:1}
+  html.anim .hl{transform:none}
+  html.anim .media[data-mrv]{clip-path:none}
+  .hero-foot .scr i::after{display:none}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#restaurant">Skip to content</a>
+
+<!-- ============ NAV ============ -->
+<header class="nav on-hero" id="nav">
+  <div class="nav-in">
+    <a href="#hero" class="wordmark" data-scroll aria-label="Levante — back to top">LEVANTE</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#restaurant" class="lnk" data-scroll>The Restaurant</a>
+      <a href="#day" class="lnk" data-scroll>The Day</a>
+      <a href="#house" class="lnk" data-scroll>The House</a>
+    </nav>
+    <a href="#reserve" class="btn btn-ivory nav-cta" data-scroll>Reserve a table</a>
+    <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu">
+      <span class="bi" aria-hidden="true"><span></span><span></span><span></span></span>
+    </button>
+  </div>
+</header>
+
+<!-- mobile menu -->
+<div class="mmenu" id="mmenu" aria-hidden="true" inert>
+  <nav aria-label="Mobile">
+    <a href="#restaurant" class="big" data-scroll>The Restaurant <span class="no" aria-hidden="true">01</span></a>
+    <a href="#day" class="big" data-scroll>The Day <span class="no" aria-hidden="true">02</span></a>
+    <a href="#house" class="big" data-scroll>The House <span class="no" aria-hidden="true">03</span></a>
+    <a href="#reserve" class="big" data-scroll>Reserve <span class="no" aria-hidden="true">04</span></a>
+  </nav>
+  <div class="mfoot">
+    <p class="mono">WEDNESDAY — SUNDAY · ONE SEATING · 13:30</p>
+    <p class="mono dim">CAP D'EN FONT · MENORCA</p>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section id="hero" aria-label="Levante — restaurant of daylight">
+  <div class="hero-media" id="heroMedia">
+    <video id="heroVideo" muted loop playsinline preload="metadata" tabindex="-1" aria-hidden="true"
+      poster="assets/images/hero-poster.jpg">
+      <source src="assets/videos/hero.mp4" type="video/mp4">
+    </video>
+    <picture>
+      <source srcset="assets/images/hero-poster.webp" type="image/webp">
+      <img class="hero-poster" id="heroPoster" width="1920" height="1072" fetchpriority="high" decoding="async"
+        src="assets/images/hero-poster.jpg"
+        alt="Levante's pale limestone terrace above the Balearic Sea on Menorca's south coast, in hard midday light">
+    </picture>
+  </div>
+  <div class="hero-scrim" aria-hidden="true"></div>
+
+  <div class="hero-content" id="heroContent">
+    <div class="hero-kicker">
+      <p class="eyebrow">Menorca · Illes Balears — Restaurant of daylight</p>
+    </div>
+    <h1 class="hero-title" aria-label="Levante"><span class="hm"><span class="hl">L</span></span><span class="hm"><span class="hl">E</span></span><span class="hm"><span class="hl">V</span></span><span class="hm"><span class="hl">A</span></span><span class="hm"><span class="hl">N</span></span><span class="hm"><span class="hl">T</span></span><span class="hm"><span class="hl">E</span></span></h1>
+    <p class="hero-sub">Twelve tables above the Balearic Sea. One seating each day, while the light lasts.</p>
+  </div>
+
+  <div class="hero-foot">
+    <span class="hleft">Cut into the marès · Est. 2024</span>
+    <span class="scr"><i aria-hidden="true"></i> Scroll</span>
+    <span>One seating · 13:30</span>
+  </div>
+</section>
+
+<!-- ============ SCENE 2 · THE RESTAURANT ============ -->
+<section id="restaurant" class="sec wrap" aria-labelledby="restaurant-h">
+  <div class="rest-head">
+    <p class="eyebrow" data-rv>The Restaurant — Cap d'en Font</p>
+    <h2 class="statement" id="restaurant-h" data-words>The island wakes east. <em>Levante</em> is named for the wind that carries the morning.</h2>
+  </div>
+
+  <div class="rest-grid">
+    <div class="rest-main">
+      <figure class="media" data-mrv data-plx>
+        <picture>
+          <source srcset="assets/images/dining-room.webp" type="image/webp">
+          <img src="assets/images/dining-room.jpg" width="1600" height="893"
+            alt="The dining room — a single shelf of pale marès limestone open to the sea" loading="lazy" decoding="async">
+        </picture>
+        <figcaption class="cap">The dining room</figcaption>
+      </figure>
+    </div>
+    <div class="rest-side">
+      <p class="body-l" data-rv>On Menorca's south coast, a single shelf of marès limestone holds twelve tables above the water. The fire is lit at noon. Lunch begins at half past one and follows the light until it leaves — five hours, five acts, nothing hurried. Nothing on the table has travelled further than the island's shore.</p>
+      <figure class="media" data-mrv data-plx>
+        <picture>
+          <source srcset="assets/images/materials.webp" type="image/webp">
+          <img src="assets/images/materials.jpg" width="1000" height="671"
+            alt="Limestone, raw linen, unglazed ceramic and cast bronze in hard island sun" loading="lazy" decoding="async">
+        </picture>
+        <figcaption class="cap">Stone · linen · bronze</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="stats" data-rv>
+    <div class="stat"><b>12</b><span>Tables · 40 covers</span></div>
+    <div class="stat"><b>01</b><span>Seating · 13:30</span></div>
+    <div class="stat"><b>05</b><span>Hours of daylight</span></div>
+    <div class="stat"><b>1846</b><span>The quarry's first cut</span></div>
+  </div>
+</section>
+
+<!-- ============ SCENE 3 · THE DAY ============ -->
+<section id="day" aria-labelledby="day-h">
+  <div class="day-head wrap">
+    <p class="eyebrow" data-rv>The Tasting Menu</p>
+    <h2 class="statement" id="day-h" data-words>The Day — five acts across one afternoon.</h2>
+    <div class="day-intro">
+      <p class="body-l" data-rv>The kitchen cooks with the light. Raw and cold while the sun is high; fire as the shadows grow long; sweetness at golden hour. The menu changes with the boats and the garden — the shape of the afternoon does not.</p>
+      <p class="day-price" data-rv>The Day · 195&nbsp;€ &nbsp;—&nbsp; Wines of the islands · 110&nbsp;€</p>
+    </div>
+  </div>
+
+  <!-- desktop pinned stage -->
+  <div class="day-stage" id="dayStage">
+    <div class="stage-grid">
+      <div class="stage-copy">
+        <div class="act-over sw"><span id="actIdx">01 / 05</span><span id="actTime">13:30</span></div>
+        <h3 class="act-name sw" id="actName">First Light</h3>
+        <p class="act-dish sw" id="actDish">Menorcan oyster · green almond · finger lime</p>
+        <p class="act-note sw" id="actNote">Raw and cold, while the sun is high.</p>
+        <div class="act-ghost" id="actGhost" aria-hidden="true">01</div>
+      </div>
+      <div class="stage-media" id="stageMedia" aria-hidden="true"></div>
+    </div>
+    <div class="stage-ticks" id="stageTicks" role="tablist" aria-label="Menu acts"></div>
+    <p class="stage-hint" aria-hidden="true">Scroll — the light will change</p>
+  </div>
+
+  <!-- mobile cards -->
+  <div class="day-cards" id="dayCards"></div>
+</section>
+
+<!-- ============ SCENE 4 · THE HOUSE ============ -->
+<section id="house" class="sec wrap" aria-labelledby="house-h">
+  <div class="house-head">
+    <div class="hl-l">
+      <p class="eyebrow" data-rv>The House — Architecture by Estudi Migjorn</p>
+      <h2 class="statement" id="house-h" data-words>A quarry, reopened.</h2>
+    </div>
+    <p class="body-l hl-r" data-rv>For five centuries Menorca built itself from marès — the pale stone cut from its own ground. Levante returns to a disused quarry face above the water: one room, one long shelf of stone, finished in island oak, raw linen and cast bronze. The sun does the decorating.</p>
+  </div>
+
+  <div class="house-media">
+    <figure class="media" data-mrv data-plx>
+      <picture>
+        <source srcset="assets/images/terrace-golden-hour.webp" type="image/webp">
+        <img src="assets/images/terrace-golden-hour.jpg" width="2000" height="1342"
+          alt="The terrace at golden hour, the sea turning gold below" loading="lazy" decoding="async">
+      </picture>
+      <figcaption class="cap">The terrace · golden hour</figcaption>
+    </figure>
+  </div>
+
+  <div class="materials" data-rv>
+    <div class="mat"><b>Marès limestone</b><span>cut from the site itself</span></div>
+    <div class="mat"><b>Island oak</b><span>milled in Alaior, finished with wax</span></div>
+    <div class="mat"><b>Raw linen</b><span>woven in Barcelona, washed soft</span></div>
+    <div class="mat"><b>Cast bronze</b><span>poured by hand in Maó</span></div>
+  </div>
+
+  <div class="chef">
+    <div class="chef-txt">
+      <p class="eyebrow" data-rv>The Kitchen</p>
+      <h3 class="statement" data-words>Marta Riudavets</h3>
+      <p class="chef-quote" data-rv>We don't cook against the clock. We cook with the light.</p>
+      <p class="body-l chef-body" data-rv>Marta cooked over Basque fires for a decade before the island called her home. At Levante she keeps a short menu and a long fire, and lets the day decide the rest.</p>
+      <p class="chef-sig" data-rv>Chef &amp; custodian — Levante</p>
+    </div>
+    <div class="chef-pic">
+      <figure class="media" data-mrv data-plx>
+        <picture>
+          <source srcset="assets/images/chef-marta-riudavets.webp" type="image/webp">
+          <img src="assets/images/chef-marta-riudavets.jpg" width="1100" height="1366"
+            alt="Chef Marta Riudavets in the bright limestone kitchen" loading="lazy" decoding="async">
+        </picture>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCENE 5 · RESERVE ============ -->
+<section id="reserve" class="sec wrap" aria-labelledby="reserve-h">
+  <div class="res-grid">
+    <div class="res-copy">
+      <p class="eyebrow" data-rv>Reservations</p>
+      <h2 class="statement" id="reserve-h" data-words>The afternoon is yours.</h2>
+      <p class="body-l" data-rv>One seating of twelve tables, released three months ahead. Lunch begins at half past one and takes the whole afternoon — plan for five hours, and stay for the light.</p>
+      <ul class="res-facts" data-rv>
+        <li><span>Lunch, Wednesday — Sunday</span><span>13:30</span></li>
+        <li><span>The Day, five acts</span><span>195 € / GUEST</span></li>
+        <li><span>Wines of the islands</span><span>110 € / GUEST</span></li>
+        <li><span>Tables of two to eight</span><span>HEARTH SEATS 4</span></li>
+      </ul>
+    </div>
+
+    <div class="res-card" id="resCard">
+      <form id="resForm" novalidate>
+        <fieldset class="fld" id="fldDate">
+          <div class="lab"><span id="labDate">01 — Choose a day</span><span class="err-note">choose a day</span></div>
+          <div class="d-scroll" id="dateRow" role="radiogroup" aria-labelledby="labDate"></div>
+        </fieldset>
+
+        <fieldset class="fld">
+          <div class="lab"><span id="labGuests">02 — Guests</span></div>
+          <div class="g-row" role="group" aria-labelledby="labGuests">
+            <button type="button" class="g-btn" id="gMinus" aria-label="Fewer guests">&#8722;</button>
+            <span class="g-num" id="gNum" aria-live="polite" aria-atomic="true">2</span>
+            <button type="button" class="g-btn" id="gPlus" aria-label="More guests">+</button>
+            <span class="g-cap" id="gCap">Tables of two to eight</span>
+          </div>
+        </fieldset>
+
+        <fieldset class="fld" id="fldTable">
+          <div class="lab"><span id="labTable">03 — Where you'll sit</span><span class="err-note">choose a table</span></div>
+          <div class="t-cards" id="tCards" role="radiogroup" aria-labelledby="labTable">
+            <button type="button" class="t-card" data-t="The dining room"><b>The dining room</b><span>Inside the stone — coolest in high summer.</span></button>
+            <button type="button" class="t-card" data-t="The sea terrace"><b>The sea terrace</b><span>Open to the horizon, linen overhead.</span></button>
+            <button type="button" class="t-card" data-t="The hearth counter"><b>The hearth counter</b><span>Four seats facing the fire.</span></button>
+          </div>
+        </fieldset>
+
+        <fieldset class="fld" id="fldWho">
+          <div class="lab"><span>04 — Who is coming</span><span class="err-note">name and a valid email</span></div>
+          <div class="res-inputs">
+            <span>
+              <label class="vh" for="inName">Your name</label>
+              <input class="inp" id="inName" type="text" name="name" placeholder="Your name" autocomplete="name" required aria-required="true">
+            </span>
+            <span>
+              <label class="vh" for="inMail">Email</label>
+              <input class="inp" id="inMail" type="email" name="email" placeholder="Email" autocomplete="email" required aria-required="true">
+            </span>
+          </div>
+        </fieldset>
+
+        <button type="submit" class="btn btn-clay res-submit" id="resSubmit">Request the table <span class="ar" aria-hidden="true">→</span></button>
+        <p class="res-small">Nothing is charged today · Confirmation within the hour</p>
+        <p class="res-note" id="resNote" role="alert" aria-live="assertive"></p>
+      </form>
+
+      <div class="res-done" id="resDone" role="status" aria-live="polite">
+        <p class="eyebrow">Request received</p>
+        <h3 class="statement">The afternoon is&nbsp;yours.</h3>
+        <ul class="sum">
+          <li><span>Day</span><span id="sumDate">—</span></li>
+          <li><span>Guests</span><span id="sumGuests">—</span></li>
+          <li><span>Table</span><span id="sumTable">—</span></li>
+          <li><span>Seating</span><span>13:30 — while the light lasts</span></li>
+        </ul>
+        <p class="note">Our maître d' will confirm by email within the hour. If the day is spoken for, we'll offer the nearest afternoon with the same light.</p>
+        <button type="button" class="btn btn-ghost amend" id="amendBtn">Amend the request</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot" id="foot">
+  <div class="foot-top">
+    <p class="foot-line" data-words>Come while the <em>light</em> lasts.</p>
+    <a href="#reserve" class="btn btn-ivory" data-scroll>Reserve a table <span class="ar" aria-hidden="true">→</span></a>
+  </div>
+  <!-- CONFIGURE: address, phone and email are brand-concept placeholders. -->
+  <div class="foot-grid">
+    <p class="fw">LEVANTE</p>
+    <div class="fcol">
+      <h4>Find us</h4>
+      <address>Camí de Cap d'en Font, s/n<br>Sant Lluís, Menorca<br>07713, España</address>
+    </div>
+    <div class="fcol">
+      <h4>Hours</h4>
+      <p>Wednesday — Sunday<br>One seating · 13:30<br>Closed through January</p>
+    </div>
+    <div class="fcol">
+      <h4>Contact</h4>
+      <a class="lnk" href="mailto:reservations@levante.example">reservations@levante.example</a>
+      <a class="lnk" href="tel:+34971156024">+34 971 156 024</a>
+    </div>
+  </div>
+  <div class="foot-btm">
+    <span>Levante — Restaurant of daylight · Menorca</span>
+    <span>From first light to last ember</span>
+  </div>
+</footer>
+
+<!-- ============ JSON-LD · Restaurant schema ============
+     CONFIGURE: values below are brand-concept placeholders; verify
+     name/address/phone/geo/url and replace the .example domain
+     before production. -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Restaurant",
+  "name":"Levante",
+  "description":"A restaurant of daylight on Menorca's south coast. Twelve tables cut into pale limestone above the Balearic Sea, with one seating each day following the sun across five acts.",
+  "servesCuisine":["Mediterranean","Menorcan","Contemporary"],
+  "priceRange":"€€€€",
+  "image":"https://www.levante.example/assets/images/og-image.jpg",
+  "url":"https://www.levante.example/",
+  "acceptsReservations":"https://www.levante.example/#reserve",
+  "telephone":"+34 971 156 024",
+  "email":"reservations@levante.example",
+  "address":{
+    "@type":"PostalAddress",
+    "streetAddress":"Camí de Cap d'en Font, s/n",
+    "addressLocality":"Sant Lluís",
+    "addressRegion":"Illes Balears",
+    "postalCode":"07713",
+    "addressCountry":"ES"
+  },
+  "openingHoursSpecification":[{
+    "@type":"OpeningHoursSpecification",
+    "dayOfWeek":["Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens":"13:30",
+    "closes":"18:30"
+  }]
+}
+</script>
+
+<script src="assets/js/gsap.min.js" defer></script>
+<script src="assets/js/ScrollTrigger.min.js" defer></script>
+<script src="assets/js/lenis.min.js" defer></script>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

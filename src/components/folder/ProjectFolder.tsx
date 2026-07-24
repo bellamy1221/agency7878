@@ -1,117 +1,92 @@
 "use client";
 
+import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { useState, type CSSProperties } from "react";
+import { getArchiveProjects } from "@/data/projects";
 import styles from "./project-folder.module.css";
 
-const SHEETS = [
-  {
-    id: "a",
-    label: "Сайт",
-    title: "Сайт для сервиса",
-    year: 2026,
-    status: "Концепт",
-  },
-  {
-    id: "b",
-    label: "Интерфейс",
-    title: "Кабинет клиента",
-    year: 2026,
-    status: "Эксперимент",
-  },
-  {
-    id: "c",
-    label: "Промо",
-    title: "Сайт события",
-    year: 2026,
-    status: "Концепт",
-  },
-  {
-    id: "d",
-    label: "Форма",
-    title: "Быстрая запись",
-    year: 2026,
-    status: "Концепт",
-  },
-] as const;
+export function ProjectFolder() {
+  const reduce = useReducedMotion();
+  const [isOpen, setIsOpen] = useState(false);
+  const archiveProjects = getArchiveProjects().slice(0, 5);
 
-/**
- * All sheets fan open on hover; only the first sheet is interactive.
- */
-export function ProjectFolder({ compact = false }: { compact?: boolean }) {
-  const [open, setOpen] = useState(false);
-  const work = SHEETS[0];
+  const prepareArchiveOpen = () => {
+    setIsOpen(true);
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  };
 
   return (
     <div className={styles.layout}>
       <div
         className={styles.stage}
-        data-open={open}
-        onPointerEnter={() => setOpen(true)}
-        onPointerLeave={() => setOpen(false)}
+        data-open={isOpen}
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
       >
         <div aria-hidden className={styles.halo} />
         <div className={styles.folder}>
           <div aria-hidden className={styles.back}>
-            <span className={styles.backLabel}>TSBLV / ARCHIVE</span>
+            <span className={styles.backLabel}>TSBLV / АРХИВ</span>
           </div>
 
-          <div className={styles.sheets}>
-            {[...SHEETS].reverse().map((item, revI) => {
-              const index = SHEETS.length - 1 - revI;
-              const isFirst = index === 0;
+          <div className={styles.sheets} aria-hidden>
+            {[...archiveProjects].reverse().map((project, reverseIndex) => {
+              const index = archiveProjects.length - 1 - reverseIndex;
               return (
                 <div
-                  key={item.id}
+                  key={project.slug}
                   className={styles.sheet}
-                  data-first={isFirst ? "true" : "false"}
                   style={
                     {
-                      "--sheet-x": `${(index - 1.5) * 0.35}rem`,
-                      "--sheet-y": `${-12 - index * 3.2}%`,
-                      "--sheet-rotate": `${(index - 1.5) * 0.45}deg`,
-                      "--sheet-delay": `${index * 22}ms`,
-                      "--sheet-nest": `${index * 0.22}rem`,
+                      "--sheet-top": `${index * 0.35}rem`,
+                      "--sheet-right": `${(archiveProjects.length - 1 - index) * 0.22}rem`,
+                      "--sheet-left": `${index * 0.45}rem`,
+                      "--sheet-x": `${(index - 2) * 1}rem`,
+                      "--sheet-y": `${-14 - index * 5}%`,
+                      "--sheet-rotate": `${(index - 2) * 0.85}deg`,
+                      "--sheet-delay": `${index * 35}ms`,
                       zIndex: 10 - index,
                     } as CSSProperties
                   }
-                  aria-hidden={!isFirst}
                 >
-                  <span className={styles.sheetLabel}>{item.label}</span>
-                  <small className={styles.sheetMeta}>
-                    {item.year} · {item.status}
-                  </small>
+                  <span className={styles.sheetLabel}>{project.category}</span>
+                  <small className={styles.sheetMeta}>{project.title}</small>
                 </div>
               );
             })}
           </div>
 
-          <div className={styles.front}>
-            <span className={styles.frontArrow} aria-hidden>
-              ↗
+          <Link
+            href="/archive"
+            scroll
+            className={styles.front}
+            aria-label="Открыть архив проектов"
+            onClick={prepareArchiveOpen}
+            onFocus={() => setIsOpen(true)}
+            onBlur={() => setIsOpen(false)}
+          >
+            <span className={styles.frontEyebrow}>Архив · интерактивные версии внутри</span>
+            <span className={styles.frontRow}>
+              <strong className={styles.frontTitle}>Архив проектов</strong>
+              <span className={styles.frontArrow} aria-hidden>↗</span>
             </span>
-            <button
-              type="button"
-              className={styles.frontHit}
-              aria-expanded={open}
-              aria-label={open ? "Закрыть папку" : "Открыть папку"}
-              onClick={() => setOpen((v) => !v)}
-            />
-          </div>
+          </Link>
         </div>
       </div>
 
-      <div
-        className={compact ? `${styles.caption} ${styles.captionCompact}` : styles.caption}
+      <motion.div
+        className={styles.caption}
+        initial={reduce ? false : { opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       >
-        <p className={styles.captionLabel}>
-          {work.label} · {work.year} · {work.status}
+        <p className={styles.captionLabel}>Архив / 07</p>
+        <p className={styles.captionTitle}>Сайты, интерфейсы и эксперименты</p>
+        <p className={styles.captionText}>
+          Откройте папку: внутри — локальные версии проектов, которые можно листать и нажимать.
         </p>
-        <p className={styles.captionTitle}>{work.title}</p>
-        <Link href="/archive" className={styles.archiveCta}>
-          Открыть весь архив
-        </Link>
-      </div>
+      </motion.div>
     </div>
   );
 }

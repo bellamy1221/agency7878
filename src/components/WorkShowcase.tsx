@@ -13,6 +13,7 @@ const tintBySlug: Record<string, string> = {
   "alina-vesna": "bg-[#f3ebe8]",
   "stol-mini": "bg-[#e8eef8]",
   primerochnaya: "bg-[#f1ebe0]",
+  "sever-ios": "bg-[#dce7e1]",
 };
 
 /** Unified preview height so switching projects never jumps. */
@@ -23,12 +24,14 @@ function PreviewVisual({ project }: { project: Project }) {
         <div className="absolute inset-y-0 left-0 w-[62%] overflow-hidden rounded-[10px] border border-[#141210]/12 bg-white shadow-[0_10px_24px_rgba(20,18,16,0.08)]">
           <div className="flex items-center justify-between border-b border-[#141210]/10 px-2.5 py-1.5">
             <p className="font-mono text-[9px] uppercase tracking-[0.1em] text-[#6b655c]">
-              Telegram
+              {project.slug === "sever-ios" ? "Native" : "Telegram"}
             </p>
-            <p className="font-mono text-[9px] text-accent">Mini App</p>
+            <p className="font-mono text-[9px] text-accent">
+              {project.slug === "sever-ios" ? "iOS App" : "Mini App"}
+            </p>
           </div>
           <div className="relative h-[calc(100%-2rem)]">
-            <Image src={project.cover} alt="" fill sizes="36vw" className="object-cover" />
+            <Image src={project.cover} alt="" fill loading="eager" sizes="36vw" className="object-cover" />
           </div>
         </div>
         <div className="absolute bottom-[6%] right-[2%] top-[14%] w-[34%] overflow-hidden rounded-[14px] border-[3px] border-[#141210] bg-[#141210] shadow-[0_12px_28px_rgba(20,18,16,0.25)]">
@@ -54,7 +57,7 @@ function PreviewVisual({ project }: { project: Project }) {
             <span className="browser-dot" />
           </div>
           <div className="relative min-h-0 flex-1">
-            <Image src={project.cover} alt="" fill sizes="28vw" className="object-cover" />
+            <Image src={project.cover} alt="" fill loading="eager" sizes="28vw" className="object-cover" />
           </div>
         </div>
         <div className="flex min-h-0 flex-col overflow-hidden rounded-[10px] border border-[#141210]/12 bg-white shadow-[0_10px_24px_rgba(20,18,16,0.07)]">
@@ -90,6 +93,7 @@ function PreviewVisual({ project }: { project: Project }) {
           src={project.cover}
           alt={`Превью ${project.title}`}
           fill
+          loading="eager"
           sizes="42vw"
           className="object-cover"
         />
@@ -123,7 +127,7 @@ export function WorkShowcase({ projects }: { projects: Project[] }) {
 
   return (
     <div className="lg:flex lg:min-h-0 lg:flex-1 lg:flex-col">
-      <div className="hidden min-h-0 flex-1 gap-5 lg:grid lg:grid-cols-12 lg:items-stretch lg:gap-6">
+      <div className="hidden min-h-0 flex-1 gap-5 lg:grid lg:grid-cols-12 lg:items-stretch lg:gap-8">
         <div
           className="flex min-h-0 flex-col justify-center lg:col-span-4"
           role="listbox"
@@ -139,7 +143,7 @@ export function WorkShowcase({ projects }: { projects: Project[] }) {
                 aria-selected={isActive}
                 onMouseEnter={() => setActive(index)}
                 onFocus={() => setActive(index)}
-                className={`group flex w-full cursor-pointer items-center justify-between gap-3 border-b border-border py-2.5 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
+                className={`group flex w-full cursor-pointer items-center justify-between gap-3 border-b border-border py-4 text-left transition-[color,padding] duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
                   isActive ? "text-foreground" : "text-muted hover:text-foreground"
                 }`}
               >
@@ -147,13 +151,13 @@ export function WorkShowcase({ projects }: { projects: Project[] }) {
                   <p className="truncate font-mono text-[10px] uppercase tracking-[0.1em] text-muted">
                     0{index + 1} · {item.category}
                   </p>
-                  <p className="mt-0.5 truncate text-[15px] font-medium tracking-[-0.02em]">
+                  <p className={`mt-1 truncate font-medium tracking-[-0.03em] transition-[font-size] duration-300 ${isActive ? "text-xl" : "text-[15px]"}`}>
                     {item.shortTitle ?? item.title}
                   </p>
                 </div>
                 <span
-                  className={`h-1.5 w-1.5 shrink-0 rounded-full transition-colors ${
-                    isActive ? "bg-accent" : "bg-border group-hover:bg-muted"
+                  className={`h-px shrink-0 transition-[width,background-color] duration-300 ${
+                    isActive ? "w-9 bg-accent" : "w-3 bg-border group-hover:bg-muted"
                   }`}
                   aria-hidden
                 />
@@ -162,7 +166,7 @@ export function WorkShowcase({ projects }: { projects: Project[] }) {
           })}
         </div>
 
-        <div className="relative min-h-[28rem] lg:col-span-8 xl:min-h-[30rem]">
+        <div className="relative min-h-[32rem] lg:col-span-8 xl:min-h-[36rem]">
           <AnimatePresence initial={false}>
             <motion.div
               key={project.slug}
@@ -174,17 +178,17 @@ export function WorkShowcase({ projects }: { projects: Project[] }) {
             >
               <Link
                 href={`/work/${project.slug}`}
-                className={`group flex h-full cursor-pointer flex-col overflow-hidden rounded-[12px] border border-[#141210]/10 ${tint} p-3 text-[#141210] shadow-[0_18px_40px_rgba(0,0,0,0.28)] transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_48px_rgba(0,0,0,0.34)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent`}
+                className={`group flex h-full cursor-pointer flex-col overflow-hidden rounded-[18px] border border-white/15 ${tint} p-3 text-[#141210] shadow-[0_28px_70px_rgba(0,0,0,0.38)] transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:shadow-[0_36px_82px_rgba(0,0,0,0.48)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent`}
               >
                 <div className="min-h-0 flex-1 overflow-hidden">
                   <PreviewVisual project={project} />
                 </div>
-                <div className="mt-2.5 grid h-[5.5rem] shrink-0 gap-3 border-t border-[#141210]/12 pt-2.5 md:grid-cols-[1.35fr_auto] md:items-end">
+                <div className="mt-3 grid min-h-[6.75rem] shrink-0 gap-4 border-t border-[#141210]/12 px-1 pb-1 pt-3 md:grid-cols-[1.35fr_auto] md:items-end">
                   <div className="min-w-0">
                     <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-[#6b655c]">
                       {project.status}
                     </p>
-                    <h3 className="mt-0.5 truncate text-lg font-semibold tracking-[-0.03em] text-[#141210]">
+                    <h3 className="mt-1 truncate text-2xl font-semibold tracking-[-0.045em] text-[#141210]">
                       {project.shortTitle ?? project.title}
                     </h3>
                     <p className="mt-1 line-clamp-2 text-[13px] leading-snug text-[#5a544c]">
@@ -242,6 +246,7 @@ export function WorkShowcase({ projects }: { projects: Project[] }) {
                     src={item.cover}
                     alt={item.title}
                     fill
+                    loading="eager"
                     sizes="85vw"
                     className="object-cover"
                   />

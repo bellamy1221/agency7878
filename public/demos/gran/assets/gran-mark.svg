@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ГРАНЬ — фирменный знак. Гранёный кристалл: 4 грани встречаются в центре,
+     акцентная грань (верх-лево) в брендовом синем #5E7896.
+     currentColor — основной контур наследует цвет текста; акцент зафиксирован. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="ГРАНЬ">
+  <defs>
+    <symbol id="gran-mark" viewBox="0 0 100 100">
+      <!-- accent facet: apex A(50,8) → left L(14,50) → center M(50,50) -->
+      <polygon points="50,8 14,50 50,50" fill="#5E7896"/>
+      <!-- facet grid + outline (inherits currentColor) -->
+      <g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="miter">
+        <polygon points="50,8 86,50 50,92 14,50"/>
+        <line x1="50" y1="8"  x2="50" y2="92"/>
+        <line x1="14" y1="50" x2="86" y2="50"/>
+      </g>
+    </symbol>
+  </defs>
+  <use href="#gran-mark" x="0" y="0" width="100" height="100"/>
+</svg>

@@ -1,50 +1,71 @@
 "use client";
 
+import { ArrowUpRight } from "@phosphor-icons/react";
 import { motion, useReducedMotion } from "motion/react";
-import { FaqNudge } from "@/components/FaqNudge";
-import { ProjectFolder } from "@/components/folder/ProjectFolder";
+import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
+
+const archiveNotes = [
+  ["A.01", "Типографические системы", "Эксперимент"],
+  ["A.02", "Интерфейсные состояния", "UI study"],
+  ["A.03", "Короткие продуктовые идеи", "Концепции"],
+] as const;
 
 export function ArchiveFolderSection() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="relative flex snap-start flex-col justify-center overflow-hidden border-b border-border/60 py-10 md:py-12 lg:py-14">
-      {!reduce ? (
-        <motion.div
-          className="pointer-events-none absolute left-1/2 top-1/2 h-[22rem] w-[22rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#2f86f5]/10 blur-3xl"
-          animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.65, 0.4] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          aria-hidden
-        />
-      ) : null}
-
-      <FaqNudge
-        q="Что внутри архива?"
-        a="Короткие идеи и интерфейсы, которые не вошли в избранное."
-        className="absolute left-3 top-[18%] z-20 hidden max-w-[8rem] xl:left-6 xl:block 2xl:left-10"
-      />
-      <FaqNudge
-        q="Можно взять идею как основу?"
-        a="Да. Адаптируем под ваш оффер и аудиторию."
-        className="absolute right-3 top-[18%] z-20 hidden max-w-[8rem] xl:right-6 xl:block 2xl:right-10"
+    <section className="relative snap-start overflow-hidden border-b border-white/10 py-24 md:py-32 lg:py-40">
+      <motion.div
+        className="archive-teaser-orb"
+        animate={reduce ? undefined : { rotate: 360 }}
+        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+        aria-hidden
       />
 
-      <div className="relative mx-auto flex w-full max-w-[1400px] flex-col items-center justify-center px-4 md:px-6 lg:px-8">
-        <Reveal>
-          <div className="mx-auto max-w-lg text-center">
-            <h2 className="text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
-              Ещё идеи в архиве
-            </h2>
-            <p className="mx-auto mt-1.5 max-w-md text-[13px] leading-relaxed text-muted">
-              Короткие сайты, интерфейсы и эксперименты. Откройте папку или
-              перейдите в полный архив.
-            </p>
-          </div>
+      <div className="relative mx-auto grid max-w-[1460px] gap-12 px-5 md:px-8 lg:grid-cols-12 lg:items-end lg:gap-10 lg:px-10">
+        <Reveal className="lg:col-span-6">
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#d09a85]">
+            Архив / 03
+          </p>
+          <h2 className="mt-5 max-w-[10ch] text-[clamp(3rem,6vw,6.4rem)] font-semibold leading-[0.9] tracking-[-0.065em]">
+            Идеи, пробы, системы.
+          </h2>
+          <p className="mt-6 max-w-[38ch] text-[15px] leading-[1.7] text-muted md:text-base">
+            Рабочая полка студии: визуальные эксперименты и продуктовые наброски,
+            которые показывают диапазон подходов вне главной пятёрки.
+          </p>
+          <Link
+            href="/archive"
+            className="btn-cta-primary mt-8 inline-flex h-12 items-center gap-2 rounded-full px-6 text-sm font-semibold"
+          >
+            Открыть каталог
+            <ArrowUpRight size={16} weight="bold" />
+          </Link>
         </Reveal>
 
-        <Reveal delay={0.06} className="mt-3 w-full md:mt-4">
-          <ProjectFolder compact />
+        <Reveal className="lg:col-span-5 lg:col-start-8" delay={0.08}>
+          <div className="border-t border-white/12">
+            {archiveNotes.map(([index, title, status]) => (
+              <div
+                key={index}
+                className="group grid grid-cols-[auto_1fr_auto] items-center gap-4 border-b border-white/10 py-5"
+              >
+                <span className="font-mono text-[10px] tracking-[0.14em] text-[#d87350]">
+                  {index}
+                </span>
+                <span className="text-sm font-medium tracking-[-0.015em] transition-transform duration-300 group-hover:translate-x-1 md:text-base">
+                  {title}
+                </span>
+                <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[#746c64]">
+                  {status}
+                </span>
+              </div>
+            ))}
+          </div>
+          <p className="mt-4 text-right font-mono text-[9px] uppercase tracking-[0.14em] text-[#655e57]">
+            10 позиций · обновляется
+          </p>
         </Reveal>
       </div>
     </section>

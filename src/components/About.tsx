@@ -1,77 +1,69 @@
-import Image from "next/image";
+import { ArrowDownRight } from "@phosphor-icons/react/dist/ssr";
 import { Reveal } from "@/components/Reveal";
 
 const capabilities = [
-  "Понятная структура под бизнес-задачу",
-  "Сильная визуальная подача",
-  "Мышление про конверсию",
-  "Лёгкие и уместные анимации",
-  "Адаптивная frontend-разработка",
-  "Быстрый практичный запуск",
-];
+  ["01", "Структура", "Выстраиваю путь пользователя вокруг конкретной бизнес-задачи."],
+  ["02", "Арт-дирекшн", "Создаю визуальную систему с характером, а не набор модных эффектов."],
+  ["03", "Разработка", "Собираю адаптивный интерфейс, который остаётся быстрым и поддерживаемым."],
+  ["04", "Запуск", "Довожу продукт до рабочего состояния и передаю понятную основу для роста."],
+] as const;
 
 export function About() {
   return (
-    <section id="about" className="scroll-mt-24 border-b border-border bg-surface">
-      <div className="mx-auto max-w-[1400px] px-4 py-20 md:px-6 md:py-28 lg:px-8 lg:py-36">
+    <section id="about" className="relative scroll-mt-20 snap-start overflow-hidden border-y border-white/10">
+      <div className="about-glow" aria-hidden />
+      <div className="relative mx-auto max-w-[1460px] px-5 py-24 md:px-8 md:py-32 lg:px-10 lg:py-40">
         <Reveal>
-          <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
-            <p className="editorial-label">О студии</p>
-            <span className="note-chip">один человек · весь цикл</span>
+          <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#d09a85]">
+              О студии / 02
+            </p>
+            <p className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-[#776e66] md:block">
+              Один специалист · единая ответственность
+            </p>
           </div>
         </Reveal>
 
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
-          <Reveal className="lg:col-span-5 lg:pt-4">
-            <h2 className="text-3xl font-medium tracking-tight md:text-5xl">
-              Честно и{" "}
-              <span className="font-serif-accent">по-человечески</span>
+        <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <Reveal className="lg:col-span-7">
+            <h2 className="max-w-[13ch] text-[clamp(2.8rem,6.2vw,6.8rem)] font-semibold leading-[0.92] tracking-[-0.065em]">
+              Проектирую бизнесу{" "}
+              <span className="font-serif-accent text-[#d99a81]">цифровое лицо</span>,{" "}
+              которое работает.
             </h2>
-            <p className="mt-6 max-w-md text-base leading-relaxed text-muted md:text-lg">
-              TSBLV - независимая российская digital-студия. Делаю выразительные
-              сайты и лёгкие цифровые продукты для малого бизнеса, локальных мест,
-              экспертов и частных проектов.
-            </p>
-            <p className="mt-4 max-w-md text-base leading-relaxed text-muted md:text-lg">
-              Я сам веду проект от структуры до запуска, поэтому вы говорите
-              напрямую с человеком, который отвечает за результат.
-            </p>
-            <blockquote className="mt-8 max-w-sm border-l-2 border-accent pl-4 text-base leading-relaxed text-foreground/85 md:text-lg">
-              Красиво достаточно, чтобы запомнили. Ясно достаточно, чтобы написали.
-            </blockquote>
           </Reveal>
 
-          <Reveal className="relative lg:col-span-6 lg:col-start-7" delay={0.08}>
-            <div className="relative ml-0 max-w-lg lg:ml-8">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-editorial)] border border-border">
-                <Image
-                  src="https://picsum.photos/seed/tsblv-studio-desk/900/1200"
-                  alt="Рабочее пространство студии TSBLV"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 420px"
-                  className="object-cover contrast-[1.04]"
-                />
-              </div>
-              <div className="absolute -bottom-5 -left-3 max-w-[210px] -rotate-2 rounded-lg border border-border bg-background p-3 shadow-[0_12px_30px_rgba(22,21,19,0.08)] md:-left-8">
-                <p className="editorial-label mb-1">Между делом</p>
-                <p className="text-sm leading-snug text-foreground/85">
-                  Не делаю «глобальные агентства». Делаю сайты, которыми удобно
-                  пользоваться.
-                </p>
-              </div>
-            </div>
-
-            <ul className="mt-14 grid gap-3 sm:grid-cols-2">
-              {capabilities.map((item) => (
-                <li
-                  key={item}
-                  className="border-t border-border pt-3 text-sm text-foreground/85 transition-colors hover:text-accent"
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
+          <Reveal className="lg:col-span-4 lg:col-start-9 lg:pt-2" delay={0.08}>
+            <p className="max-w-[38ch] text-lg leading-[1.55] text-[#d1c7bc] md:text-xl">
+              TSBLV объединяет продуктовый взгляд, визуальное направление и
+              frontend-разработку в одном процессе.
+            </p>
+            <p className="mt-5 max-w-[42ch] text-[15px] leading-[1.7] text-[#91877e]">
+              Вы общаетесь напрямую с человеком, который принимает решения и
+              отвечает за результат — от первого экрана до готового запуска.
+            </p>
+            <a
+              href="#contact"
+              className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[#f4efe7] transition-colors hover:text-[#d87350]"
+            >
+              Обсудить задачу
+              <ArrowDownRight size={16} weight="bold" />
+            </a>
           </Reveal>
+        </div>
+
+        <div className="mt-16 grid border-t border-white/10 sm:grid-cols-2 lg:mt-24 lg:grid-cols-4">
+          {capabilities.map(([number, title, text], index) => (
+            <Reveal
+              key={title}
+              delay={index * 0.05}
+              className="border-b border-white/10 py-6 sm:px-5 sm:first:pl-0 lg:border-b-0 lg:border-r lg:last:border-r-0"
+            >
+              <p className="font-mono text-[10px] tracking-[0.14em] text-[#d87350]">{number}</p>
+              <h3 className="mt-8 text-lg font-semibold tracking-[-0.025em]">{title}</h3>
+              <p className="mt-2 max-w-[30ch] text-sm leading-relaxed text-[#8f857b]">{text}</p>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

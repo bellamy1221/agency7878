@@ -1,6 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, PaperPlaneTilt } from "@phosphor-icons/react/dist/ssr";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpRight,
+  PaperPlaneTilt,
+} from "@phosphor-icons/react/dist/ssr";
 import type { Project } from "@/data/projects";
 import { getAdjacentProjects } from "@/data/projects";
 import { site } from "@/data/site";
@@ -26,8 +31,7 @@ export function CasePageContent({ project }: CasePageProps) {
 
           <div className="mt-8 max-w-4xl">
             <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-              {project.category} · {project.year}
-              {project.isConcept ? " · Независимая концепция" : ""}
+              {project.category} · {project.projectType} · {project.year}
             </p>
             <h1 className="mt-4 text-4xl font-medium tracking-tight md:text-6xl">
               {project.title}
@@ -35,6 +39,31 @@ export function CasePageContent({ project }: CasePageProps) {
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
               {project.summary}
             </p>
+            <div className="mt-6 flex flex-wrap items-center gap-4">
+              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-accent">
+                {project.status}
+              </span>
+              {project.demoPath ? (
+                <Link
+                  href={project.demoPath}
+                  className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border px-4 text-sm font-semibold transition-colors hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                >
+                  Открыть интерактивную версию
+                  <ArrowUpRight size={15} weight="bold" />
+                </Link>
+              ) : null}
+              {project.liveUrl ? (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border px-4 text-sm font-semibold transition-colors hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                >
+                  Live project
+                  <ArrowUpRight size={15} weight="bold" />
+                </a>
+              ) : null}
+            </div>
           </div>
         </div>
       </div>
@@ -45,7 +74,7 @@ export function CasePageContent({ project }: CasePageProps) {
             src={project.cover}
             alt={`Обложка проекта ${project.title}`}
             fill
-            priority
+            loading="eager"
             sizes="100vw"
             className="object-cover"
           />
@@ -123,33 +152,28 @@ export function CasePageContent({ project }: CasePageProps) {
           Кадры и адаптив
         </h2>
         <div className="mt-8 grid gap-5 md:grid-cols-12">
-          <div className="relative aspect-[16/11] overflow-hidden rounded-[var(--radius-editorial)] border border-border md:col-span-7">
-            <Image
-              src={project.gallery[0] ?? project.cover}
-              alt={`${project.title}: основной экран`}
-              fill
-              sizes="(max-width: 768px) 100vw, 60vw"
-              className="object-cover"
-            />
-          </div>
-          <div className="relative aspect-[16/11] overflow-hidden rounded-[var(--radius-editorial)] border border-border md:col-span-5">
-            <Image
-              src={project.gallery[1] ?? project.cover}
-              alt={`${project.title}: дополнительный экран`}
-              fill
-              sizes="(max-width: 768px) 100vw, 40vw"
-              className="object-cover"
-            />
-          </div>
-          <div className="relative mx-auto aspect-[9/16] w-full max-w-[320px] overflow-hidden rounded-[var(--radius-editorial)] border border-border md:col-span-4 md:col-start-5">
-            <Image
-              src={project.gallery[2] ?? project.cover}
-              alt={`${project.title}: мобильный экран`}
-              fill
-              sizes="320px"
-              className="object-cover"
-            />
-          </div>
+          {(project.gallery.length > 0 ? project.gallery : [project.cover]).map(
+            (image, index, gallery) => (
+              <div
+                key={image}
+                className={`relative aspect-[16/10] overflow-hidden rounded-[var(--radius-editorial)] border border-border ${
+                  gallery.length === 1
+                    ? "md:col-span-12"
+                    : index % 2 === 0
+                      ? "md:col-span-7"
+                      : "md:col-span-5"
+                }`}
+              >
+                <Image
+                  src={image}
+                  alt={`${project.title}: ${index === 0 ? "основной экран" : `дополнительный кадр ${index + 1}`}`}
+                  fill
+                  sizes={gallery.length === 1 ? "100vw" : "(max-width: 768px) 100vw, 58vw"}
+                  className="object-cover"
+                />
+              </div>
+            ),
+          )}
         </div>
       </div>
 
@@ -180,7 +204,7 @@ export function CasePageContent({ project }: CasePageProps) {
       <div className="border-t border-border bg-surface">
         <div className="mx-auto flex max-w-[1400px] flex-col items-start justify-between gap-5 px-4 py-10 md:flex-row md:items-center md:px-6 md:py-12 lg:px-8">
           <h2 className="max-w-md text-xl font-medium tracking-tight md:text-2xl">
-            Нужен сайт с похожим уровнем проработки?
+            Нужен цифровой продукт с похожим уровнем проработки?
           </h2>
           <a
             href={site.telegram}

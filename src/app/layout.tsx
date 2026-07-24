@@ -22,17 +22,20 @@ const jetbrains = JetBrains_Mono({
   display: "swap",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "TSBLV — дизайн и разработка сайтов",
     template: "%s · TSBLV",
   },
   description:
-    "Независимый дизайнер и frontend-разработчик: лендинги и сайты с понятной структурой, продуманной анимацией и аккуратной реализацией.",
+    "Независимая digital-студия: бизнес-сайты и цифровые продукты с сильным визуальным направлением и аккуратной frontend-реализацией.",
   openGraph: {
     title: "TSBLV — дизайн и разработка сайтов",
     description:
-      "Выразительные лендинги и сайты для бизнеса. Дизайн и разработка в одних руках.",
+      "Бизнес-сайты и цифровые продукты. Стратегия, арт-дирекшн и frontend в одних руках.",
     locale: "ru_RU",
     type: "website",
   },
