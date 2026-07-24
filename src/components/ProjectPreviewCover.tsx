@@ -26,7 +26,7 @@ export function ProjectPreviewCover({
 
   return (
     <div
-      className={`${styles.cover} ${fill ? styles.fill : ""} ${project.previewFit === "contain" ? styles.contain : ""} ${project.previewDevice ? styles.withDevice : ""} ${project.previewDeviceSide === "left" ? styles.phoneLeft : ""} ${className}`}
+      className={`${styles.cover} ${fill ? styles.fill : ""} ${project.previewFit === "contain" ? styles.contain : ""} ${project.previewDevice ? styles.withDevice : ""} ${project.previewDeviceSide === "left" ? styles.phoneLeft : ""} ${project.previewVariant === "fintech" ? styles.fintech : ""} ${className}`}
       style={{ "--preview-accent": project.accent } as CSSProperties}
     >
       <Image
@@ -41,6 +41,18 @@ export function ProjectPreviewCover({
         } as CSSProperties}
         className={`${styles.image} transition-transform duration-700 ease-out`}
       />
+      {project.previewVariant === "fintech" ? (
+        <div className={styles.fintechPanel} aria-hidden>
+          <span className={styles.fintechKicker}>Lumen / Telegram</span>
+          <strong className={styles.fintechBalance}>$10,783.73</strong>
+          <div className={styles.fintechStats}>
+            <span>Баланс</span>
+            <span>Карта</span>
+            <span>Операции</span>
+          </div>
+          <div className={styles.fintechLine} />
+        </div>
+      ) : null}
       {project.previewDevice ? (
         <div className={styles.phone} aria-hidden>
           <Image

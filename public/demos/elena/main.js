@@ -83,18 +83,10 @@
   })();
 
   /* ------------------------------------------------------------------
-     3 · SMOOTH SCROLL (Lenis, desktop + motion allowed) & ANCHORS
+     3 · NATIVE SCROLL & ANCHORS
+     Native scrolling keeps the presentation responsive on every device.
   ------------------------------------------------------------------ */
   var lenis = null;
-  if (window.Lenis && hasGSAP && !RM && FINE) {
-    try {
-      lenis = new Lenis({ duration: 1.15, smoothWheel: true });
-      lenis.on('scroll', ScrollTrigger.update);
-      gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
-      gsap.ticker.lagSmoothing(0);
-      doc.documentElement.classList.add('lenis-native-off');
-    } catch (e) { lenis = null; }
-  }
 
   function goTo(target) {
     if (lenis) { lenis.scrollTo(target, { offset: -64 }); }
@@ -177,12 +169,6 @@
       .fromTo('#hero-actions', { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: .9 }, 1.1)
       .fromTo('#hero-scroll', { autoAlpha: 0 }, { autoAlpha: 1, duration: .8 }, 1.5);
 
-    gsap.timeline({
-      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom 25%', scrub: .6 }
-    })
-      .to('.hero__content', { yPercent: -12, autoAlpha: 0, ease: 'none' }, 0)
-      .to(heroVideo, { scale: 1.06, ease: 'none' }, 0)
-      .to('#hero-scroll', { autoAlpha: 0, ease: 'none' }, 0);
   }
 
   /* ------------------------------------------------------------------
@@ -338,7 +324,7 @@
   ------------------------------------------------------------------ */
   (function protocol() {
     var section = $('#protocol'), wrapEl = $('#protocol-stagewrap');
-    if (!section || !wrapEl || !hasGSAP) return;
+    if (!section || !wrapEl || !hasGSAP || !window.ELENA_ENABLE_PINNED_PROTOCOL) return;
     var stages = $$('.stage', wrapEl);
 
     var mm = gsap.matchMedia();
@@ -391,7 +377,7 @@
   ------------------------------------------------------------------ */
   (function membrane() {
     var zone = $('#membrane-zone');
-    if (!zone || RM || !hasGSAP) return;
+    if (!zone || RM || !hasGSAP || !window.ELENA_ENABLE_3D) return;
     if (!window.matchMedia('(min-width: 900px)').matches) return;
 
     var testCanvas = doc.createElement('canvas');

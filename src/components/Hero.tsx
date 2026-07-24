@@ -40,7 +40,7 @@ export function Hero() {
 
           <motion.div className="mt-8 flex flex-wrap items-center gap-3" {...line()}>
             <Link
-              href="/#work"
+              href="/archive"
               className="btn-cta-primary inline-flex h-12 items-center gap-2 rounded-full px-6 text-sm font-semibold"
             >
               Смотреть работы

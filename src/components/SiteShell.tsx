@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { InteractiveBackground } from "@/components/InteractiveBackground";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { LoadingScreen } from "@/components/LoadingScreen";
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -25,6 +26,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
   return (
     <>
+      {isHome ? <LoadingScreen /> : null}
       {isHome ? <InteractiveBackground /> : null}
       <div className="relative z-10">
         <Header />

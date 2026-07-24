@@ -39,6 +39,7 @@ export interface Project {
   previewDevice?: "phone";
   previewDevicePosition?: string;
   previewDeviceSide?: "left";
+  previewVariant?: "fintech";
   previewCopySide?: "left";
   demoPath?: string;
   gallery: string[];
@@ -121,8 +122,8 @@ export const projects: Project[] = [
     layout: "editorial",
     accent: "#A9796B",
     cover: "/projects/elena-live.png",
-    previewImage: "/demos/elena/assets/poster.webp",
-    coverPosition: "center 50%",
+    previewImage: "/projects/elena-portrait.webp",
+    coverPosition: "center 44%",
     demoPath: "/demos/elena/index.html",
     gallery: [
       "/projects/elena-portrait.webp",
@@ -219,10 +220,11 @@ export const projects: Project[] = [
     featuredOrder: 4,
     layout: "split-left",
     accent: "#4D8191",
-    cover: "/projects/hearth-cover.jpg",
-    coverPosition: "center",
+    cover: "/projects/hearth-cover-fixed.png",
+    previewImage: "/projects/hearth-cover-fixed.png",
+    coverPosition: "center top",
     demoPath: "/demos/hearth/index.html",
-    gallery: ["/projects/hearth-cover.jpg"],
+    gallery: ["/projects/hearth-cover-fixed.png"],
     summary:
       "Спокойное персональное рабочее пространство для macOS, объединяющее задачи, заметки, планирование, календарь, фокус и базу знаний.",
     context:
@@ -314,8 +316,7 @@ export const projects: Project[] = [
     layout: "editorial",
     accent: "#315F58",
     cover: "/projects/aera-cover.jpg",
-    coverPosition: "center 42%",
-    previewFit: "contain",
+    coverPosition: "center 45%",
     demoPath: "/demos/aera/index.html",
     gallery: ["/projects/aera-cover.jpg"],
     summary:
@@ -443,7 +444,7 @@ export const projects: Project[] = [
     coverZoom: 1.26,
     previewDevice: "phone",
     previewDevicePosition: "center 46%",
-    previewDeviceSide: "left",
+    previewVariant: "fintech",
     demoPath: "/demos/lumen-card/index.html",
     gallery: ["/projects/lumen-cover.jpg"],
     summary:
@@ -553,6 +554,50 @@ export const projects: Project[] = [
     outcome: "Завершённая концепция сайта ресторана.",
     isConcept: true,
   },
+  {
+    slug: "umbra-restaurant",
+    title: "UMBRA",
+    previewTitle: "UMBRA",
+    previewCategory: "Ресторан над облаками",
+    category: "Ресторан / гостеприимство",
+    projectType: "Концепт сайта",
+    archiveCategory: "Сайты",
+    year: 2026,
+    status: "Концепт",
+    featured: false,
+    layout: "editorial",
+    accent: "#E09A48",
+    cover: "/projects/umbra-cover.png",
+    coverPosition: "center",
+    demoPath: "/demos/umbra/index.html",
+    gallery: ["/projects/umbra-cover.png"],
+    summary:
+      "Иммерсивная концепция сайта ресторана на вулканическом хребте: одна посадка на закате, сезонное меню и атмосфера затмения.",
+    context:
+      "UMBRA задуман как камерный ресторан высокой кухни над облаками с тщательно выстроенным вечерним сценарием.",
+    problem:
+      "Обычная ресторанная витрина не передаёт ощущение места, времени и редкости одного вечернего сервиса.",
+    objective:
+      "Соединить историю локации, меню и путь к бронированию в цельное цифровое впечатление.",
+    solution:
+      "Кинематографичный сайт с тёмной палитрой, астрономическими мотивами, меню-пассажами и сценариями бронирования.",
+    functionality: [
+      "Подача меню по этапам вечера",
+      "Информация о времени посадки",
+      "История команды и винной карты",
+      "Сценарий бронирования стола",
+    ],
+    contribution:
+      "Концепция, арт-дирекшн, интерфейсные сценарии и адаптивная презентация.",
+    services: ["Art direction", "Editorial web", "Motion"],
+    visualDirection:
+      "Графитовая палитра, пепельные фактуры, янтарный свет и деликатная кинематографичная анимация.",
+    development:
+      "Статическая интерактивная концепция с адаптивной компоновкой и поддержкой reduced motion.",
+    outcome:
+      "Цельная презентация ресторанного бренда, связывающая атмосферу локации с бронированием.",
+    isConcept: true,
+  },
 ];
 
 export function getFeaturedProjects(): Project[] {
@@ -565,7 +610,29 @@ export function getFeaturedProjects(): Project[] {
 }
 
 export function getArchiveProjects(): Project[] {
-  return projects;
+  const archiveOrder = [
+    "mount-hospitality",
+    "forma-mini-app",
+    "hearth-macos",
+    "stanza-3d",
+    "elena-orlova",
+    "lumen-card",
+    "aera-dentistry",
+    "anna-volkova",
+    "elan-events",
+    "gran-education",
+    "morozov-renovation",
+    "sfera-travel",
+    "levante-restaurant",
+    "umbra-restaurant",
+  ];
+  const ranks = new Map(archiveOrder.map((slug, index) => [slug, index]));
+
+  return [...projects].sort(
+    (first, second) =>
+      (ranks.get(first.slug) ?? Number.MAX_SAFE_INTEGER) -
+      (ranks.get(second.slug) ?? Number.MAX_SAFE_INTEGER),
+  );
 }
 
 export function getProjectBySlug(slug: string): Project | undefined {
