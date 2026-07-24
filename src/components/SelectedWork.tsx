@@ -1,39 +1,22 @@
-"use client";
-
-import { FaqNudge } from "@/components/FaqNudge";
+import { ProjectFolder } from "@/components/folder/ProjectFolder";
 import { Reveal } from "@/components/Reveal";
-import { WorkShowcase } from "@/components/WorkShowcase";
-import { getFeaturedProjects } from "@/data/projects";
 
 export function SelectedWork() {
-  const projects = getFeaturedProjects();
-
   return (
-    <section
-      id="work"
-      className="relative flex snap-start flex-col border-b border-white/10 py-10 md:py-12 lg:py-14"
-    >
-      <FaqNudge
-        q="Почему концепции, а не кейсы?"
-        a="Показываю подход к работе. Живой проект собираю уже под вашу задачу."
-        className="absolute right-3 top-16 z-20 hidden max-w-[8rem] xl:block xl:right-6 xl:top-20 2xl:right-10"
-      />
-
-      <div className="mx-auto flex w-full max-w-[1400px] flex-col overflow-x-hidden px-4 md:px-6 lg:px-8">
+    <section id="work" className="scroll-mt-20 border-t border-white/10 py-24 md:py-32 lg:py-36">
+      <div className="mx-auto w-full max-w-[1460px] px-5 md:px-8 lg:px-10">
         <Reveal>
-          <div className="mb-4 shrink-0 text-center lg:mb-5 lg:max-w-[70%] lg:text-left">
-            <h2 className="text-xl font-semibold tracking-[-0.035em] md:text-2xl lg:text-[1.65rem]">
-              Избранные работы
-            </h2>
-            <p className="mx-auto mt-1 max-w-2xl text-[13px] leading-relaxed text-muted lg:mx-0">
-              Несколько проектов, показывающих мой подход к дизайну, структуре и
-              разработке.
-            </p>
-          </div>
+          <h2 className="max-w-[12ch] text-[clamp(2.65rem,4.6vw,4.8rem)] font-semibold leading-[0.96] tracking-[-0.055em]">
+            Работы в архиве
+          </h2>
+          <p className="mt-4 max-w-[42ch] text-[15px] leading-[1.65] text-muted md:text-base">
+            Открывайте папку — внутри собраны локальные интерактивные версии проектов,
+            которые можно посмотреть прямо в портфолио.
+          </p>
         </Reveal>
 
-        <Reveal delay={0.05}>
-          <WorkShowcase projects={projects} />
+        <Reveal className="mt-10 md:mt-14" delay={0.05}>
+          <ProjectFolder />
         </Reveal>
       </div>
     </section>

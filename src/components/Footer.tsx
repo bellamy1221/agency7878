@@ -8,8 +8,8 @@ export function Footer() {
         <div className="space-y-4">
           <p className="text-2xl font-medium tracking-tight">{site.name}</p>
           <p className="max-w-sm text-sm leading-relaxed text-muted">
-            Выразительные лендинги и сайты с понятной структурой, продуманной
-            анимацией и аккуратной технической реализацией.
+            Бизнес-сайты и цифровые продукты с сильным визуальным направлением,
+            ясной структурой и аккуратной реализацией.
           </p>
           <p className="note-chip !normal-case tracking-normal">
             {site.availability}
@@ -50,8 +50,6 @@ export function Footer() {
             <li>
               <a
                 href={site.emailCompose}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="transition-colors hover:text-accent"
               >
                 {site.email}

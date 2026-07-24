@@ -4,52 +4,36 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
 
 const LOUVER_COUNT = 14;
-const STORAGE_KEY = "tsblv-glass-louvers-v2";
-
-type LoadingScreenProps = {
-  onDone?: () => void;
-};
-
 /**
  * Hero-only intro: horizontal glass louvers rotate open, then dissolve.
  * Does not persist on the page after exit.
  */
-export function LoadingScreen({ onDone }: LoadingScreenProps) {
+export function LoadingScreen() {
   const reduce = useReducedMotion();
   const [phase, setPhase] = useState<"closed" | "open" | "fade" | "gone">(
     "closed",
   );
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const seen = sessionStorage.getItem(STORAGE_KEY);
-      if (seen === "1" || reduce) {
-        setPhase("gone");
-        onDone?.();
-        return;
-      }
-    }
-
     if (reduce) {
-      setPhase("gone");
-      onDone?.();
-      return;
+      const skipTimer = window.setTimeout(() => {
+        setPhase("gone");
+      }, 0);
+      return () => window.clearTimeout(skipTimer);
     }
 
-    const openTimer = window.setTimeout(() => setPhase("open"), 480);
-    const fadeTimer = window.setTimeout(() => setPhase("fade"), 480 + 1100);
+    const openTimer = window.setTimeout(() => setPhase("open"), 520);
+    const fadeTimer = window.setTimeout(() => setPhase("fade"), 1_960);
     const doneTimer = window.setTimeout(() => {
-      sessionStorage.setItem(STORAGE_KEY, "1");
       setPhase("gone");
-      onDone?.();
-    }, 480 + 1100 + 480);
+    }, 2_700);
 
     return () => {
       window.clearTimeout(openTimer);
       window.clearTimeout(fadeTimer);
       window.clearTimeout(doneTimer);
     };
-  }, [reduce, onDone]);
+  }, [reduce]);
 
   return (
     <AnimatePresence>
@@ -59,16 +43,16 @@ export function LoadingScreen({ onDone }: LoadingScreenProps) {
           initial={{ opacity: 1 }}
           animate={{ opacity: phase === "fade" ? 0 : 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.68, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="absolute inset-0 bg-[#0c0b0a]/88" />
+          <div className="absolute inset-0 bg-[#0c0b0a]" />
 
           <div
             className="absolute inset-0 flex flex-col"
             style={{ perspective: "2200px", transformStyle: "preserve-3d" }}
           >
             {Array.from({ length: LOUVER_COUNT }).map((_, i) => {
-              const delay = i * 0.045;
+              const delay = i * 0.038;
               return (
                 <motion.div
                   key={i}
@@ -93,7 +77,7 @@ export function LoadingScreen({ onDone }: LoadingScreenProps) {
                         }
                   }
                   transition={{
-                    duration: 1.05,
+                    duration: 0.96,
                     delay,
                     ease: [0.45, 0.05, 0.2, 1],
                   }}

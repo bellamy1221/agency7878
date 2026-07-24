@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UMBRA — Dinner in the Shadow of the Earth</title>
+<meta name="description" content="UMBRA — a restaurant above the clouds. Twenty-four seats on a volcanic ridge, 2,396 metres over the Atlantic. One seating each night, from dusk to starlight. The menu follows the phases of an eclipse.">
+<meta property="og:title" content="UMBRA — Dinner in the Shadow of the Earth">
+<meta property="og:description" content="A restaurant above the clouds. One seating a night, at dusk. Six passages of an eclipse.">
+<meta property="og:image" content="https://pub.hyperagent.com/api/published/pbf01KY73RAJZ_4D5R6K16EZYKDCP9/ec051932-53a3-4a2a-bd20-832e4da09369.png">
+<meta name="theme-color" content="#0B0908">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='20' fill='%23070605' stroke='%23E09A48' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Instrument+Serif:ital@0;1&family=Fragment+Mono:ital@0;1&family=Archivo:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   UMBRA — design tokens
+============================================================ */
+:root{
+  --bg0:#070605;
+  --bg:#0B0908;
+  --bg2:#12100D;
+  --ink:#EDE6D9;
+  --ink2:rgba(237,230,217,.62);
+  --ink3:rgba(237,230,217,.36);
+  --line:rgba(237,230,217,.13);
+  --gold:#E09A48;
+  --gold-dim:rgba(224,154,72,.55);
+  --gold-ghost:rgba(224,154,72,.12);
+  --serif:'Italiana',serif;
+  --edit:'Instrument Serif',serif;
+  --mono:'Fragment Mono',monospace;
+  --sans:'Archivo',sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --bgc:var(--bg);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{
+  background:var(--bgc);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:300;
+  font-size:clamp(.95rem,.4vw + .8rem,1.06rem);
+  line-height:1.72;
+  overflow-x:hidden;
+  transition:background 1s ease;
+  -webkit-font-smoothing:antialiased;
+}
+body.totality{--bgc:#030202}
+::selection{background:var(--gold);color:#0B0908}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+:focus-visible{outline:1px solid var(--gold);outline-offset:4px}
+html.has-cursor,html.has-cursor a,html.has-cursor button,html.has-cursor input{cursor:none}
+
+/* type helpers */
+.mono{font-family:var(--mono);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;line-height:1.9}
+.mono-md{font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase}
+.gold{color:var(--gold)}
+.dim{color:var(--ink2)}
+.dimmer{color:var(--ink3)}
+
+/* ============================================================
+   grain + vignette
+============================================================ */
+#grain{
+  position:fixed;inset:-60px;z-index:96;pointer-events:none;opacity:.055;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1.2s steps(6) infinite;
+}
+@keyframes grain{
+  0%{transform:translate(0,0)}25%{transform:translate(-22px,14px)}
+  50%{transform:translate(14px,-20px)}75%{transform:translate(-10px,-12px)}
+  100%{transform:translate(18px,10px)}
+}
+#vignette{position:fixed;inset:0;z-index:95;pointer-events:none;
+  background:radial-gradient(120% 100% at 50% 45%,transparent 58%,rgba(0,0,0,.5) 100%)}
+
+/* ============================================================
+   preloader
+============================================================ */
+#loader{
+  position:fixed;inset:0;z-index:300;background:var(--bg0);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform 1s var(--ease);
+}
+#loader.done{transform:translateY(-101%)}
+.load-stage{position:relative;width:200px;height:200px}
+.load-sun{position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,214,150,.9) 30%,rgba(224,154,72,.32) 52%,transparent 72%)}
+#loadDisc{position:absolute;left:50%;top:50%;width:128px;height:128px;border-radius:50%;
+  background:var(--bg0);box-shadow:0 0 0 1px rgba(255,224,170,.22);
+  transform:translate(calc(-50% - 140px),-50%)}
+#loadGlint{position:absolute;left:calc(50% + 58px);top:calc(50% - 58px);width:7px;height:7px;border-radius:50%;
+  background:#FFF6E6;box-shadow:0 0 22px 7px rgba(255,236,200,.85);opacity:0;transform:scale(.2)}
+#loadGlint.on{animation:glint .55s var(--ease) forwards}
+@keyframes glint{0%{opacity:0;transform:scale(.2)}45%{opacity:1;transform:scale(1.25)}100%{opacity:0;transform:scale(.4)}}
+.load-word{position:absolute;left:40px;bottom:34px}
+.load-num{position:absolute;right:40px;bottom:34px;font-family:var(--mono);font-size:.72rem;letter-spacing:.3em}
+.load-label{position:absolute;left:50%;bottom:34px;transform:translateX(-50%)}
+
+/* ============================================================
+   cursor
+============================================================ */
+#cur,#curRing{position:fixed;left:0;top:0;pointer-events:none;z-index:400;border-radius:50%;
+  transform:translate(-50%,-50%);opacity:0}
+#cur{width:6px;height:6px;background:var(--ink);mix-blend-mode:difference}
+#curRing{width:34px;height:34px;border:1px solid rgba(237,230,217,.45);
+  display:flex;align-items:center;justify-content:center;
+  transition:width .45s var(--ease),height .45s var(--ease),background .45s var(--ease),border-color .45s}
+#curRing span{font-family:var(--mono);font-size:.52rem;letter-spacing:.24em;opacity:0;transition:opacity .3s}
+#curRing.big{width:78px;height:78px;background:rgba(7,6,5,.72);border-color:rgba(224,154,72,.7)}
+#curRing.big span{opacity:1;color:var(--gold)}
+@media (pointer:coarse){#cur,#curRing{display:none}}
+
+/* ============================================================
+   nav
+============================================================ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:120;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:26px clamp(20px,4vw,52px);
+  transition:transform .6s var(--ease),background .6s,opacity .6s}
+.nav.hidden{transform:translateY(-110%)}
+.nav.scrolled{background:linear-gradient(rgba(7,6,5,.72),transparent 160%);backdrop-filter:blur(8px)}
+.nav-mark{font-family:var(--serif);font-size:1.05rem;letter-spacing:.42em;text-indent:.42em}
+.nav-right{display:flex;align-items:center;gap:clamp(16px,2.4vw,34px)}
+.nav-reserve{font-family:var(--mono);font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;
+  border:1px solid var(--line);border-radius:99px;padding:11px 22px;
+  transition:background .5s var(--ease),color .5s,border-color .5s}
+.nav-reserve:hover{background:var(--ink);color:#0B0908;border-color:var(--ink)}
+.burger{width:34px;height:22px;position:relative}
+.burger i{position:absolute;left:0;right:0;height:1px;background:var(--ink);transition:transform .5s var(--ease),top .5s var(--ease)}
+.burger i:first-child{top:6px}.burger i:last-child{top:15px}
+body.menu-open .burger i:first-child{top:10px;transform:rotate(45deg)}
+body.menu-open .burger i:last-child{top:10px;transform:rotate(-45deg)}
+body.totality .nav{opacity:.28}
+
+/* ============================================================
+   overlay menu
+============================================================ */
+#overlay{position:fixed;inset:0;z-index:110;background:#060504;
+  clip-path:circle(0px at calc(100% - 54px) 44px);
+  transition:clip-path .9s var(--ease);
+  visibility:hidden;display:flex;flex-direction:column;justify-content:center;
+  padding:0 clamp(24px,7vw,110px)}
+#overlay::after{content:"";position:absolute;left:-18%;bottom:-32%;width:60vmin;height:60vmin;border-radius:50%;
+  background:radial-gradient(circle,rgba(224,154,72,.16),transparent 65%);pointer-events:none}
+body.menu-open #overlay{clip-path:circle(150% at calc(100% - 54px) 44px);visibility:visible}
+#overlay.closing{visibility:visible}
+.ov-links{display:flex;flex-direction:column;gap:.2em}
+.ov-links a{display:flex;align-items:baseline;gap:2.2vw;width:fit-content;
+  font-family:var(--serif);font-size:clamp(2.2rem,6.4vw,5.4rem);line-height:1.12;letter-spacing:.04em;
+  opacity:0;transform:translateY(36px);transition:opacity .7s var(--ease),transform .7s var(--ease),color .4s}
+.ov-links a em{font-family:var(--mono);font-style:normal;font-size:.62rem;letter-spacing:.26em;color:var(--ink3)}
+body.menu-open .ov-links a{opacity:1;transform:none}
+.ov-links:hover a:not(:hover){opacity:.3}
+.ov-links a:hover{color:var(--gold)}
+.ov-foot{position:absolute;left:clamp(24px,7vw,110px);right:clamp(24px,7vw,110px);bottom:40px;
+  display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+/* ============================================================
+   phase rail
+============================================================ */
+#rail{position:fixed;left:26px;top:50%;transform:translateY(-50%);z-index:100;
+  display:flex;flex-direction:column;gap:16px;transition:opacity .6s}
+#rail button{position:relative;width:20px;height:20px;opacity:.42;transition:opacity .4s}
+#rail button svg{display:block}
+#rail button .outline{stroke:rgba(237,230,217,.5);transition:stroke .4s}
+#rail button.active{opacity:1}
+#rail button.active .outline{stroke:var(--gold)}
+#rail button::after{content:attr(data-label);position:absolute;left:30px;top:50%;transform:translateY(-50%);
+  font-family:var(--mono);font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink2);
+  opacity:0;white-space:nowrap;transition:opacity .35s;pointer-events:none}
+#rail button:hover::after{opacity:1}
+body.totality #rail{opacity:.2}
+@media (max-width:1099px){#rail{display:none}}
+
+/* ============================================================
+   shared section chrome
+============================================================ */
+.wrap{width:min(1520px,92vw);margin:0 auto}
+section{position:relative}
+.chapter-head{margin-bottom:clamp(2.6rem,7vh,5.5rem)}
+.kick{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:.64rem;
+  letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem}
+.kick::before{content:"";width:34px;height:1px;background:var(--gold-dim)}
+h2.big{font-family:var(--serif);font-weight:400;font-size:clamp(2.9rem,7.4vw,8.2rem);
+  line-height:.98;letter-spacing:.015em;text-transform:uppercase}
+.edit{font-family:var(--edit);font-style:italic;font-weight:400;
+  font-size:clamp(1.35rem,2.6vw,2.5rem);line-height:1.3;letter-spacing:.005em}
+p.body{max-width:34em;color:var(--ink2)}
+figure.mask{overflow:hidden;position:relative}
+figure.mask img{width:100%;height:100%;object-fit:cover}
+
+/* ============================================================
+   HERO
+============================================================ */
+#dusk{height:100vh;min-height:640px;background:var(--bg0);overflow:hidden}
+#sky{position:absolute;inset:0;width:100%;height:100%}
+.cl{position:absolute;pointer-events:none;filter:blur(46px)}
+.cl1{left:-12%;right:-12%;bottom:-16%;height:42%;
+  background:radial-gradient(58% 92% at 50% 100%,rgba(154,138,132,.20),transparent 70%);
+  animation:drift1 52s ease-in-out infinite alternate}
+.cl2{left:-20%;right:-6%;bottom:-22%;height:36%;
+  background:radial-gradient(46% 86% at 42% 100%,rgba(126,112,110,.16),transparent 72%);
+  animation:drift2 74s ease-in-out infinite alternate}
+@keyframes drift1{to{transform:translateX(4%)}}
+@keyframes drift2{to{transform:translateX(-5%)}}
+.hero-core{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 5vw}
+.hero-kick{margin-bottom:2.4vh;color:var(--ink2);opacity:0;transition:opacity 1.2s ease 1.15s}
+body.loaded .hero-kick{opacity:1}
+h1.wordmark{font-family:var(--serif);font-weight:400;line-height:.86;
+  font-size:clamp(4.6rem,19vw,21rem);display:flex;gap:.09em}
+h1.wordmark .lw{display:inline-block;overflow:hidden;padding-bottom:.06em}
+h1.wordmark .l{display:inline-block;transform:translateY(114%);transition:transform 1.25s var(--ease)}
+body.loaded h1.wordmark .l{transform:none}
+h1.wordmark .lw:nth-child(1) .l{transition-delay:.08s}
+h1.wordmark .lw:nth-child(2) .l{transition-delay:.16s}
+h1.wordmark .lw:nth-child(3) .l{transition-delay:.24s}
+h1.wordmark .lw:nth-child(4) .l{transition-delay:.32s}
+h1.wordmark .lw:nth-child(5) .l{transition-delay:.4s}
+.hero-tag{margin-top:3.2vh;font-size:clamp(1.15rem,1.9vw,1.7rem);color:var(--ink2);
+  opacity:0;transform:translateY(14px);transition:opacity 1s ease 1.3s,transform 1s var(--ease) 1.3s}
+body.loaded .hero-tag{opacity:1;transform:none}
+.hero-data{position:absolute;left:0;right:0;bottom:34px;
+  display:flex;align-items:flex-end;justify-content:space-between;
+  padding:0 clamp(20px,4vw,52px);opacity:0;transition:opacity 1.2s ease 1.7s}
+body.loaded .hero-data{opacity:1}
+.hero-cue{display:flex;flex-direction:column;align-items:center;gap:12px}
+.hero-cue i{width:1px;height:44px;background:linear-gradient(var(--ink),transparent);display:block;
+  animation:cue 2.2s var(--ease) infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media (max-width:760px){
+  .hero-data{flex-direction:column;align-items:center;gap:14px;text-align:center}
+  .hero-cue{order:3}
+}
+
+/* ============================================================
+   CREED (manifesto)
+============================================================ */
+#creed{padding:clamp(7rem,18vh,13rem) 0}
+.creed-lines{font-family:var(--serif);font-weight:400;text-transform:uppercase;
+  font-size:clamp(2.5rem,6.6vw,7.2rem);line-height:1.06;letter-spacing:.02em;max-width:12em}
+.creed-lines .w{display:inline-block}
+.creed-body{margin-top:clamp(2.6rem,6vh,4.5rem);display:flex;gap:6vw;align-items:flex-start;flex-wrap:wrap}
+.creed-body .mono{flex:0 0 auto;color:var(--ink3);padding-top:.5em}
+.creed-body p{max-width:31em;color:var(--ink2);font-size:1.05em}
+.creed-frag{position:absolute;z-index:-1}
+.frag-a{top:6%;right:6vw;width:clamp(130px,17vw,270px)}
+.frag-b{bottom:-4%;left:4vw;width:clamp(110px,13vw,210px)}
+.creed-frag figure{overflow:hidden}
+.creed-frag img{opacity:.8}
+.creed-frag figcaption{margin-top:10px;color:var(--ink3)}
+@media (max-width:900px){.frag-a{position:static;margin:3rem 0 0 auto}.frag-b{display:none}}
+
+/* ============================================================
+   MOUNTAIN
+============================================================ */
+#mountain{padding-top:clamp(5rem,12vh,9rem)}
+.mtn-pin{position:relative;height:100vh;min-height:560px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.mtn-media{position:absolute;inset:0;overflow:hidden}
+.mtn-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.18)}
+.mtn-media::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(rgba(7,6,5,.55),transparent 30%,transparent 62%,rgba(7,6,5,.86))}
+.mtn-title{position:relative;z-index:2;text-align:center}
+.mtn-title h2{text-shadow:0 4px 60px rgba(0,0,0,.6)}
+.mtn-callout{position:absolute;z-index:3;display:flex;align-items:center;gap:12px;color:var(--ink2)}
+.mtn-callout::before{content:"";width:7px;height:7px;border-radius:50%;border:1px solid var(--gold);flex:0 0 auto}
+.co-1{left:7%;top:20%}.co-2{right:7%;top:30%}.co-3{left:10%;bottom:22%}.co-4{right:9%;bottom:16%}
+.ticker{position:absolute;left:0;right:0;bottom:0;z-index:4;border-top:1px solid var(--line);
+  overflow:hidden;background:rgba(7,6,5,.4);backdrop-filter:blur(6px)}
+.ticker-inner{display:flex;gap:0;width:max-content;animation:tick 46s linear infinite;padding:13px 0}
+.ticker-inner span{padding:0 2.6rem;color:var(--ink3);white-space:nowrap}
+.ticker-inner span b{color:var(--gold);font-weight:400}
+@keyframes tick{to{transform:translateX(-50%)}}
+.evening{padding:clamp(5rem,12vh,9rem) 0 clamp(4rem,9vh,7rem)}
+.eve-row{display:grid;grid-template-columns:minmax(150px,.42fr) 1fr;gap:4vw;align-items:baseline;
+  padding:clamp(1.6rem,3.4vh,2.6rem) 0;border-top:1px solid var(--line)}
+.eve-row:last-child{border-bottom:1px solid var(--line)}
+.eve-time{font-family:var(--serif);font-size:clamp(1.7rem,3.6vw,3.3rem);letter-spacing:.03em;white-space:nowrap;transition:color .5s}
+.eve-row:hover .eve-time{color:var(--gold)}
+.eve-row p{max-width:34em;color:var(--ink2)}
+@media (max-width:700px){
+  .mtn-callout{position:static}
+  .mtn-callouts{position:absolute;left:5vw;right:5vw;bottom:64px;z-index:3;display:grid;grid-template-columns:1fr;gap:8px}
+  .eve-row{grid-template-columns:1fr;gap:.6rem}
+}
+@media (min-width:701px){.mtn-callouts{position:static}}
+
+/* ============================================================
+   PASSAGES — horizontal tasting journey
+============================================================ */
+#passages{background:transparent}
+.pass-stage{position:relative;padding:clamp(4rem,10vh,7rem) 0 0}
+.pass-head{padding:0 clamp(20px,4vw,52px)}
+.pass-track{display:flex;align-items:stretch;gap:clamp(24px,5vw,84px);
+  padding:clamp(2rem,5vh,3.4rem) clamp(20px,8vw,10vw) clamp(4rem,9vh,6rem);
+  overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none}
+.pass-track::-webkit-scrollbar{display:none}
+#passages.pinned{height:100vh;min-height:620px}
+#passages.pinned .pass-stage{height:100%;display:flex;flex-direction:column;justify-content:space-between;padding-bottom:0}
+#passages.pinned .pass-track{overflow:visible;flex:1;align-items:center;padding-top:0;padding-bottom:5.5rem;scroll-snap-type:none}
+.pass-lead{flex:0 0 auto;width:min(420px,78vw);align-self:center;scroll-snap-align:center}
+.pass-lead .edit{margin-top:1.2rem}
+.passage{position:relative;flex:0 0 auto;display:flex;flex-direction:column;gap:1.15rem;
+  width:min(340px,74vw);scroll-snap-align:center}
+.passage::before{content:attr(data-num);position:absolute;top:-.52em;left:-.34em;z-index:3;
+  font-family:var(--serif);font-size:clamp(4.4rem,7.5vw,7.5rem);line-height:1;color:transparent;
+  -webkit-text-stroke:1px rgba(237,230,217,.24);pointer-events:none}
+.p-media{position:relative;aspect-ratio:4/5;overflow:hidden;transform-style:preserve-3d}
+.p-media img{width:100%;height:100%;object-fit:cover;transform:translateX(var(--px,0)) scale(1.14);will-change:transform}
+.p-media::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(237,230,217,.07);
+  background:linear-gradient(transparent 62%,rgba(7,6,5,.55))}
+.p-idx{color:var(--ink3)}
+.p-phase{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,2vw,2rem);letter-spacing:.06em;text-transform:uppercase;margin-top:-.4rem}
+.p-dish{font-family:var(--edit);font-style:italic;font-size:clamp(1.02rem,1.25vw,1.2rem);line-height:1.45;color:var(--ink2)}
+.p-note{color:var(--ink3)}
+.p-tag{display:inline-flex;align-items:center;gap:9px;color:var(--gold);margin-top:.2rem}
+.candle{width:7px;height:10px;border-radius:50% 50% 42% 42%;background:radial-gradient(circle at 50% 30%,#FFE9BE,#E09A48 60%,transparent 75%);
+  filter:blur(.4px);opacity:.35;transition:opacity .6s;animation:flick 1.4s ease-in-out infinite alternate}
+@keyframes flick{from{transform:scaleY(1) translateY(0)}to{transform:scaleY(1.28) translateY(-1px)}}
+body.totality .passage.p-totality .candle{opacity:1}
+body.totality .passage:not(.p-totality){opacity:.2;filter:brightness(.5)}
+.passage{transition:opacity .7s ease,filter .7s ease}
+.pass-hud{position:absolute;left:0;right:0;bottom:0;z-index:5;display:none;
+  align-items:center;justify-content:space-between;padding:1.4rem clamp(20px,4vw,52px);
+  border-top:1px solid var(--line)}
+#passages.pinned .pass-hud{display:flex}
+.hud-phases{display:flex;gap:12px}
+.hud-phases svg{opacity:.32;transition:opacity .4s}
+.hud-phases svg.on{opacity:1}
+body.totality .pass-hud{opacity:.5}
+
+/* ============================================================
+   CRAFT — fire / dark split
+============================================================ */
+#craft{margin-top:clamp(4rem,10vh,8rem)}
+.craft-stage{position:relative;height:100vh;min-height:600px;overflow:hidden}
+.craft-layer{position:absolute;inset:0;overflow:hidden}
+.craft-bg{position:absolute;inset:0}
+.craft-bg img{width:100%;height:100%;object-fit:cover;opacity:.5}
+.craft-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(90% 90% at 50% 50%,rgba(7,6,5,.25),rgba(7,6,5,.9))}
+.craft-layer.fire{z-index:2;clip-path:inset(0 calc(100% - var(--split,50%)) 0 0)}
+.craft-copy{position:absolute;top:50%;transform:translateY(-50%);width:min(420px,38vw)}
+.craft-copy.left{left:7vw}.craft-copy.right{right:7vw;text-align:right}
+.craft-copy h3{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,4.6vw,4.6rem);letter-spacing:.05em;text-transform:uppercase;margin:.6rem 0 1.1rem}
+.craft-copy p{color:var(--ink2)}
+.craft-copy.right .kick{justify-content:flex-end}
+.craft-divider{position:absolute;top:0;bottom:0;left:var(--split,50%);width:1px;z-index:3;
+  background:linear-gradient(transparent,rgba(237,230,217,.5),transparent)}
+.craft-divider::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:44px;height:44px;border-radius:50%;border:1px solid rgba(237,230,217,.4);
+  background:linear-gradient(90deg,rgba(224,154,72,.35) 50%,rgba(7,6,5,.8) 50%)}
+.craft-hint{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);z-index:4;color:var(--ink3)}
+@media (max-width:899px){
+  .craft-stage{height:auto;min-height:0}
+  .craft-layer{position:relative;clip-path:none!important;min-height:78vh;display:flex;align-items:center}
+  .craft-copy{position:relative;top:auto;transform:none;width:min(480px,86vw);margin:0 7vw;padding:16vh 0}
+  .craft-copy.right{text-align:left;margin-left:auto}
+  .craft-copy.right .kick{justify-content:flex-start}
+  .craft-divider,.craft-hint{display:none}
+}
+
+/* ============================================================
+   CHEF
+============================================================ */
+#chef{padding:clamp(7rem,16vh,12rem) 0}
+.chef-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(2.5rem,6vw,7rem);align-items:center}
+.chef-fig{aspect-ratio:3/4}
+.chef-fig img{transform:scale(1.12)}
+.chef-quote{margin:1.6rem 0 2rem;font-size:clamp(1.7rem,3.2vw,3.1rem)}
+.chef-quote .gold{font-style:italic}
+.chef-facts{margin-top:2.2rem;color:var(--ink3)}
+.chef-sig{margin-top:2.6rem;font-family:var(--edit);font-style:italic;font-size:1.55rem;color:var(--ink2)}
+@media (max-width:899px){.chef-grid{grid-template-columns:1fr}.chef-fig{max-width:440px}}
+
+/* ============================================================
+   CELLAR
+============================================================ */
+#cellar{padding:clamp(5rem,12vh,9rem) 0 clamp(7rem,15vh,11rem);background:linear-gradient(var(--bg0),transparent 22%)}
+.cellar-top{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:clamp(2.5rem,6vw,7rem);align-items:end;margin-bottom:clamp(3rem,7vh,5rem)}
+.cellar-fig{aspect-ratio:4/5;max-width:380px;justify-self:end}
+.cellar-fig img{transform:scale(1.1)}
+.wine{display:grid;grid-template-columns:minmax(0,2.4fr) minmax(0,1.1fr) minmax(0,1.8fr) auto;
+  gap:2.5vw;align-items:baseline;padding:1.5rem .8rem;border-top:1px solid var(--line);
+  transition:background .5s,padding .5s}
+.wine:last-of-type{border-bottom:1px solid var(--line)}
+.wine:hover{background:rgba(237,230,217,.035);padding-left:1.6rem}
+.wine-name{font-family:var(--edit);font-style:italic;font-size:clamp(1.15rem,1.7vw,1.6rem);transition:color .4s}
+.wine:hover .wine-name{color:var(--gold)}
+.wine-year{font-family:var(--serif);font-size:1.2rem;letter-spacing:.08em}
+@media (max-width:899px){
+  .cellar-top{grid-template-columns:1fr}
+  .cellar-fig{justify-self:start;max-width:320px}
+  .wine{grid-template-columns:1fr auto;gap:.4rem 1.4rem}
+  .wine .mono:nth-child(3){grid-column:1/-1}
+}
+
+/* ============================================================
+   RESERVE
+============================================================ */
+#reserve{padding:clamp(6rem,15vh,11rem) 0;background:
+  radial-gradient(70% 46% at 50% 0%,rgba(224,154,72,.07),transparent 62%)}
+#reserve .chapter-head{text-align:center}
+#reserve .kick{justify-content:center}
+#reserve .edit{color:var(--ink2);margin-top:1.2rem}
+.nights{display:flex;gap:14px;overflow-x:auto;padding:8px 4px 22px;scrollbar-width:none;scroll-snap-type:x proximity}
+.nights::-webkit-scrollbar{display:none}
+.night{flex:0 0 auto;width:172px;text-align:left;border:1px solid var(--line);padding:18px 18px 16px;
+  scroll-snap-align:start;display:flex;flex-direction:column;gap:6px;
+  transition:border-color .4s,background .4s,transform .4s var(--ease)}
+.night:hover{border-color:rgba(237,230,217,.4);transform:translateY(-4px)}
+.night.sel{background:var(--ink);border-color:var(--ink)}
+.night.sel *{color:#0B0908!important}
+.night.sel .n-moon .lit{fill:#0B0908}
+.night.sel .n-moon .outline{stroke:rgba(11,9,8,.5)}
+.night.off{opacity:.34;pointer-events:none}
+.n-day{font-family:var(--mono);font-size:.6rem;letter-spacing:.24em;color:var(--ink3);text-transform:uppercase}
+.n-date{font-family:var(--serif);font-size:1.7rem;letter-spacing:.04em;line-height:1.1}
+.n-dusk{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase}
+.n-moonrow{display:flex;align-items:center;gap:9px;margin-top:6px}
+.n-note{font-family:var(--mono);font-size:.54rem;letter-spacing:.16em;color:var(--ink3);text-transform:uppercase;line-height:1.6}
+.res-panel{max-width:880px;margin:2.6rem auto 0;border:1px solid var(--line);padding:clamp(1.6rem,4vw,3rem);
+  opacity:.35;pointer-events:none;transition:opacity .6s ease}
+.res-panel.on{opacity:1;pointer-events:auto}
+.res-summary{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-bottom:1.4rem;border-bottom:1px solid var(--line);margin-bottom:1.8rem}
+.res-grid{display:grid;grid-template-columns:auto 1fr 1fr auto;gap:clamp(1.2rem,3vw,2.6rem);align-items:end}
+.guests{display:flex;align-items:center;gap:18px}
+.g-btn{width:40px;height:40px;border:1px solid var(--line);border-radius:50%;font-family:var(--mono);
+  transition:border-color .4s,background .4s,color .4s}
+.g-btn:hover{border-color:var(--ink);background:var(--ink);color:#0B0908}
+#gNum{font-family:var(--serif);font-size:2.5rem;width:1.6ch;text-align:center}
+.field{display:flex;flex-direction:column;gap:8px}
+.field input{background:transparent;border:none;border-bottom:1px solid var(--line);color:var(--ink);
+  font-family:var(--sans);font-weight:300;font-size:1rem;padding:9px 2px;transition:border-color .4s}
+.field input:focus{outline:none;border-color:var(--gold)}
+.field input::placeholder{color:var(--ink3)}
+.field.err input{border-color:#B4543C}
+.res-btn{font-family:var(--mono);font-size:.64rem;letter-spacing:.26em;text-transform:uppercase;
+  border:1px solid var(--ink);border-radius:99px;padding:17px 34px;white-space:nowrap;
+  transition:background .5s var(--ease),color .5s}
+.res-btn:hover{background:var(--ink);color:#0B0908}
+.res-foot{margin-top:1.8rem;color:var(--ink3);text-align:center}
+.res-success{display:none;text-align:center;padding:1.4rem 0 .6rem}
+.res-panel.done .res-success{display:block}
+.res-panel.done form,.res-panel.done .res-summary{display:none}
+.suc-ecl{width:74px;height:74px;margin:0 auto 1.8rem;position:relative}
+.suc-ecl .ring{position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,214,150,.85) 32%,rgba(224,154,72,.3) 55%,transparent 74%)}
+.suc-ecl .dsc{position:absolute;inset:12px;border-radius:50%;background:var(--bg);
+  box-shadow:0 0 0 1px rgba(255,224,170,.3);transform:translateX(-56px);transition:transform 1.4s var(--ease) .15s}
+.res-panel.done .suc-ecl .dsc{transform:none}
+.suc-h{font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.4rem);letter-spacing:.04em;text-transform:uppercase}
+.suc-p{max-width:30em;margin:1rem auto 1.4rem;color:var(--ink2)}
+@media (max-width:899px){.res-grid{grid-template-columns:1fr;gap:1.6rem}.res-btn{width:100%}}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+footer{background:var(--bg0);padding:clamp(5rem,12vh,8rem) 0 2.4rem;border-top:1px solid var(--line)}
+.f-mark{display:block;width:100%;text-align:center;position:relative;overflow:hidden;
+  font-family:var(--serif);font-size:clamp(3.6rem,13vw,13rem);letter-spacing:.14em;text-indent:.14em;
+  line-height:1.05;color:var(--ink);padding:.05em 0}
+.f-disc{position:absolute;top:50%;left:0;width:.78em;height:.78em;border-radius:50%;
+  background:var(--bg0);box-shadow:0 0 0 2px rgba(224,154,72,.55),0 0 44px 8px rgba(224,154,72,.28);
+  transform:translate(-140%,-50%);transition:transform 2s var(--ease);pointer-events:none}
+.f-mark:hover .f-disc{transform:translate(calc(100vw + 40%),-50%)}
+.f-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:2.4rem;margin:clamp(3rem,7vh,5rem) 0;
+  padding-top:2.6rem;border-top:1px solid var(--line)}
+.f-cols h4{font-family:var(--mono);font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:1.1rem;font-weight:400}
+.f-cols p,.f-cols li{color:var(--ink2);font-size:.92rem;line-height:1.9;list-style:none}
+.f-base{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;padding-top:1.6rem;border-top:1px solid var(--line)}
+.f-base span{font-family:var(--mono);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3)}
+@media (max-width:899px){.f-cols{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.f-cols{grid-template-columns:1fr}}
+
+/* reveal defaults are visible; JS opts elements in */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  #loader{display:none}
+  h1.wordmark .l,.hero-tag,.hero-kick,.hero-data{transform:none;opacity:1}
+}
+</style>
+<noscript><style>
+  #loader,#cur,#curRing{display:none}
+  h1.wordmark .l{transform:none}.hero-kick,.hero-tag,.hero-data{opacity:1}
+  .res-panel{opacity:1;pointer-events:auto}
+</style></noscript>
+</head>
+<body>
+
+<div id="loader" aria-hidden="true">
+  <div class="load-stage">
+    <div class="load-sun"></div>
+    <div id="loadDisc"></div>
+    <div id="loadGlint"></div>
+  </div>
+  <span class="load-word mono dimmer">UMBRA — LA PALMA</span>
+  <span class="load-label mono dimmer">OCCULTATION</span>
+  <span class="load-num" id="loadNum">000</span>
+</div>
+
+<div id="grain" aria-hidden="true"></div>
+<div id="vignette" aria-hidden="true"></div>
+<div id="cur" aria-hidden="true"></div>
+<div id="curRing" aria-hidden="true"><span id="curLabel"></span></div>
+
+<header class="nav" id="nav">
+  <a href="#dusk" class="nav-mark" data-scroll>UMBRA</a>
+  <div class="nav-right">
+    <a href="#reserve" class="nav-reserve" data-scroll data-cursor="BOOK">Reserve</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><i></i><i></i></button>
+  </div>
+</header>
+
+<nav id="overlay" aria-label="Chapters">
+  <div class="ov-links" id="ovLinks">
+    <a href="#creed" data-scroll><em>01</em>The Creed</a>
+    <a href="#mountain" data-scroll><em>02</em>The Mountain</a>
+    <a href="#passages" data-scroll><em>03</em>The Passages</a>
+    <a href="#craft" data-scroll><em>04</em>Fire &amp; Dark</a>
+    <a href="#chef" data-scroll><em>05</em>The Hand</a>
+    <a href="#cellar" data-scroll><em>06</em>The Cellar</a>
+    <a href="#reserve" data-scroll><em>07</em>The Table</a>
+  </div>
+  <div class="ov-foot">
+    <span class="mono dimmer">28°45′N&nbsp;&nbsp;17°52′W — ALT 2 396 M</span>
+    <span class="mono dimmer">TONIGHT AT DUSK — <span data-dusk>—:—</span></span>
+    <span class="mono dimmer"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e8bca9aaa4ada8bda5aabaa9c6baadbbbc">[email&#160;protected]</a></span>
+  </div>
+</nav>
+
+<nav id="rail" aria-label="Progress"></nav>
+
+<main>
+
+<!-- ===================== HERO ===================== -->
+<section id="dusk" aria-label="Umbra">
+  <canvas id="sky"></canvas>
+  <div class="cl cl1"></div><div class="cl cl2"></div>
+  <div class="hero-core">
+    <p class="hero-kick mono">A restaurant above the clouds — La Palma, Canarias</p>
+    <h1 class="wordmark" aria-label="UMBRA">
+      <span class="lw"><span class="l">U</span></span><span class="lw"><span class="l">M</span></span><span class="lw"><span class="l">B</span></span><span class="lw"><span class="l">R</span></span><span class="lw"><span class="l">A</span></span>
+    </h1>
+    <p class="hero-tag edit">Dinner in the shadow of the Earth.</p>
+  </div>
+  <div class="hero-data">
+    <span class="mono dim">One seating · Twenty-four seats</span>
+    <div class="hero-cue"><span class="mono dimmer">Descend into evening</span><i></i></div>
+    <span class="mono dim">Tonight at dusk — <span class="gold" data-dusk>—:—</span></span>
+  </div>
+</section>
+
+<!-- ===================== CREED ===================== -->
+<section id="creed">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="kick">Chapter I — The Creed</p>
+    </div>
+    <h2 class="creed-lines" data-words>When the sun leaves the sky, appetite begins.</h2>
+    <div class="creed-body">
+      <span class="mono">Manifesto — 001</span>
+      <p data-reveal>Umbra is a restaurant above the clouds — twenty-four chairs on a volcanic ridge, higher than the weather. We cook with fire and its absence: ember, ash, smoke, and the cold black of the lava caves beneath the dining room. One seating a night. It begins at dusk and ends under the Milky Way.</p>
+    </div>
+    <div class="creed-frag frag-a" data-depth="-40">
+      <figure class="mask" data-mask><img loading="lazy" src="https://pub.hyperagent.com/api/published/pbf01KY73RBGP_X7NFCFSZEN037KZX/e68c3486-4593-430e-a122-13f6be609f84.png" alt="Macro of glowing embers over charred vine wood"></figure>
+      <figcaption class="mono dimmer">Fig. 01 — Ember, vine wood</figcaption>
+    </div>
+    <div class="creed-frag frag-b" data-depth="34">
+      <figure class="mask" data-mask><img loading="lazy" src="https://pub.hyperagent.com/api/published/pbf01KY73RBSP_NN75GNW8XMVS8Y3K/d59370c4-f92a-4ba9-af8b-bd2dacdae7d0.png" alt="Obsidian shards and volcanic ash in cold light"></figure>
+      <figcaption class="mono dimmer">Fig. 02 — Obsidian, ash</figcaption>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MOUNTAIN ===================== -->
+<section id="mountain">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="kick">Chapter II — The Mountain</p>
+    </div>
+  </div>
+  <div class="mtn-pin">
+    <div class="mtn-media"><img id="mtnImg" src="https://pub.hyperagent.com/api/published/pbf01KY73RAJZ_4D5R6K16EZYKDCP9/ec051932-53a3-4a2a-bd20-832e4da09369.png" alt="Sea of clouds at dusk beneath an observatory ridge"></div>
+    <div class="mtn-title"><h2 class="big" data-chars>Higher than<br>the weather</h2></div>
+    <div class="mtn-callouts">
+      <span class="mtn-callout co-1 mono" data-co>Sky quality — 21.9 mag/arcsec²</span>
+      <span class="mtn-callout co-2 mono" data-co>Cloud sea below — 1 200 m</span>
+      <span class="mtn-callout co-3 mono" data-co>Protected sky — law of 1988</span>
+      <span class="mtn-callout co-4 mono" data-co>Observatory ridge — La Palma</span>
+    </div>
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-inner mono">
+        <span>ALT <b>2 396 M</b></span><span>LAT <b>28°45′ N</b></span><span>LNG <b>17°52′ W</b></span><span>SEEING <b>0.6″</b></span><span>AIR <b>8°C AT DUSK</b></span><span>HUMIDITY <b>22%</b></span><span>WIND <b>NW 14 KM/H</b></span><span>MILKY WAY <b>OVERHEAD 23:10</b></span><span>ALT <b>2 396 M</b></span><span>LAT <b>28°45′ N</b></span><span>LNG <b>17°52′ W</b></span><span>SEEING <b>0.6″</b></span><span>AIR <b>8°C AT DUSK</b></span><span>HUMIDITY <b>22%</b></span><span>WIND <b>NW 14 KM/H</b></span><span>MILKY WAY <b>OVERHEAD 23:10</b></span>
+      </div>
+    </div>
+  </div>
+  <div class="wrap evening">
+    <p class="edit dim" data-reveal>The hour follows the sun. An evening at Umbra:</p>
+    <div style="height:clamp(2rem,5vh,3.4rem)"></div>
+    <div class="eve-row" data-reveal>
+      <span class="eve-time">Dusk −45′</span>
+      <p>Arrival by the old ridge road. Fino and smoked almonds at the parapet, the ocean somewhere under the clouds.</p>
+    </div>
+    <div class="eve-row" data-reveal>
+      <span class="eve-time">Dusk</span>
+      <p>First contact. The sun touches the Atlantic. Service begins.</p>
+    </div>
+    <div class="eve-row" data-reveal>
+      <span class="eve-time">Dusk +2ʰ</span>
+      <p>Totality. The lights go out, candles are lit, and the Milky Way leans over the table.</p>
+    </div>
+    <div class="eve-row" data-reveal>
+      <span class="eve-time">Dusk +4ʰ</span>
+      <p>Last light. You fall back down through the clouds; the island returns.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PASSAGES ===================== -->
+<section id="passages">
+  <div class="pass-stage">
+    <div class="pass-head">
+      <p class="kick">Chapter III — The Passages</p>
+    </div>
+    <div class="pass-track" id="passTrack">
+      <div class="pass-lead">
+        <h2 class="big" style="font-size:clamp(2.6rem,4.6vw,4.6rem)" data-chars>Six passages of&nbsp;an&nbsp;eclipse</h2>
+        <p class="edit dim">The menu follows the sky — from first contact to last light.</p>
+        <p class="mono dimmer" style="margin-top:1.6rem">Drag / scroll →</p>
+      </div>
+
+      <article class="passage" data-num="01" data-cursor="VIEW">
+        <div class="p-media" data-tilt><img loading="lazy" src="https://pub.hyperagent.com/api/published/pbf01KY73R8DY_SDGA7SZN0KM6MQGD/b08391d6-5b6a-44fd-b3da-4bdbecda2781.png" alt="Charred ash brioche with ember butter on black stone"></div>
+        <p class="p-idx mono">Passage 01</p>
+        <h3 class="p-phase">First Contact</h3>
+        <p class="p-dish">Ash brioche, ember butter, salt of the old sea.</p>
+        <p class="p-note mono">Vine-fire hearth · 4 min in the ash</p>
+      </article>
+
+      <article class="passage" data-num="02" data-cursor="VIEW">
+        <div class="p-media" data-tilt><img loading="lazy" src="https://pub.hyperagent.com/api/published/pbf01KY73R8SB_2FA57ZNJSQK9EB9X/baf16807-05bf-4019-8831-4f8ee402d714.png" alt="Cuttlefish ribbons over rippled squid ink"></div>
+        <p class="p-idx mono">Passage 02</p>
+        <h3 class="p-phase">Shadow Bands</h3>
+        <p class="p-dish">Cuttlefish in its own ink, black garlic, fig-leaf oil.</p>
+        <p class="p-note mono">Cut to ribbons · ink pulled in bands</p>
+      </article>
+
+      <article class="passage" data-num="03" data-cursor="VIEW">
+        <div class="p-media" data-tilt><img loading="lazy" src="https://pub.hyperagent.com/api/published/pbf01KY73R92C_G7PEY25QYNW0AKSV/029a0e69-11ee-449b-82f6-dba0ac189dd2.png" alt="Cured yolk glowing in a ring of saffron broth"></div>
+        <p class="p-idx mono">Passage 03</p>
+        <h3 class="p-phase">Corona</h3>
+        <p class="p-dish">Yolk cured in vine ash, golden broth, saffron of Garafía.</p>
+        <p class="p-note mono">21 days in ash · served warm, not hot</p>
+      </article>
+
+      <article class="passage p-totality" data-num="04" data-cursor="VIEW">
+        <div class="p-media" data-tilt><img loading="lazy" src="https://pub.hyperagent.com/api/published/pbf01KY73R9G2_X83603FXF8YGASFA/dd8e4cc4-2277-462f-bcae-b5c5cbdd1c94.png" alt="Aged pigeon with black trumpets on basalt, in near darkness"></div>
+        <p class="p-idx mono">Passage 04</p>
+        <h3 class="p-phase">Totality</h3>
+        <p class="p-dish">Aged pigeon over vine embers, black trumpet, burnt cherry.</p>
+        <p class="p-tag mono"><span class="candle"></span>Served in darkness</p>
+      </article>
+
+      <article class="passage" data-num="05" data-cursor="VIEW">
+        <div class="p-media" data-tilt><img loading="lazy" src="https://pub.hyperagent.com/api/published/pbf01KY73R9SK_1SNZN78RY7RH7EZF/e0662d3b-f7f0-4dc7-a2bc-8c5c4d86faaa.png" alt="Frozen almond dome with a brilliant sugar ring"></div>
+        <p class="p-idx mono">Passage 05</p>
+        <h3 class="p-phase">Diamond Ring</h3>
+        <p class="p-dish">Frozen almond, citrus caviar, a ring of bright sugar.</p>
+        <p class="p-note mono">−18° · the first light returns</p>
+      </article>
+
+      <article class="passage" data-num="06" data-cursor="VIEW">
+        <div class="p-media" data-tilt><img loading="lazy" src="https://pub.hyperagent.com/api/published/pbf01KY73RA46_7EBDPGSA0SPZHCDF/5701aada-ca98-4a50-9d10-9e5b80f75b69.png" alt="Chocolate ember with a wisp of smoke"></div>
+        <p class="p-idx mono">Passage 06</p>
+        <h3 class="p-phase">Last Light</h3>
+        <p class="p-dish">Warm chocolate and olive oil, smoked salt — a last ember.</p>
+        <p class="p-note mono">Eaten while it still glows</p>
+      </article>
+    </div>
+    <div class="pass-hud">
+      <span class="mono dim" id="hudLabel">Passage 01 / 06 — First Contact</span>
+      <div class="hud-phases" id="hudPhases"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CRAFT ===================== -->
+<section id="craft">
+  <div class="craft-stage" id="craftStage">
+    <div class="craft-layer dark">
+      <div class="craft-bg"><img loading="lazy" src="https://pub.hyperagent.com/api/published/pbf01KY73RBSP_NN75GNW8XMVS8Y3K/d59370c4-f92a-4ba9-af8b-bd2dacdae7d0.png" alt=""></div>
+      <div class="craft-copy right">
+        <p class="kick">Chapter IV — Its Absence</p>
+        <h3>By Dark</h3>
+        <p>Beneath the room, lava tubes hold thirteen degrees the year round. Cured fish, koji, old cheese, beeswax. What fire doesn’t finish, darkness does.</p>
+      </div>
+    </div>
+    <div class="craft-layer fire">
+      <div class="craft-bg"><img loading="lazy" src="https://pub.hyperagent.com/api/published/pbf01KY73RBGP_X7NFCFSZEN037KZX/e68c3486-4593-430e-a122-13f6be609f84.png" alt=""></div>
+      <div class="craft-copy left">
+        <p class="kick">Chapter IV — Fire</p>
+        <h3>By Fire</h3>
+        <p>A fire that has not gone out since opening night. Vine cuttings, fig wood, pine from the caldera. It roasts, it cures, it perfumes — the only clock in our kitchen.</p>
+      </div>
+    </div>
+    <div class="craft-divider" aria-hidden="true"></div>
+    <span class="craft-hint mono">Move to tip the balance</span>
+  </div>
+</section>
+
+<!-- ===================== CHEF ===================== -->
+<section id="chef">
+  <div class="wrap chef-grid">
+    <figure class="mask chef-fig" data-mask>
+      <img loading="lazy" id="chefImg" src="https://pub.hyperagent.com/api/published/pbf01KY73RB52_0BMQGA7HXJCBX8B7/a0a41cf8-b634-4f79-b7af-afbe479b0a64.png" alt="Chef Aitana Roque lit by ember light">
+    </figure>
+    <div>
+      <p class="kick">Chapter V — The Hand</p>
+      <h2 class="big" data-chars>Aitana Roque</h2>
+      <p class="chef-quote edit" data-reveal>“I don’t plate food. <span class="gold">I plate the hour.</span>”</p>
+      <p class="body" data-reveal>Born on the island, trained at fire temples in the Basque hills and pastry rooms in Paris, Roque returned to the mountain that made her. Her kitchen keeps one law: nothing reaches the table that hasn’t met fire, ash, or darkness.</p>
+      <p class="chef-facts mono" data-reveal>Born Garafía, 1987 · Fire since 2011 · Two stars, kept lightly</p>
+      <p class="chef-sig" data-reveal>— A. Roque</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CELLAR ===================== -->
+<section id="cellar">
+  <div class="wrap">
+    <div class="cellar-top">
+      <div>
+        <p class="kick">Chapter VI — The Cellar</p>
+        <h2 class="big" data-chars>Grown in ash</h2>
+        <p class="body" style="margin-top:1.8rem" data-reveal>Ungrafted vines in black ash, some two centuries old. We pour the island first, the world second.</p>
+      </div>
+      <figure class="mask cellar-fig" data-mask>
+        <img loading="lazy" id="wineImg" src="https://pub.hyperagent.com/api/published/pbf01KY73RC2S_CYGR06R38V1VY77C/f69e2b50-41c5-4f21-a0b7-0d809866b723.png" alt="Dark wine bottle on volcanic rock">
+      </figure>
+    </div>
+    <div class="wine" data-reveal data-cursor="POUR">
+      <span class="wine-name">Malvasía Volcánica — “Cráter”</span>
+      <span class="mono dimmer">Fuencaliente</span>
+      <span class="mono dim">Apricot · brine · warm stone</span>
+      <span class="wine-year">2019</span>
+    </div>
+    <div class="wine" data-reveal data-cursor="POUR">
+      <span class="wine-name">Listán Negro — “Fuga”</span>
+      <span class="mono dimmer">Las Manchas</span>
+      <span class="mono dim">Pepper · violets · cool smoke</span>
+      <span class="wine-year">2021</span>
+    </div>
+    <div class="wine" data-reveal data-cursor="POUR">
+      <span class="wine-name">Vino de Tea — “Norte”</span>
+      <span class="mono dimmer">Tijarafe</span>
+      <span class="mono dim">Island pine · red fruit · resin</span>
+      <span class="wine-year">2020</span>
+    </div>
+    <div class="wine" data-reveal data-cursor="POUR">
+      <span class="wine-name">“Bruma” — Brut Nature</span>
+      <span class="mono dimmer">Above the cloud line</span>
+      <span class="mono dim">Salt · green apple · altitude</span>
+      <span class="wine-year">2018</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RESERVE ===================== -->
+<section id="reserve">
+  <div class="wrap">
+    <div class="chapter-head">
+      <p class="kick">Chapter VII — The Table</p>
+      <h2 class="big" data-chars>One seating, at dusk</h2>
+      <p class="edit" data-reveal>The hour follows the sun. The calendar follows the moon.</p>
+    </div>
+    <div class="nights" id="nights" aria-label="Choose a night"></div>
+    <div class="res-panel" id="resPanel">
+      <div class="res-summary">
+        <span class="mono dim" id="resNight">Select a night above</span>
+        <span class="mono dimmer" id="resMoon"></span>
+      </div>
+      <form id="resForm" novalidate>
+        <div class="res-grid">
+          <div class="guests">
+            <button type="button" class="g-btn" id="gMinus" aria-label="Fewer guests">−</button>
+            <span id="gNum">2</span>
+            <button type="button" class="g-btn" id="gPlus" aria-label="More guests">+</button>
+          </div>
+          <label class="field" id="fName"><span class="mono dimmer">Name</span>
+            <input type="text" name="name" placeholder="Your name" autocomplete="name"></label>
+          <label class="field" id="fMail"><span class="mono dimmer">Email</span>
+            <input type="email" name="email" placeholder="you@night.sky" autocomplete="email"></label>
+          <button type="submit" class="res-btn" data-cursor="BOOK" data-magnetic>Request the table</button>
+        </div>
+      </form>
+      <p class="res-foot mono">Seatings release at each new moon · Tables of 2–8 · The long table seats 24</p>
+      <div class="res-success" aria-live="polite">
+        <div class="suc-ecl"><div class="ring"></div><div class="dsc"></div></div>
+        <p class="suc-h">Received.</p>
+        <p class="suc-p">The mountain answers within a day. Dress warmly — the terrace is 2,396 metres closer to the stars.</p>
+        <p class="mono gold" id="sucRef">REF —</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <a href="#dusk" class="f-mark" data-scroll aria-label="Back to top">UMBRA<span class="f-disc" aria-hidden="true"></span></a>
+    <div class="f-cols">
+      <div>
+        <h4>Visit</h4>
+        <p>Ctra. del Roque, km 34<br>Garafía, La Palma<br>Islas Canarias</p>
+      </div>
+      <div>
+        <h4>Write</h4>
+        <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="176376757b7257627a7565763965726463">[email&#160;protected]</a><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc8c8e998f8fbc89919e8e9dd28e998f88">[email&#160;protected]</a></p>
+      </div>
+      <div>
+        <h4>The Hour</h4>
+        <p>We seat once, at dusk.<br>Tonight — <span class="gold" data-dusk>—:—</span> WEST<br>Closed on full-moon Mondays.</p>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <p>Journal — soon<br>Instagram — @umbra.rest<br>The room’s playlist — at the pass</p>
+      </div>
+    </div>
+    <div class="f-base">
+      <span>Umbra is a fictional restaurant — a concept &amp; design study</span>
+      <span>Type — Italiana · Instrument Serif · Fragment Mono</span>
+      <span>28°45′14″ N · 17°52′06″ W</span>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+<script>
+(function(){
+'use strict';
+var $=function(s,c){return (c||document).querySelector(s)};
+var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var fine=window.matchMedia('(pointer: fine)').matches;
+var customCursor=false;
+var hasGsap=typeof gsap!=='undefined'&&typeof ScrollTrigger!=='undefined';
+
+/* ============ SOLAR + LUNAR MATH ============ */
+var LAT=28.7542,LNG=-17.8851;
+function solarEventUTC(y,m,d,zenith,rising){
+  var rad=Math.PI/180;
+  var N1=Math.floor(275*m/9),N2=Math.floor((m+9)/12),
+      N3=1+Math.floor((y-4*Math.floor(y/4)+2)/3),
+      N=N1-(N2*N3)+d-30;
+  var lngHour=LNG/15;
+  var t=rising?N+((6-lngHour)/24):N+((18-lngHour)/24);
+  var M=(0.9856*t)-3.289;
+  var L=M+(1.916*Math.sin(M*rad))+(0.020*Math.sin(2*M*rad))+282.634;
+  L=((L%360)+360)%360;
+  var RA=Math.atan(0.91764*Math.tan(L*rad))/rad;
+  RA=((RA%360)+360)%360;
+  var Lq=Math.floor(L/90)*90,RAq=Math.floor(RA/90)*90;
+  RA=(RA+(Lq-RAq))/15;
+  var sinDec=0.39782*Math.sin(L*rad);
+  var cosDec=Math.cos(Math.asin(sinDec));
+  var cosH=(Math.cos(zenith*rad)-(sinDec*Math.sin(LAT*rad)))/(cosDec*Math.cos(LAT*rad));
+  if(cosH>1||cosH<-1)return null;
+  var H=rising?360-Math.acos(cosH)/rad:Math.acos(cosH)/rad;
+  H=H/15;
+  var T=H+RA-(0.06571*t)-6.622;
+  var UT=T-lngHour;UT=((UT%24)+24)%24;
+  return new Date(Date.UTC(y,m-1,d)+UT*3600000);
+}
+var fmtCanary;
+try{fmtCanary=new Intl.DateTimeFormat('en-GB',{timeZone:'Atlantic/Canary',hour:'2-digit',minute:'2-digit'});}
+catch(e){fmtCanary=new Intl.DateTimeFormat('en-GB',{hour:'2-digit',minute:'2-digit'});}
+function duskFor(date){
+  var d=solarEventUTC(date.getFullYear(),date.getMonth()+1,date.getDate(),96,false);
+  return d?fmtCanary.format(d):'—:—';
+}
+function moonPhase(date){
+  var syn=29.530588853,ref=Date.UTC(2000,0,6,18,14);
+  var days=(date.getTime()-ref)/86400000;
+  var p=(days%syn)/syn;return p<0?p+1:p;
+}
+function moonSVG(p,id,size){
+  size=size||20;var r=size*0.45,c=size/2;
+  var dx=p<0.5?-4*r*p:4*r*(1-p);
+  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'" class="n-moon" aria-hidden="true">'+
+    '<defs><mask id="'+id+'"><rect width="'+size+'" height="'+size+'" fill="#fff"/>'+
+    '<circle cx="'+(c+dx)+'" cy="'+c+'" r="'+r+'" fill="#000"/></mask></defs>'+
+    '<circle class="outline" cx="'+c+'" cy="'+c+'" r="'+r+'" fill="none" stroke="rgba(237,230,217,.4)" stroke-width="1"/>'+
+    '<circle class="lit" cx="'+c+'" cy="'+c+'" r="'+r+'" fill="#EDE6D9" mask="url(#'+id+')"/></svg>';
+}
+function occlSVG(ratio,id,size){
+  size=size||20;var r=size*0.45,c=size/2;
+  var cx2=c+(1-ratio)*(2*r+2);
+  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'" aria-hidden="true">'+
+    '<defs><mask id="'+id+'"><rect width="'+size+'" height="'+size+'" fill="#fff"/>'+
+    '<circle cx="'+cx2+'" cy="'+c+'" r="'+r+'" fill="#000"/></mask></defs>'+
+    '<circle class="outline" cx="'+c+'" cy="'+c+'" r="'+r+'" fill="none" stroke="rgba(237,230,217,.5)" stroke-width="1"/>'+
+    '<circle cx="'+c+'" cy="'+c+'" r="'+r+'" fill="#EDE6D9" mask="url(#'+id+')"/></svg>';
+}
+/* tonight's dusk everywhere */
+(function(){
+  var now=new Date(),t=duskFor(now);
+  $$('[data-dusk]').forEach(function(el){el.textContent=t});
+})();
+
+/* ============ PHASE RAIL ============ */
+var railSections=['dusk','creed','mountain','passages','craft','chef','cellar','reserve'];
+var railLabels=['Dusk','Creed','Mountain','Passages','Craft','Hand','Cellar','Table'];
+(function(){
+  var rail=$('#rail');if(!rail)return;
+  railSections.forEach(function(id,i){
+    var b=document.createElement('button');
+    b.setAttribute('data-label',railLabels[i]);
+    b.setAttribute('aria-label',railLabels[i]);
+    b.innerHTML=occlSVG(i/(railSections.length-1),'rm'+i,20);
+    b.addEventListener('click',function(){scrollToEl('#'+id)});
+    rail.appendChild(b);
+  });
+})();
+function setRail(i){
+  $$('#rail button').forEach(function(b,j){b.classList.toggle('active',j===i)});
+}
+setRail(0);
+
+/* ============ HUD PHASE GLYPHS ============ */
+var phaseNames=['First Contact','Shadow Bands','Corona','Totality','Diamond Ring','Last Light'];
+(function(){
+  var hp=$('#hudPhases');if(!hp)return;
+  for(var i=0;i<6;i++){
+    var s=document.createElement('span');
+    s.innerHTML=occlSVG(i===3?1:(i/5)*0.9,'hp'+i,16);
+    hp.appendChild(s.firstChild);
+  }
+})();
+
+/* ============ HERO CANVAS ============ */
+(function(){
+  var cv=$('#sky');if(!cv||!cv.getContext)return;
+  var ctx=cv.getContext('2d');
+  var w=0,h=0,stars=[],raf=null,visible=true;
+  var tx=0,ty=0,mx=0,my=0,t0=performance.now();
+  function resize(){
+    var dpr=Math.min(window.devicePixelRatio||1,2);
+    w=cv.clientWidth;h=cv.clientHeight;
+    cv.width=w*dpr;cv.height=h*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    stars=[];
+    var n=Math.round(w*h/6500);
+    for(var i=0;i<n;i++)stars.push({x:Math.random()*w,y:Math.random()*h,
+      r:Math.random()*1.2+0.3,a:Math.random()*0.55+0.12,s:Math.random()*1.8+0.4,p:Math.random()*6.28});
+  }
+  function draw(now){
+    var t=(now-t0)/1000;
+    mx+=(tx-mx)*0.045;my+=(ty-my)*0.045;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#EDE6D9';
+    for(var i=0;i<stars.length;i++){
+      var s=stars[i];
+      ctx.globalAlpha=s.a*(0.62+0.38*Math.sin(t*s.s+s.p));
+      ctx.fillRect(s.x+mx*7,s.y+my*5,s.r,s.r);
+    }
+    ctx.globalAlpha=1;
+    var cx=w/2-mx*16,cy=h*0.40-my*11;
+    var R=Math.max(76,Math.min(w,h)*0.15);
+    var br=1+Math.sin(t*0.55)*0.028;
+    var g=ctx.createRadialGradient(cx,cy,R*0.8,cx,cy,R*4);
+    g.addColorStop(0,'rgba(237,230,217,0.10)');g.addColorStop(1,'rgba(237,230,217,0)');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,R*4,0,7);ctx.fill();
+    g=ctx.createRadialGradient(cx,cy,R*0.9,cx,cy,R*2.5*br);
+    g.addColorStop(0,'rgba(224,148,64,0.32)');g.addColorStop(1,'rgba(224,148,64,0)');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,R*2.5*br,0,7);ctx.fill();
+    g=ctx.createRadialGradient(cx,cy,R*0.96,cx,cy,R*1.52*br);
+    g.addColorStop(0,'rgba(255,214,150,0.85)');g.addColorStop(0.25,'rgba(240,170,90,0.35)');
+    g.addColorStop(1,'rgba(240,170,90,0)');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,R*1.52*br,0,7);ctx.fill();
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(t*0.018);
+    ctx.strokeStyle='rgba(244,196,130,0.05)';ctx.lineWidth=1;
+    for(var k=0;k<42;k++){
+      var a=(k/42)*6.2832;
+      var len=R*(1.22+0.6*Math.abs(Math.sin(k*12.9898)));
+      ctx.beginPath();
+      ctx.moveTo(Math.cos(a)*R*1.02,Math.sin(a)*R*1.02);
+      ctx.lineTo(Math.cos(a)*len,Math.sin(a)*len);
+      ctx.stroke();
+    }
+    ctx.restore();
+    ctx.beginPath();ctx.arc(cx,cy,R,0,7);ctx.fillStyle='#080606';ctx.fill();
+    ctx.beginPath();ctx.arc(cx,cy,R,0,7);
+    ctx.strokeStyle='rgba(255,224,170,0.26)';ctx.lineWidth=1.2;ctx.stroke();
+    if(visible&&!reduced)raf=requestAnimationFrame(draw);
+  }
+  resize();
+  window.addEventListener('resize',function(){resize();if(reduced)draw(performance.now())});
+  if(fine)window.addEventListener('pointermove',function(e){
+    tx=(e.clientX/w-0.5)*2;ty=(e.clientY/h-0.5)*2;
+  });
+  if('IntersectionObserver' in window&&!reduced){
+    new IntersectionObserver(function(en){
+      visible=en[0].isIntersecting;
+      if(visible&&raf===null){raf=requestAnimationFrame(draw)}
+      if(!visible&&raf!==null){cancelAnimationFrame(raf);raf=null}
+    },{threshold:0}).observe(cv);
+  }
+  if(reduced){draw(performance.now())}else{raf=requestAnimationFrame(draw)}
+})();
+
+/* ============ PRELOADER ============ */
+(function(){
+  var loader=$('#loader');
+  function finish(){
+    if(loader&&loader.parentNode)setTimeout(function(){loader.remove()},1100);
+    document.body.classList.add('loaded');
+  }
+  if(!loader){document.body.classList.add('loaded');return}
+  if(reduced){loader.remove();document.body.classList.add('loaded');return}
+  var num=$('#loadNum'),disc=$('#loadDisc'),glint=$('#loadGlint');
+  var D=1500,start=null;
+  function tick(now){
+    if(start===null)start=now;
+    var p=Math.min(1,(now-start)/D);
+    var e=1-Math.pow(1-p,3);
+    num.textContent=('00'+Math.round(e*100)).slice(-3);
+    disc.style.transform='translate(calc(-50% + '+((1-e)*-140).toFixed(1)+'px), -50%)';
+    if(p<1){requestAnimationFrame(tick)}
+    else{
+      glint.classList.add('on');
+      setTimeout(function(){loader.classList.add('done');finish()},430);
+    }
+  }
+  requestAnimationFrame(tick);
+})();
+
+/* ============ CURSOR ============ */
+(function(){
+  if(!customCursor||!fine||reduced)return;
+  var cur=$('#cur'),ring=$('#curRing'),label=$('#curLabel');
+  if(!cur||!ring)return;
+  document.documentElement.classList.add('has-cursor');
+  var x=0,y=0,rx=0,ry=0,shown=false;
+  window.addEventListener('pointermove',function(e){
+    x=e.clientX;y=e.clientY;
+    if(!shown){shown=true;cur.style.opacity=1;ring.style.opacity=1}
+    cur.style.left=x+'px';cur.style.top=y+'px';
+  });
+  document.addEventListener('mouseleave',function(){cur.style.opacity=0;ring.style.opacity=0;shown=false});
+  (function loop(){
+    rx+=(x-rx)*0.16;ry+=(y-ry)*0.16;
+    ring.style.left=rx+'px';ring.style.top=ry+'px';
+    requestAnimationFrame(loop);
+  })();
+  document.addEventListener('mouseover',function(e){
+    var t=e.target.closest('[data-cursor]');
+    if(t){label.textContent=t.getAttribute('data-cursor');ring.classList.add('big')}
+  });
+  document.addEventListener('mouseout',function(e){
+    var t=e.target.closest('[data-cursor]');
+    if(t&&!(e.relatedTarget&&e.relatedTarget.closest&&e.relatedTarget.closest('[data-cursor]')===t)){
+      ring.classList.remove('big');
+    }
+  });
+})();
+
+/* ============ SMOOTH SCROLL + CHOREOGRAPHY ============ */
+var lenis=null;
+function scrollToEl(sel){
+  var el=$(sel);if(!el)return;
+  if(lenis){lenis.scrollTo(el,{duration:1.6})}
+  else{el.scrollIntoView({behavior:reduced?'auto':'smooth'})}
+}
+$$('[data-scroll]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var href=a.getAttribute('href');
+    if(href&&href.charAt(0)==='#'){
+      e.preventDefault();
+      closeMenu();
+      setTimeout(function(){scrollToEl(href)},60);
+    }
+  });
+});
+
+/* word splitter for creed */
+(function(){
+  $$('[data-words]').forEach(function(el){
+    var words=el.textContent.trim().split(/\s+/);
+    el.innerHTML=words.map(function(wd){return '<span class="w">'+wd+'</span>'}).join(' ');
+  });
+})();
+/* char splitter for big headings */
+(function(){
+  if(!hasGsap||reduced)return;
+  $$('[data-chars]').forEach(function(el){
+    var html='';
+    el.childNodes.forEach(function(node){
+      if(node.nodeType===3){
+        var chars=node.textContent.split('');
+        chars.forEach(function(ch){
+          html+=ch===' '?' ':'<span class="cw" style="display:inline-block;overflow:hidden;vertical-align:top"><span class="c" style="display:inline-block">'+(ch===' '?'&nbsp;':ch)+'</span></span>';
+        });
+      }else if(node.nodeName==='BR'){html+='<br>'}
+      else{html+=node.outerHTML||''}
+    });
+    el.innerHTML=html;
+  });
+})();
+
+if(hasGsap&&!reduced){
+  gsap.registerPlugin(ScrollTrigger);
+  if(typeof Lenis!=='undefined'){
+    lenis=new Lenis({lerp:0.09,wheelMultiplier:1});
+    lenis.on('scroll',ScrollTrigger.update);
+    gsap.ticker.add(function(t){lenis.raf(t*1000)});
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* generic reveals */
+  $$('[data-reveal]').forEach(function(el){
+    gsap.fromTo(el,{autoAlpha:0,y:44},{autoAlpha:1,y:0,duration:1.2,ease:'power4.out',
+      scrollTrigger:{trigger:el,start:'top 88%'}});
+  });
+  /* masked figures */
+  $$('figure[data-mask]').forEach(function(fig){
+    var img=fig.querySelector('img');
+    gsap.set(fig,{clipPath:'inset(0 0 100% 0)'});
+    if(img)gsap.set(img,{scale:1.25});
+    ScrollTrigger.create({trigger:fig,start:'top 86%',once:true,onEnter:function(){
+      gsap.to(fig,{clipPath:'inset(0 0 0% 0)',duration:1.5,ease:'power4.inOut'});
+      if(img)gsap.to(img,{scale:1.06,duration:2.2,ease:'power3.out'});
+    }});
+  });
+  /* char headings rise */
+  $$('[data-chars]').forEach(function(el){
+    var cs=el.querySelectorAll('.c');
+    if(!cs.length)return;
+    gsap.set(cs,{yPercent:112});
+    ScrollTrigger.create({trigger:el,start:'top 86%',once:true,onEnter:function(){
+      gsap.to(cs,{yPercent:0,duration:1.15,ease:'power4.out',stagger:0.028});
+    }});
+  });
+  /* creed light-up words */
+  (function(){
+    var ws=$$('#creed .creed-lines .w');
+    if(ws.length){
+      gsap.fromTo(ws,{color:'rgba(237,230,217,0.13)'},{color:'#EDE6D9',stagger:0.08,ease:'none',
+        scrollTrigger:{trigger:'#creed .creed-lines',start:'top 78%',end:'bottom 42%',scrub:0.6}});
+    }
+    $$('.creed-frag').forEach(function(f){
+      var d=parseFloat(f.getAttribute('data-depth'))||30;
+      gsap.fromTo(f,{y:-d},{y:d,ease:'none',
+        scrollTrigger:{trigger:'#creed',start:'top bottom',end:'bottom top',scrub:0.8}});
+    });
+  })();
+  /* rail active states */
+  railSections.forEach(function(id,i){
+    ScrollTrigger.create({trigger:'#'+id,start:'top 55%',end:'bottom 55%',
+      onToggle:function(st){if(st.isActive)setRail(i)}});
+  });
+  /* mountain pin */
+  var mmg=gsap.matchMedia();
+  mmg.add('(min-width: 700px)',function(){
+    var tl=gsap.timeline({scrollTrigger:{trigger:'.mtn-pin',start:'top top',end:'+=130%',pin:true,scrub:0.8}});
+    tl.fromTo('#mtnImg',{scale:1.18},{scale:1.02,ease:'none'},0)
+      .fromTo('.mtn-title',{yPercent:12},{yPercent:-10,ease:'none'},0);
+    $$('[data-co]').forEach(function(co,i){
+      tl.fromTo(co,{autoAlpha:0,y:22},{autoAlpha:1,y:0,duration:0.16,ease:'power2.out'},0.14+i*0.16);
+    });
+    return function(){};
+  });
+  mmg.add('(max-width: 699px)',function(){
+    gsap.fromTo('#mtnImg',{scale:1.16},{scale:1.02,ease:'none',
+      scrollTrigger:{trigger:'.mtn-pin',start:'top bottom',end:'bottom top',scrub:0.8}});
+    $$('[data-co]').forEach(function(co){gsap.set(co,{autoAlpha:1})});
+    return function(){};
+  });
+
+  /* horizontal passages (desktop) */
+  var hudLabel=$('#hudLabel');
+  var cards=$$('.passage');
+  function pad2(n){return ('0'+n).slice(-2)}
+  function updateHud(){
+    var best=0,bd=1e9,vw=window.innerWidth;
+    cards.forEach(function(c,i){
+      var r=c.getBoundingClientRect();
+      var cen=r.left+r.width/2-vw/2;
+      var d=Math.abs(cen);
+      var par=Math.max(-1,Math.min(1,cen/vw));
+      c.querySelector('.p-media img').style.setProperty('--px',(par*-7)+'%');
+      if(d<bd){bd=d;best=i}
+    });
+    if(hudLabel)hudLabel.textContent='Passage '+pad2(best+1)+' / 06 — '+phaseNames[best];
+    $$('#hudPhases svg').forEach(function(s,i){s.classList.toggle('on',i<=best)});
+    var tot=cards[3]?cards[3].getBoundingClientRect():null;
+    var isTot=tot&&Math.abs(tot.left+tot.width/2-window.innerWidth/2)<tot.width*0.72;
+    document.body.classList.toggle('totality',!!isTot);
+  }
+  mmg.add('(min-width: 900px)',function(){
+    var sec=$('#passages'),track=$('#passTrack');
+    sec.classList.add('pinned');
+    var getAmount=function(){return Math.max(0,track.scrollWidth-window.innerWidth)};
+    var tween=gsap.to(track,{x:function(){return -getAmount()},ease:'none',
+      scrollTrigger:{trigger:sec,start:'top top',end:function(){return '+='+getAmount()},
+        scrub:0.7,pin:true,anticipatePin:1,invalidateOnRefresh:true,
+        onUpdate:updateHud,onLeave:function(){document.body.classList.remove('totality')},
+        onLeaveBack:function(){document.body.classList.remove('totality')}}});
+    updateHud();
+    return function(){
+      sec.classList.remove('pinned');gsap.set(track,{x:0});
+      document.body.classList.remove('totality');
+    };
+  });
+  mmg.add('(max-width: 899px)',function(){
+    var tot=$('.passage.p-totality');
+    var io=null;
+    if(tot&&'IntersectionObserver' in window){
+      io=new IntersectionObserver(function(en){
+        document.body.classList.toggle('totality',en[0].intersectionRatio>0.62);
+      },{threshold:[0,0.62,1]});
+      io.observe(tot);
+    }
+    return function(){if(io)io.disconnect();document.body.classList.remove('totality')};
+  });
+
+  /* tilt on cards (desktop) */
+  if(fine){
+    $$('.p-media[data-tilt]').forEach(function(m){
+      m.addEventListener('pointermove',function(e){
+        var r=m.getBoundingClientRect();
+        var dx=(e.clientX-r.left)/r.width-0.5,dy=(e.clientY-r.top)/r.height-0.5;
+        gsap.to(m,{rotateY:dx*7,rotateX:-dy*5,transformPerspective:900,duration:0.5,ease:'power2.out'});
+      });
+      m.addEventListener('pointerleave',function(){
+        gsap.to(m,{rotateX:0,rotateY:0,duration:0.9,ease:'elastic.out(1,0.55)'});
+      });
+    });
+  }
+  /* chef + wine parallax */
+  gsap.fromTo('#chefImg',{yPercent:-6},{yPercent:6,ease:'none',
+    scrollTrigger:{trigger:'#chef',start:'top bottom',end:'bottom top',scrub:0.8}});
+  gsap.fromTo('#wineImg',{yPercent:-7},{yPercent:7,ease:'none',
+    scrollTrigger:{trigger:'#cellar',start:'top bottom',end:'bottom top',scrub:0.8}});
+}else{
+  document.documentElement.classList.add('static');
+  /* totality fallback without gsap */
+  var tot=$('.passage.p-totality');
+  if(tot&&'IntersectionObserver' in window&&!reduced){
+    new IntersectionObserver(function(en){
+      document.body.classList.toggle('totality',en[0].intersectionRatio>0.62);
+    },{threshold:[0,0.62,1]}).observe(tot);
+  }
+}
+
+/* nav show/hide */
+(function(){
+  var nav=$('#nav'),lastY=0;
+  function onScroll(y){
+    nav.classList.toggle('scrolled',y>90);
+    if(y>560&&y>lastY+6&&!document.body.classList.contains('menu-open'))nav.classList.add('hidden');
+    else if(y<lastY-4||y<=560)nav.classList.remove('hidden');
+    lastY=y;
+  }
+  if(lenis){lenis.on('scroll',function(e){onScroll(e.scroll)})}
+  else{window.addEventListener('scroll',function(){onScroll(window.scrollY)},{passive:true})}
+})();
+
+/* overlay menu */
+var burger=$('#burger');
+function closeMenu(){
+  if(!document.body.classList.contains('menu-open'))return;
+  document.body.classList.remove('menu-open');
+  burger.setAttribute('aria-expanded','false');
+  var ov=$('#overlay');ov.classList.add('closing');
+  setTimeout(function(){ov.classList.remove('closing')},950);
+  if(lenis)lenis.start();
+}
+burger.addEventListener('click',function(){
+  if(document.body.classList.contains('menu-open')){closeMenu()}
+  else{
+    document.body.classList.add('menu-open');
+    burger.setAttribute('aria-expanded','true');
+    if(lenis)lenis.stop();
+  }
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu()});
+/* stagger delays for overlay links */
+$$('#ovLinks a').forEach(function(a,i){a.style.transitionDelay=(0.16+i*0.055)+'s'});
+
+/* magnetic */
+if(fine&&!reduced){
+  $$('[data-magnetic]').forEach(function(b){
+    b.addEventListener('pointermove',function(e){
+      var r=b.getBoundingClientRect();
+      var dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);
+      b.style.transform='translate('+dx*0.18+'px,'+dy*0.18+'px)';
+    });
+    b.addEventListener('pointerleave',function(){
+      b.style.transition='transform .7s cubic-bezier(.16,1,.3,1)';
+      b.style.transform='';
+      setTimeout(function(){b.style.transition=''},700);
+    });
+  });
+}
+
+/* craft split divider */
+(function(){
+  var stage=$('#craftStage');if(!stage||!fine||reduced)return;
+  var target=50,cur=50,running=false;
+  function loop(){
+    cur+=(target-cur)*0.09;
+    stage.style.setProperty('--split',cur.toFixed(2)+'%');
+    if(Math.abs(target-cur)>0.05){requestAnimationFrame(loop)}else{running=false}
+  }
+  stage.addEventListener('pointermove',function(e){
+    if(window.innerWidth<900)return;
+    var r=stage.getBoundingClientRect();
+    target=Math.max(14,Math.min(86,((e.clientX-r.left)/r.width)*100));
+    if(!running){running=true;requestAnimationFrame(loop)}
+  });
+  stage.addEventListener('pointerleave',function(){
+    target=50;
+    if(!running){running=true;requestAnimationFrame(loop)}
+  });
+})();
+
+/* ============ RESERVATION ============ */
+(function(){
+  var nightsEl=$('#nights');if(!nightsEl)return;
+  var panel=$('#resPanel'),resNight=$('#resNight'),resMoon=$('#resMoon');
+  var sel=null,guests=2;
+  var days=['SUN','MON','TUE','WED','THU','FRI','SAT'];
+  var months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  function moonNote(p){
+    if(p<0.035||p>0.965)return{n:'New moon',d:'Darkest sky — the observatory night'};
+    if(Math.abs(p-0.5)<0.035)return{n:'Full moon',d:'Bright night — the terrace glows'};
+    if(p<0.5)return{n:'Waxing moon',d:'Clear ridge — half-lit ascent'};
+    return{n:'Waning moon',d:'Late moonrise — long dark dinner'};
+  }
+  var nights=[];
+  for(var i=1;i<=14;i++){
+    var d=new Date();d.setDate(d.getDate()+i);
+    var p=moonPhase(d);
+    nights.push({date:d,dusk:duskFor(d),phase:p,off:(d.getDate()%9===4)});
+  }
+  nights.forEach(function(n,i){
+    var mn=moonNote(n.phase);
+    var b=document.createElement('button');
+    b.type='button';
+    b.className='night'+(n.off?' off':'');
+    b.setAttribute('data-cursor','PICK');
+    b.innerHTML='<span class="n-day">'+days[n.date.getDay()]+'</span>'+
+      '<span class="n-date">'+n.date.getDate()+' '+months[n.date.getMonth()]+'</span>'+
+      '<span class="n-dusk">Dusk '+n.dusk+'</span>'+
+      '<span class="n-moonrow">'+moonSVG(n.phase,'mn'+i,18)+'<span class="n-note">'+mn.n+'</span></span>'+
+      '<span class="n-note">'+(n.off?'Fully seated — waitlist':mn.d)+'</span>';
+    if(!n.off)b.addEventListener('click',function(){
+      sel=n;
+      $$('.night',nightsEl).forEach(function(x){x.classList.remove('sel')});
+      b.classList.add('sel');
+      panel.classList.add('on');panel.classList.remove('done');
+      resNight.textContent=days[n.date.getDay()]+' '+n.date.getDate()+' '+months[n.date.getMonth()]+' — Dusk '+n.dusk;
+      resMoon.textContent=mn.n+' · '+mn.d;
+    });
+    nightsEl.appendChild(b);
+  });
+  var gNum=$('#gNum');
+  $('#gMinus').addEventListener('click',function(){guests=Math.max(1,guests-1);gNum.textContent=guests});
+  $('#gPlus').addEventListener('click',function(){guests=Math.min(8,guests+1);gNum.textContent=guests});
+  $('#resForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!sel){resNight.textContent='Choose a night above first';return}
+    var name=$('#fName input'),mail=$('#fMail input'),ok=true;
+    $('#fName').classList.toggle('err',!(ok=name.value.trim().length>1)&&true);
+    if(!ok){name.focus();return}
+    var mok=/.+@.+\..+/.test(mail.value);
+    $('#fMail').classList.toggle('err',!mok);
+    if(!mok){mail.focus();return}
+    var mm=('0'+(sel.date.getMonth()+1)).slice(-2),dd=('0'+sel.date.getDate()).slice(-2);
+    $('#sucRef').textContent='REF UMB–'+mm+dd+'–'+String.fromCharCode(65+Math.floor(Math.random()*8))+guests;
+    panel.classList.add('done');
+  });
+})();
+
+})();
+</script>
+</body>
+</html>

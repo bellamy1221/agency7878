@@ -98,7 +98,7 @@ export function Header() {
           </Link>
 
           <motion.nav
-            className="relative z-10 hidden items-center lg:flex"
+            className="relative z-10 hidden items-center gap-5 lg:flex"
             style={reduce || !isHome ? undefined : { gap }}
             aria-label="Основная навигация"
           >
@@ -106,7 +106,12 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="nav-link whitespace-nowrap text-[13px] font-medium text-muted transition-colors hover:text-foreground"
+                aria-current={link.href === "/archive" && pathname === "/archive" ? "page" : undefined}
+                className={`nav-link whitespace-nowrap text-[13px] font-medium transition-colors hover:text-foreground ${
+                  link.href === "/archive" && pathname === "/archive"
+                    ? "text-foreground"
+                    : "text-muted"
+                }`}
               >
                 {link.label}
               </Link>
@@ -127,7 +132,7 @@ export function Header() {
 
           <button
             type="button"
-            className="relative z-10 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border/50 lg:hidden"
+            className="relative z-10 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border/50 lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Закрыть меню" : "Открыть меню"}
@@ -141,13 +146,18 @@ export function Header() {
       {open ? (
         <div
           id="mobile-menu"
-          className="mx-3 mt-2 rounded-2xl border border-white/10 bg-[#121110]/92 px-4 py-5 backdrop-blur-xl lg:hidden"
+          className={`mx-3 mt-2 rounded-2xl border px-4 py-5 shadow-xl backdrop-blur-xl lg:hidden ${
+            isHome
+              ? "border-white/10 bg-[#121110]/92"
+              : "border-border bg-surface/95"
+          }`}
         >
           <nav className="flex flex-col gap-0.5" aria-label="Мобильная навигация">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
+                aria-current={link.href === "/archive" && pathname === "/archive" ? "page" : undefined}
                 className="rounded-lg px-3 py-2.5 text-base font-medium text-foreground"
                 onClick={() => setOpen(false)}
               >

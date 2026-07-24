@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="ru" data-lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f4f1ea">
+<title>MOUNT — Выше лишнего · Северная Осетия, Кавказ</title>
+<meta name="description" content="MOUNT — уединённый архитектурный отель в Северной Осетии–Алании. Камень, тишина и горы. Спроектирован как тихое продолжение склона.">
+<meta name="keywords" content="MOUNT, отель Северная Осетия, горный отель Кавказ, архитектурный отель, North Ossetia hotel, Caucasus">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MOUNT — Выше лишнего">
+<meta property="og:description" content="Уединённый архитектурный отель, созданный камнем, тишиной и горами Северной Осетии.">
+<meta property="og:image" content="/demos/mount/images/hero-dawn.png">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MOUNT — Выше лишнего">
+<meta name="twitter:description" content="Уединённый архитектурный отель в Северной Осетии–Алании.">
+<meta name="twitter:image" content="/demos/mount/images/hero-dawn.png">
+<link rel="canonical" href="https://mount.example/">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f4f1ea'/%3E%3Cpath d='M4 26 L12 10 L18 20 L21 14 L28 26 Z' fill='none' stroke='%23252422' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f4f1ea'/%3E%3Cpath d='M4 26 L12 10 L18 20 L21 14 L28 26 Z' fill='none' stroke='%23252422' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Hotel","name":"MOUNT","description":"Уединённый архитектурный отель в Северной Осетии–Алании.","starRating":{"@type":"Rating","ratingValue":"5"},"address":{"@type":"PostalAddress","addressRegion":"Северная Осетия–Алания","addressCountry":"RU"},"geo":{"@type":"GeoCoordinates","latitude":42.75,"longitude":44.20},"priceRange":"$$$$","telephone":"+7 (000) 000-00-00","image":"/demos/mount/images/hero-dawn.png"}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ============================================================
+   MOUNT — Design System
+   ============================================================ */
+:root{
+  --stone:#9a958a; --limestone:#c8c0ad; --ivory:#f4f1ea; --mist:#faf8f2;
+  --oak:#b8997a; --oak-deep:#8a6f53; --sage:#8a9382; --grey:#6f6f6a;
+  --charcoal:#252422; --charcoal-soft:#3a3833; --forest:#2f3a2e; --forest-deep:#1f2a1f;
+  --bronze:#9c7a4a; --line:#dcd6c8; --line-soft:#e8e3d6;
+
+  --serif:'Instrument Serif','Times New Roman',serif;
+  --sans:'Inter Tight',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-soft:cubic-bezier(.4,0,.2,1);
+
+  --max:1640px; --gutter:clamp(20px,4vw,64px);
+  --nav-h:72px;
+  --r:3px; --r-md:6px; --r-lg:10px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  font-family:var(--sans);font-weight:400;font-size:16px;line-height:1.6;color:var(--charcoal);
+  background:var(--ivory);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;text-rendering:optimizeLegibility;
+}
+img,video{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+input,select,textarea{font:inherit;color:inherit}
+::selection{background:var(--forest);color:var(--mist)}
+
+/* Focus */
+:focus-visible{outline:2px solid var(--forest);outline-offset:3px;border-radius:2px}
+
+/* ============================================================
+   Typography
+   ============================================================ */
+.serif{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;line-height:1.05}
+.display{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.02em}
+.italic{font-style:italic}
+.label{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--grey)}
+.label-charcoal{color:var(--charcoal)}
+.meta{font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:.04em;color:var(--grey)}
+.eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--grey)}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--grey);opacity:.6}
+.eyebrow.center::after{content:"";width:28px;height:1px;background:var(--grey);opacity:.6}
+.eyebrow.no-line::before{display:none}
+
+/* ============================================================
+   Layout helpers
+   ============================================================ */
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+.wrap-tight{max-width:1240px;margin:0 auto;padding:0 var(--gutter)}
+.section{padding:clamp(80px,11vw,180px) 0;position:relative}
+.section-sm{padding:clamp(60px,8vw,120px) 0}
+.bg-mist{background:var(--mist)}
+.bg-ivory{background:var(--ivory)}
+.bg-forest{background:var(--forest-deep);color:var(--mist)}
+.bg-stone{background:#ece7da}
+.num-marker{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.2em;color:var(--oak-deep)}
+.divider{height:1px;background:var(--line);width:100%}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 1.1s var(--ease-out),transform 1.1s var(--ease-out)}
+.reveal.in{opacity:1;transform:none}
+.reveal-clip{clip-path:inset(0 0 100% 0);transition:clip-path 1.2s var(--ease-out)}
+.reveal-clip.in{clip-path:inset(0 0 0 0)}
+.reveal-img{overflow:hidden}
+.reveal-img img{transform:scale(1.08);transition:transform 1.6s var(--ease-out)}
+.reveal-img.in img{transform:scale(1)}
+@media (prefers-reduced-motion:reduce){
+  .reveal,.reveal-clip,.reveal-img img{transition:none !important;transform:none !important;opacity:1 !important;clip-path:none !important}
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.06em;cursor:pointer;border-radius:var(--r);transition:background .4s var(--ease),color .4s var(--ease),border-color .4s var(--ease),transform .3s var(--ease);text-align:center;justify-content:center;line-height:1;white-space:nowrap}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--charcoal);color:var(--mist);padding:16px 26px;border:1px solid var(--charcoal)}
+.btn-primary:hover{background:var(--forest);border-color:var(--forest)}
+.btn-secondary{background:transparent;color:var(--charcoal);padding:15px 25px;border:1px solid var(--charcoal)}
+.btn-secondary:hover{background:var(--charcoal);color:var(--mist)}
+.btn-light{background:var(--mist);color:var(--charcoal);padding:16px 26px;border:1px solid var(--mist)}
+.btn-light:hover{background:transparent;color:var(--mist);border-color:var(--mist)}
+.btn-ghost{background:transparent;color:var(--charcoal);padding:14px 0;border:none;border-bottom:1px solid var(--charcoal);border-radius:0;letter-spacing:.08em;position:relative}
+.btn-ghost::after{content:"";position:absolute;left:0;bottom:-1px;width:0;height:1px;background:var(--forest);transition:width .5s var(--ease)}
+.btn-ghost:hover::after{width:100%}
+.btn-ghost:hover{color:var(--forest)}
+.btn .arrow{display:inline-block;transition:transform .4s var(--ease)}
+.btn:hover .arrow{transform:translateX(4px)}
+.btn-light .arrow{color:var(--charcoal)}
+.arrow svg{display:block}
+
+/* ============================================================
+   Preloader
+   ============================================================ */
+#preloader{position:fixed;inset:0;background:var(--ivory);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity .8s var(--ease),visibility .8s}
+#preloader.done{opacity:0;visibility:hidden;pointer-events:none}
+.preload-mark{position:relative;width:min(280px,60vw);height:120px}
+.preload-mark svg{width:100%;height:100%;overflow:visible}
+.preload-line{stroke:var(--charcoal);stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:600;stroke-dashoffset:600;animation:drawLine 2.2s var(--ease) forwards}
+.preload-word{font-family:var(--serif);font-size:clamp(28px,6vw,44px);letter-spacing:.32em;opacity:0;animation:wordIn 1.4s var(--ease) .6s forwards}
+@keyframes drawLine{to{stroke-dashoffset:0}}
+@keyframes wordIn{to{opacity:1}}
+.preload-sub{position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--grey);opacity:0;animation:wordIn 1s var(--ease) 1.2s forwards;white-space:nowrap}
+@media (prefers-reduced-motion:reduce){
+  .preload-line{stroke-dashoffset:0;animation:none}
+  .preload-word,.preload-sub{opacity:1;animation:none}
+  #preloader{transition:none}
+}
+
+/* ============================================================
+   Header
+   ============================================================ */
+#header{position:fixed;top:0;left:0;right:0;z-index:500;height:var(--nav-h);display:flex;align-items:center;transition:background .5s var(--ease),backdrop-filter .5s,box-shadow .5s,border-color .5s;border-bottom:1px solid transparent}
+#header.scrolled{background:rgba(244,241,234,.86);backdrop-filter:blur(14px) saturate(120%);-webkit-backdrop-filter:blur(14px) saturate(120%);border-bottom:1px solid var(--line-soft)}
+.header-inner{width:100%;max-width:var(--max);margin:0 auto;padding:0 var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{font-family:var(--serif);font-size:24px;letter-spacing:.28em;line-height:1;color:var(--charcoal);display:flex;align-items:center;gap:0;padding-right:.28em}
+#header:not(.scrolled) .logo{color:var(--mist);transition:color .5s var(--ease)}
+#header.scrolled .logo{color:var(--charcoal)}
+.logo svg{width:20px;height:20px;opacity:0;transition:opacity .4s}
+.logo .logo-txt{transition:color .5s var(--ease)}
+nav.primary{display:flex;align-items:center;gap:clamp(18px,2vw,32px)}
+nav.primary a{font-size:13px;font-weight:400;letter-spacing:.04em;color:var(--mist);position:relative;padding:4px 0;transition:color .4s var(--ease);opacity:.92}
+#header.scrolled nav.primary a{color:var(--charcoal)}
+nav.primary a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:currentColor;transition:width .4s var(--ease)}
+nav.primary a:hover::after{width:100%}
+nav.primary a:hover{opacity:1}
+.header-tools{display:flex;align-items:center;gap:18px}
+.lang-switch{display:flex;align-items:center;gap:6px;font-size:12px;letter-spacing:.08em}
+.lang-switch button{padding:4px 6px;color:var(--mist);opacity:.55;transition:opacity .3s,color .4s;font-weight:500}
+#header.scrolled .lang-switch button{color:var(--charcoal)}
+.lang-switch button.active{opacity:1}
+.lang-switch .sep{opacity:.4}
+.btn-cta{background:transparent;color:var(--mist);border:1px solid rgba(244,241,234,.5);padding:11px 20px;font-size:12px;letter-spacing:.06em;transition:all .4s var(--ease);border-radius:var(--r)}
+#header.scrolled .btn-cta{color:var(--charcoal);border-color:var(--charcoal)}
+.btn-cta:hover{background:var(--charcoal);color:var(--mist);border-color:var(--charcoal)}
+#header.scrolled .btn-cta:hover{background:var(--forest);border-color:var(--forest)}
+.menu-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;align-items:flex-end}
+.menu-toggle span{display:block;width:24px;height:1.5px;background:var(--mist);transition:all .4s var(--ease)}
+#header.scrolled .menu-toggle span{background:var(--charcoal)}
+.menu-toggle.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);width:26px}
+.menu-toggle.open span:nth-child(2){opacity:0}
+.menu-toggle.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);width:26px}
+
+/* Mobile nav */
+#mobile-nav{position:fixed;inset:0;background:var(--ivory);z-index:600;transform:translateY(-100%);transition:transform .6s var(--ease-out);display:flex;flex-direction:column;padding:calc(var(--nav-h) + 20px) var(--gutter) 40px;overflow-y:auto}
+#mobile-nav.open{transform:translateY(0)}
+#mobile-nav nav{display:flex;flex-direction:column;gap:4px;margin-top:30px}
+#mobile-nav nav a{font-family:var(--serif);font-size:clamp(34px,9vw,52px);line-height:1.15;padding:10px 0;color:var(--charcoal);border-bottom:1px solid var(--line-soft);display:flex;justify-content:space-between;align-items:baseline}
+#mobile-nav nav a .m-num{font-family:var(--sans);font-size:11px;letter-spacing:.2em;color:var(--grey)}
+.mobile-tools{margin-top:auto;padding-top:30px;display:flex;flex-direction:column;gap:18px}
+.mobile-tools .lang-switch button{color:var(--charcoal)}
+.mobile-tools .btn{width:100%}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+#hero{position:relative;height:100svh;min-height:640px;overflow:hidden;background:var(--charcoal)}
+#hero-media{position:absolute;inset:0;z-index:1}
+#hero-media video,#hero-media .hero-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-poster{background-size:cover;background-position:center}
+#hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,18,16,.42) 0%,rgba(20,18,16,.12) 32%,rgba(20,18,16,.08) 55%,rgba(20,18,16,.55) 100%);z-index:2}
+#hero-content{position:relative;z-index:3;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:0 var(--gutter) clamp(60px,9vh,110px);color:var(--mist);max-width:var(--max);margin:0 auto;width:100%}
+.hero-top{position:absolute;top:calc(var(--nav-h) + 28px);left:var(--gutter);right:var(--gutter);display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.hero-coord{font-size:11px;letter-spacing:.16em;color:var(--mist);opacity:.75;line-height:1.7;text-align:right}
+.hero-coord span{display:block}
+.hero-label{font-size:11px;letter-spacing:.24em;text-transform:uppercase;opacity:.85;display:flex;align-items:center;gap:12px}
+.hero-label::before{content:"";width:24px;height:1px;background:var(--mist);opacity:.6}
+.hero-headline{font-family:var(--serif);font-size:clamp(46px,10vw,148px);line-height:.92;letter-spacing:-.025em;max-width:14ch;margin-bottom:clamp(20px,3vh,34px)}
+.hero-headline .it{font-style:italic}
+.hero-sub{font-size:clamp(15px,1.4vw,18px);line-height:1.55;max-width:42ch;opacity:.9;margin-bottom:clamp(28px,4vh,42px);font-weight:300}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.hero-bottom{position:absolute;bottom:clamp(24px,4vh,40px);left:var(--gutter);right:var(--gutter);display:flex;justify-content:space-between;align-items:flex-end;gap:20px;z-index:4}
+.hero-season{font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.8;display:flex;align-items:center;gap:10px}
+.hero-season .dot{width:6px;height:6px;border-radius:50%;background:var(--sage)}
+.scroll-indicator{display:flex;flex-direction:column;align-items:center;gap:10px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.7}
+.scroll-line{width:1px;height:42px;background:rgba(244,241,234,.35);overflow:hidden;position:relative}
+.scroll-line::after{content:"";position:absolute;top:0;left:0;width:100%;height:50%;background:var(--mist);animation:scrollDot 2.4s var(--ease) infinite}
+@keyframes scrollDot{0%{transform:translateY(-100%)}60%,100%{transform:translateY(220%)}}
+.sound-toggle{position:absolute;bottom:clamp(24px,4vh,40px);right:var(--gutter);z-index:5;display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mist);opacity:.75;transition:opacity .3s;background:rgba(20,18,16,.2);padding:10px 14px;border-radius:40px;backdrop-filter:blur(6px)}
+.sound-toggle:hover{opacity:1}
+.sound-toggle .s-bars{display:flex;align-items:flex-end;gap:2px;height:14px}
+.sound-toggle .s-bars span{width:2px;background:var(--mist);border-radius:1px}
+.sound-toggle .s-bars span:nth-child(1){height:40%;animation:eq 1.1s ease-in-out infinite alternate}
+.sound-toggle .s-bars span:nth-child(2){height:70%;animation:eq 1.3s .2s ease-in-out infinite alternate}
+.sound-toggle .s-bars span:nth-child(3){height:55%;animation:eq 1s .1s ease-in-out infinite alternate}
+.sound-toggle.muted .s-bars span{animation:none;height:30%}
+@keyframes eq{to{height:100%}}
+@media (prefers-reduced-motion:reduce){.scroll-line::after,.sound-toggle .s-bars span{animation:none}}
+
+/* ============================================================
+   Sticky booking bar
+   ============================================================ */
+#booking-bar{position:fixed;left:0;right:0;bottom:0;z-index:400;background:rgba(244,241,234,.92);backdrop-filter:blur(14px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .6s var(--ease-out);padding:14px var(--gutter)}
+#booking-bar.show{transform:translateY(0)}
+.booking-bar-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1.1fr 1.1fr 0.9fr 1fr auto;gap:14px;align-items:center}
+.bb-field{display:flex;flex-direction:column;gap:3px;padding:6px 12px;border-right:1px solid var(--line);cursor:pointer;position:relative}
+.bb-field:last-of-type{border-right:none}
+.bb-field label{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey)}
+.bb-field .bb-val{font-size:14px;color:var(--charcoal);font-weight:500}
+.bb-field input{border:none;background:none;font-size:14px;font-weight:500;color:var(--charcoal);padding:2px 0;width:100%}
+.bb-cta{white-space:nowrap}
+
+/* ============================================================
+   Section header component
+   ============================================================ */
+.sec-head{display:grid;grid-template-columns:1fr 1.5fr;gap:clamp(30px,5vw,80px);align-items:end;margin-bottom:clamp(40px,6vw,80px)}
+.sec-head .left{display:flex;flex-direction:column;gap:18px}
+.sec-head .num{font-family:var(--sans);font-size:11px;letter-spacing:.2em;color:var(--oak-deep)}
+.sec-head h2{font-family:var(--serif);font-size:clamp(32px,5.2vw,72px);line-height:1.0;letter-spacing:-.02em}
+.sec-head .right p{font-size:clamp(15px,1.3vw,17px);line-height:1.6;color:var(--grey);max-width:46ch;font-weight:300}
+.sec-head .right p strong{color:var(--charcoal);font-weight:400}
+@media (max-width:840px){
+  .sec-head{grid-template-columns:1fr;gap:24px}
+  .sec-head .right p{max-width:none}
+}
+
+/* ============================================================
+   Brand intro
+   ============================================================ */
+#brand{padding-top:clamp(100px,13vw,200px)}
+.brand-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:clamp(20px,3vw,48px);align-items:start}
+.brand-hero-img{aspect-ratio:4/5;overflow:hidden;position:relative}
+.brand-hero-img img{width:100%;height:100%;object-fit:cover}
+.brand-side{display:flex;flex-direction:column;gap:28px;padding-top:6vh}
+.brand-side .b-h{font-family:var(--serif);font-size:clamp(28px,4vw,52px);line-height:1.05;letter-spacing:-.02em}
+.brand-side .b-h .it{font-style:italic}
+.brand-side p{font-size:15px;line-height:1.7;color:var(--grey);font-weight:300}
+.brand-side p strong{color:var(--charcoal);font-weight:400}
+.brand-detail{aspect-ratio:5/4;overflow:hidden;margin-top:8px}
+.brand-detail img{width:100%;height:100%;object-fit:cover}
+.topo-block{margin-top:14px;border:1px solid var(--line);padding:22px;position:relative;background:var(--mist)}
+.topo-block .t-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);margin-bottom:6px}
+.topo-block svg{width:100%;height:90px;display:block}
+.topo-line{stroke:var(--oak-deep);fill:none;stroke-width:1;opacity:.55}
+@media (max-width:840px){
+  .brand-grid{grid-template-columns:1fr;gap:32px}
+  .brand-side{padding-top:0}
+  .brand-hero-img{aspect-ratio:4/5}
+}
+
+/* ============================================================
+   View Finder (signature interaction)
+   ============================================================ */
+#viewfinder{padding:clamp(90px,12vw,170px) 0 0;background:var(--forest-deep);color:var(--mist);overflow:hidden}
+.vf-head{max-width:var(--max);margin:0 auto;padding:0 var(--gutter);display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(30px,5vw,80px);align-items:end;margin-bottom:clamp(40px,6vw,70px)}
+.vf-head .eyebrow{color:var(--sage)}
+.vf-head .eyebrow::before{background:var(--sage)}
+.vf-head h2{font-family:var(--serif);font-size:clamp(34px,5.6vw,80px);line-height:1;color:var(--mist);letter-spacing:-.02em}
+.vf-head h2 .it{font-style:italic}
+.vf-head .right p{color:rgba(250,248,242,.7);font-size:16px;line-height:1.6;max-width:44ch;font-weight:300}
+.vf-stage{position:relative;height:clamp(420px,68vh,720px);overflow:hidden;cursor:grab;background:#11140f}
+.vf-stage:active{cursor:grabbing}
+.vf-viewport{position:absolute;inset:0}
+.vf-view{position:absolute;inset:0;opacity:0;transform:scale(1.06);transition:opacity 1s var(--ease),transform 1.4s var(--ease);pointer-events:none}
+.vf-view.active{opacity:1;transform:scale(1);pointer-events:auto}
+.vf-view img{width:100%;height:100%;object-fit:cover}
+.vf-view::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,18,14,.1) 0%,rgba(15,18,14,.05) 45%,rgba(15,18,14,.78) 100%)}
+.vf-grain{position:absolute;inset:0;opacity:.08;pointer-events:none;z-index:5;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.vf-overlay{position:absolute;left:var(--gutter);right:var(--gutter);bottom:clamp(28px,6vh,64px);z-index:6;display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(24px,4vw,60px);align-items:end}
+.vf-info{transition:opacity .5s var(--ease)}
+.vf-info .vf-num{font-size:11px;letter-spacing:.24em;color:var(--sage);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.vf-info .vf-num .vf-dot{width:6px;height:6px;border-radius:50%;background:var(--sage)}
+.vf-info .vf-name{font-family:var(--serif);font-size:clamp(34px,6vw,76px);line-height:.98;color:var(--mist);margin-bottom:18px;letter-spacing:-.02em}
+.vf-info .vf-desc{font-size:15px;line-height:1.6;color:rgba(250,248,242,.78);max-width:42ch;font-weight:300;margin-bottom:22px}
+.vf-specs{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:24px}
+.vf-specs .sp{display:flex;flex-direction:column;gap:3px}
+.vf-specs .sp .sp-l{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);opacity:.8}
+.vf-specs .sp .sp-v{font-size:15px;color:var(--mist);font-weight:500}
+.vf-info .btn-ghost{color:var(--mist);border-color:rgba(250,248,242,.5)}
+.vf-info .btn-ghost::after{background:var(--sage)}
+.vf-info .btn-ghost:hover{color:var(--sage)}
+.vf-controls{display:flex;flex-direction:column;gap:18px;justify-self:end}
+.vf-rail{display:flex;flex-direction:column;gap:2px;width:min(280px,80vw)}
+.vf-tab{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(250,248,242,.16);cursor:pointer;transition:padding-left .4s var(--ease),color .4s;opacity:.55;position:relative}
+.vf-tab:hover{opacity:.85;padding-left:8px}
+.vf-tab.active{opacity:1;padding-left:8px}
+.vf-tab .vf-tab-n{font-family:var(--serif);font-size:20px;letter-spacing:.01em}
+.vf-tab .vf-tab-i{font-size:10px;letter-spacing:.18em;color:var(--sage)}
+.vf-tab.active .vf-tab-i{color:var(--mist)}
+.vf-tab.active::before{content:"";position:absolute;left:-18px;top:50%;transform:translateY(-50%);width:12px;height:1px;background:var(--sage)}
+.vf-progress{height:2px;background:rgba(250,248,242,.18);position:relative;margin-top:6px}
+.vf-progress .vf-bar{position:absolute;top:0;left:0;height:100%;background:var(--sage);width:25%;transition:width .8s var(--ease)}
+.vf-hint{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,248,242,.55);display:flex;align-items:center;gap:10px}
+.vf-hint svg{width:30px;height:14px}
+@media (max-width:840px){
+  .vf-head{grid-template-columns:1fr;gap:22px}
+  .vf-stage{height:78vh;min-height:520px}
+  .vf-overlay{grid-template-columns:1fr;gap:22px}
+  .vf-controls{justify-self:start}
+  .vf-rail{width:100%}
+  .vf-info .vf-name{font-size:clamp(30px,9vw,48px)}
+}
+
+/* ============================================================
+   Rooms
+   ============================================================ */
+.room-row{display:grid;gap:clamp(24px,4vw,64px);align-items:center;margin-bottom:clamp(70px,10vw,140px)}
+.room-row:last-child{margin-bottom:0}
+.room-row.r-1{grid-template-columns:1.1fr 1fr}
+.room-row.r-2{grid-template-columns:1fr 1.1fr}
+.room-row.r-2 .room-media{order:2}
+.room-row.r-3{grid-template-columns:1fr 1.15fr}
+.room-row.r-4{grid-template-columns:1.15fr 1fr}
+.room-row.r-4 .room-media{order:2}
+.room-media{position:relative;overflow:hidden}
+.room-media img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.room-media:hover img{transform:scale(1.03)}
+.room-row.r-1 .room-media,.room-row.r-3 .room-media{aspect-ratio:5/6}
+.room-row.r-2 .room-media,.room-row.r-4 .room-media{aspect-ratio:5/6}
+.room-media .room-tag{position:absolute;top:18px;left:18px;background:rgba(244,241,234,.92);backdrop-filter:blur(6px);padding:8px 14px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--charcoal)}
+.room-info{display:flex;flex-direction:column;gap:22px;padding:0 clamp(10px,2vw,30px)}
+.room-info .r-num{font-size:11px;letter-spacing:.22em;color:var(--oak-deep);display:flex;align-items:center;gap:10px}
+.room-info .r-num::before{content:"";width:20px;height:1px;background:var(--oak-deep);opacity:.6}
+.room-info h3{font-family:var(--serif);font-size:clamp(34px,5vw,64px);line-height:1;letter-spacing:-.02em}
+.room-info .r-desc{font-size:16px;line-height:1.65;color:var(--grey);font-weight:300;max-width:44ch}
+.room-specs{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 24px;padding:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.room-specs .sp{display:flex;flex-direction:column;gap:4px}
+.room-specs .sp .sp-l{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--grey)}
+.room-specs .sp .sp-v{font-size:17px;color:var(--charcoal);font-weight:500}
+.room-specs .sp .sp-v .small{font-size:13px;color:var(--grey);font-weight:400}
+.room-amenities{display:flex;flex-wrap:wrap;gap:10px 14px}
+.room-amenities .am{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--charcoal-soft)}
+.room-amenities .am svg{width:15px;height:15px;stroke:var(--oak-deep);stroke-width:1.4;fill:none}
+.room-cta-row{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-top:6px}
+.room-price{font-family:var(--serif);font-size:22px;color:var(--charcoal)}
+.room-price .from{font-family:var(--sans);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--grey);display:block;margin-bottom:2px}
+@media (max-width:840px){
+  .room-row{grid-template-columns:1fr !important;gap:32px;margin-bottom:80px}
+  .room-row .room-media{order:1 !important;aspect-ratio:4/5}
+  .room-info{padding:0}
+}
+
+/* ============================================================
+   Seasons
+   ============================================================ */
+#seasons{background:var(--mist)}
+.season-stage{position:relative;aspect-ratio:21/10;overflow:hidden;background:var(--charcoal)}
+@media (max-width:840px){.season-stage{aspect-ratio:4/5}}
+.season-img{position:absolute;inset:0;opacity:0;transform:scale(1.08);transition:opacity 1.2s var(--ease),transform 2s var(--ease)}
+.season-img.active{opacity:1;transform:scale(1)}
+.season-img img{width:100%;height:100%;object-fit:cover}
+.season-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,18,16,.2) 0%,rgba(20,18,16,.1) 40%,rgba(20,18,16,.7) 100%)}
+.season-content{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(28px,5vw,60px);color:var(--mist)}
+.season-content .s-name{font-family:var(--serif);font-size:clamp(40px,8vw,110px);line-height:.95;letter-spacing:-.02em;margin-bottom:10px}
+.season-content .s-name .it{font-style:italic}
+.season-content .s-atm{font-size:15px;font-weight:300;opacity:.85;max-width:38ch;margin-bottom:24px}
+.season-meta{display:flex;flex-wrap:wrap;gap:14px 36px;margin-bottom:26px}
+.season-meta .sm{display:flex;flex-direction:column;gap:3px}
+.season-meta .sm .sm-l{font-size:10px;letter-spacing:.18em;text-transform:uppercase;opacity:.7}
+.season-meta .sm .sm-v{font-size:16px;font-weight:500}
+.season-exps{display:flex;flex-wrap:wrap;gap:8px}
+.season-exps .se-chip{font-size:12px;letter-spacing:.04em;padding:8px 16px;border:1px solid rgba(250,248,242,.4);border-radius:40px;backdrop-filter:blur(4px)}
+.season-tabs{display:flex;gap:0;margin-top:0;border-bottom:1px solid var(--line)}
+.season-tab{flex:1;padding:20px 14px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);border-bottom:2px solid transparent;transition:all .4s var(--ease);text-align:center;position:relative}
+.season-tab:hover{color:var(--charcoal)}
+.season-tab.active{color:var(--charcoal);border-bottom-color:var(--forest)}
+.season-tab .st-temp{display:block;font-family:var(--serif);font-size:15px;letter-spacing:0;text-transform:none;color:var(--oak-deep);margin-top:4px}
+.season-tab.active .st-temp{color:var(--forest)}
+
+/* ============================================================
+   Experiences
+   ============================================================ */
+.exp-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2vw,28px)}
+.exp-card{position:relative;overflow:hidden;display:flex;flex-direction:column;cursor:pointer}
+.exp-card .exp-img{overflow:hidden;position:relative;flex:1}
+.exp-card .exp-img img{width:100%;height:100%;object-fit:cover;transition:transform 1.3s var(--ease)}
+.exp-card:hover .exp-img img{transform:scale(1.05)}
+.exp-card .exp-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(20,18,16,.55) 100%);transition:opacity .5s}
+.exp-card .exp-meta{position:absolute;bottom:0;left:0;right:0;padding:24px;color:var(--mist);z-index:2}
+.exp-card .exp-meta .e-n{font-size:10px;letter-spacing:.2em;opacity:.8;margin-bottom:8px}
+.exp-card .exp-meta .e-t{font-family:var(--serif);font-size:clamp(20px,2vw,28px);line-height:1.1}
+.exp-card .exp-meta .e-d{font-size:12px;opacity:0;max-height:0;overflow:hidden;transition:opacity .4s,max-height .4s;font-weight:300;margin-top:8px}
+.exp-card:hover .exp-meta .e-d{opacity:.85;max-height:80px}
+.exp-c1{grid-column:span 7;aspect-ratio:16/11}
+.exp-c2{grid-column:span 5;aspect-ratio:5/6}
+.exp-c3{grid-column:span 4;aspect-ratio:1/1}
+.exp-c4{grid-column:span 5;aspect-ratio:10/9}
+.exp-c5{grid-column:span 3;aspect-ratio:3/4}
+@media (max-width:840px){
+  .exp-grid{grid-template-columns:1fr 1fr;gap:14px}
+  .exp-c1,.exp-c2,.exp-c3,.exp-c4,.exp-c5{grid-column:span 2;aspect-ratio:4/5}
+  .exp-c1{aspect-ratio:16/11}
+}
+@media (max-width:560px){
+  .exp-grid{grid-template-columns:1fr}
+  .exp-c1,.exp-c2,.exp-c3,.exp-c4,.exp-c5{grid-column:span 1;aspect-ratio:4/5}
+  .exp-card .exp-meta .e-d{opacity:.85;max-height:80px}
+}
+
+/* ============================================================
+   Restaurant
+   ============================================================ */
+#restaurant{background:var(--forest-deep);color:var(--mist)}
+.rest-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(30px,5vw,80px);align-items:start}
+.rest-media{position:relative}
+.rest-main{aspect-ratio:4/5;overflow:hidden;margin-bottom:clamp(16px,2vw,24px)}
+.rest-main img{width:100%;height:100%;object-fit:cover}
+.rest-sub{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.5vw,18px)}
+.rest-sub .rs{aspect-ratio:1/1;overflow:hidden}
+.rest-sub .rs img{width:100%;height:100%;object-fit:cover}
+.rest-content .eyebrow{color:var(--sage)}
+.rest-content .eyebrow::before{background:var(--sage)}
+.rest-content h2{font-family:var(--serif);font-size:clamp(38px,6vw,84px);line-height:.98;color:var(--mist);margin:18px 0 8px;letter-spacing:-.02em}
+.rest-content h2 .it{font-style:italic}
+.rest-name{font-family:var(--sans);font-size:12px;letter-spacing:.3em;color:var(--sage);margin-bottom:26px}
+.rest-content p{font-size:16px;line-height:1.7;color:rgba(250,248,242,.78);font-weight:300;max-width:50ch;margin-bottom:20px}
+.chef-block{border-left:1px solid rgba(250,248,242,.2);padding:6px 0 6px 22px;margin:30px 0}
+.chef-block .cb-l{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);margin-bottom:8px}
+.chef-block .cb-n{font-family:var(--serif);font-size:24px;color:var(--mist);margin-bottom:6px}
+.chef-block .cb-q{font-size:14px;font-style:italic;color:rgba(250,248,242,.7);font-weight:300;line-height:1.5}
+.menu-toggle-row{display:flex;gap:18px;align-items:center;margin-top:30px;flex-wrap:wrap}
+.btn-ghost-light{background:transparent;color:var(--mist);padding:14px 0;border:none;border-bottom:1px solid rgba(250,248,242,.5);border-radius:0;font-size:13px;letter-spacing:.08em;position:relative;display:inline-flex;align-items:center;gap:10px}
+.btn-ghost-light::after{content:"";position:absolute;left:0;bottom:-1px;width:0;height:1px;background:var(--sage);transition:width .5s var(--ease)}
+.btn-ghost-light:hover::after{width:100%}
+.btn-ghost-light:hover{color:var(--sage)}
+@media (max-width:840px){.rest-grid{grid-template-columns:1fr;gap:40px}}
+
+/* Menu modal */
+.modal{position:fixed;inset:0;z-index:800;display:flex;align-items:center;justify-content:center;padding:30px;opacity:0;visibility:hidden;transition:opacity .4s var(--ease),visibility .4s}
+.modal.open{opacity:1;visibility:visible}
+.modal-backdrop{position:absolute;inset:0;background:rgba(20,18,16,.7);backdrop-filter:blur(8px)}
+.modal-card{position:relative;background:var(--mist);max-width:880px;width:100%;max-height:88vh;overflow-y:auto;border-radius:var(--r-md);transform:translateY(30px);transition:transform .5s var(--ease-out)}
+.modal.open .modal-card{transform:translateY(0)}
+.modal-close{position:absolute;top:20px;right:20px;width:40px;height:40px;border-radius:50%;background:rgba(37,36,34,.06);display:flex;align-items:center;justify-content:center;transition:background .3s;z-index:3}
+.modal-close:hover{background:rgba(37,36,34,.12)}
+.modal-close svg{width:16px;height:16px;stroke:var(--charcoal);stroke-width:1.6}
+.modal-body{padding:clamp(34px,5vw,64px)}
+.modal-eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--oak-deep);margin-bottom:14px}
+.modal-title{font-family:var(--serif);font-size:clamp(32px,5vw,52px);line-height:1;letter-spacing:-.02em;margin-bottom:8px}
+.modal-sub{font-size:15px;color:var(--grey);font-weight:300;margin-bottom:36px;max-width:50ch}
+.menu-course{margin-bottom:30px}
+.menu-course .mc-h{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:16px}
+.menu-course .mc-h .mc-n{font-family:var(--serif);font-size:22px}
+.menu-course .mc-h .mc-l{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey)}
+.menu-item{display:grid;grid-template-columns:1fr auto;gap:20px;padding:10px 0;border-bottom:1px dotted var(--line-soft)}
+.menu-item:last-child{border-bottom:none}
+.menu-item .mi-l .mi-n{font-size:15px;color:var(--charcoal);margin-bottom:3px;font-weight:500}
+.menu-item .mi-l .mi-d{font-size:13px;color:var(--grey);font-weight:300;line-height:1.5}
+.menu-item .mi-p{font-size:13px;color:var(--charcoal-soft);font-weight:500;white-space:nowrap}
+.menu-foot{margin-top:34px;padding-top:22px;border-top:1px solid var(--line);font-size:12px;color:var(--grey);line-height:1.6}
+
+/* ============================================================
+   Wellness
+   ============================================================ */
+.well-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(30px,5vw,70px);align-items:start}
+.well-content h2{font-family:var(--serif);font-size:clamp(34px,5.5vw,76px);line-height:1;letter-spacing:-.02em;margin:18px 0 24px}
+.well-content h2 .it{font-style:italic}
+.well-content>p{font-size:16px;line-height:1.7;color:var(--grey);font-weight:300;max-width:42ch;margin-bottom:30px}
+.well-list{display:flex;flex-direction:column;gap:0}
+.well-item{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:20px 0;border-bottom:1px solid var(--line)}
+.well-item .wi-n{font-family:var(--sans);font-size:11px;letter-spacing:.2em;color:var(--oak-deep);width:30px}
+.well-item .wi-t{font-family:var(--serif);font-size:22px;color:var(--charcoal)}
+.well-item .wi-d{font-size:13px;color:var(--grey);font-weight:300;text-align:right;max-width:24ch}
+.well-media{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(14px,1.8vw,22px);align-items:start}
+.well-media .wm-tall{aspect-ratio:3/4;overflow:hidden}
+.well-media .wm-tall img{width:100%;height:100%;object-fit:cover}
+.well-media .wm-stack{display:flex;flex-direction:column;gap:clamp(14px,1.8vw,22px)}
+.well-media .wm-stack .wm{aspect-ratio:4/3;overflow:hidden}
+.well-media .wm-stack .wm img{width:100%;height:100%;object-fit:cover}
+@media (max-width:840px){
+  .well-grid{grid-template-columns:1fr;gap:36px}
+  .well-media{grid-template-columns:1fr 1fr}
+}
+
+/* ============================================================
+   Architecture
+   ============================================================ */
+#architecture{background:var(--ivory)}
+.arch-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(30px,5vw,72px);align-items:start;margin-bottom:clamp(50px,7vw,90px)}
+.arch-diagram{position:relative}
+.arch-diagram .ad-img{aspect-ratio:5/6;overflow:hidden;margin-bottom:20px}
+.arch-diagram .ad-img img{width:100%;height:100%;object-fit:cover}
+.arch-plan{border:1px solid var(--line);padding:24px;background:var(--mist)}
+.arch-plan .ap-l{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);margin-bottom:14px;display:flex;justify-content:space-between}
+.arch-plan svg{width:100%;height:180px;display:block}
+.arch-content h2{font-family:var(--serif);font-size:clamp(32px,5vw,68px);line-height:1;letter-spacing:-.02em;margin:18px 0 24px}
+.arch-content h2 .it{font-style:italic}
+.arch-content>p{font-size:16px;line-height:1.7;color:var(--grey);font-weight:300;margin-bottom:22px;max-width:48ch}
+.arch-content>p strong{color:var(--charcoal);font-weight:400}
+.arch-principles{display:grid;grid-template-columns:repeat(2,1fr);gap:24px 30px;margin-top:30px;padding-top:30px;border-top:1px solid var(--line)}
+.arch-principle .ap-n{font-family:var(--sans);font-size:11px;letter-spacing:.2em;color:var(--oak-deep);margin-bottom:8px}
+.arch-principle .ap-t{font-family:var(--serif);font-size:20px;color:var(--charcoal);margin-bottom:6px;line-height:1.15}
+.arch-principle .ap-d{font-size:13px;color:var(--grey);font-weight:300;line-height:1.55}
+.material-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(10px,1.4vw,18px)}
+.mat{display:flex;flex-direction:column;gap:10px}
+.mat .mat-swatch{aspect-ratio:1/1;border-radius:var(--r);position:relative;overflow:hidden}
+.mat .mat-l{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey)}
+.mat .mat-n{font-family:var(--serif);font-size:17px;color:var(--charcoal)}
+.mat-stone .mat-swatch{background:linear-gradient(135deg,#b8b1a0,#9a958a)}
+.mat-oak .mat-swatch{background:linear-gradient(135deg,#c4a47e,#8a6f53)}
+.mat-bronze .mat-swatch{background:linear-gradient(135deg,#b89370,#7c5e38)}
+.mat-linen .mat-swatch{background:linear-gradient(135deg,#ece4d2,#d8ccb4)}
+.mat-glass .mat-swatch{background:linear-gradient(135deg,#cfdae0,#9fb0ba)}
+@media (max-width:840px){
+  .arch-grid{grid-template-columns:1fr;gap:36px}
+  .arch-principles{grid-template-columns:1fr}
+  .material-strip{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:520px){.material-strip{grid-template-columns:repeat(2,1fr)}}
+
+/* ============================================================
+   Location
+   ============================================================ */
+#location{background:var(--mist)}
+.loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,72px);align-items:start}
+.loc-map{position:relative;aspect-ratio:1/1;border:1px solid var(--line);background:var(--ivory);overflow:hidden}
+.loc-map svg{width:100%;height:100%;display:block}
+.loc-route{stroke:var(--forest);stroke-width:1.6;fill:none;stroke-dasharray:5 5;stroke-dashoffset:0;animation:routeDash 30s linear infinite}
+@keyframes routeDash{to{stroke-dashoffset:-200}}
+@media (prefers-reduced-motion:reduce){.loc-route{animation:none}}
+.loc-pin{fill:var(--forest)}
+.loc-pin-glow{fill:var(--forest);opacity:.18;animation:pinPulse 3s ease-in-out infinite}
+@keyframes pinPulse{0%,100%{opacity:.12;transform-origin:center}50%{opacity:.28}}
+.loc-topo{stroke:var(--oak-deep);fill:none;stroke-width:.7;opacity:.28}
+.loc-contour{stroke:var(--sage);fill:none;stroke-width:.8;opacity:.4}
+.loc-label{font-family:var(--sans);font-size:9px;letter-spacing:.1em;fill:var(--grey)}
+.loc-land{fill:#e8e1d0;opacity:.6}
+.loc-water{fill:#bccdd6;opacity:.7}
+.loc-content h2{font-family:var(--serif);font-size:clamp(32px,5vw,64px);line-height:1;letter-spacing:-.02em;margin:18px 0 24px}
+.loc-content>p{font-size:16px;line-height:1.7;color:var(--grey);font-weight:300;max-width:44ch;margin-bottom:30px}
+.loc-info{display:flex;flex-direction:column;gap:0;margin-bottom:30px}
+.loc-row{display:grid;grid-template-columns:auto 1fr auto;gap:18px;padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.loc-row:first-child{border-top:1px solid var(--line)}
+.loc-row .lr-l{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey);white-space:nowrap}
+.loc-row .lr-v{font-size:15px;color:var(--charcoal);font-weight:500}
+.loc-row .lr-v .lr-note{font-size:12px;color:var(--grey);font-weight:300;display:block;margin-top:2px}
+@media (max-width:840px){.loc-grid{grid-template-columns:1fr;gap:36px}}
+
+/* ============================================================
+   Journal
+   ============================================================ */
+#journal{background:var(--ivory)}
+.journal-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(24px,3vw,48px)}
+.j-card{display:flex;flex-direction:column;cursor:pointer}
+.j-card .j-img{aspect-ratio:4/5;overflow:hidden;margin-bottom:22px;position:relative}
+.j-card .j-img img{width:100%;height:100%;object-fit:cover;transition:transform 1.3s var(--ease)}
+.j-card:hover .j-img img{transform:scale(1.04)}
+.j-card .j-cat{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--oak-deep);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.j-card .j-cat .j-date{color:var(--grey)}
+.j-card h3{font-family:var(--serif);font-size:clamp(22px,2.4vw,30px);line-height:1.1;letter-spacing:-.01em;margin-bottom:12px;color:var(--charcoal);transition:color .3s}
+.j-card:hover h3{color:var(--forest)}
+.j-card .j-ex{font-size:14px;line-height:1.6;color:var(--grey);font-weight:300}
+.j-card .j-read{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--charcoal);margin-top:16px;display:flex;align-items:center;gap:8px}
+.j-c1{grid-column:span 5}
+.j-c2{grid-column:span 4}
+.j-c3{grid-column:span 3}
+@media (max-width:840px){
+  .journal-grid{grid-template-columns:1fr;gap:40px}
+  .j-c1,.j-c2,.j-c3{grid-column:span 1}
+}
+
+/* ============================================================
+   Reviews
+   ============================================================ */
+#reviews{background:var(--forest-deep);color:var(--mist);text-align:center}
+.rev-quote{font-family:var(--serif);font-size:clamp(26px,3.8vw,46px);line-height:1.25;letter-spacing:-.01em;max-width:24ch;margin:0 auto 36px;font-style:italic;color:var(--mist)}
+.rev-quote .r-mark{font-size:.5em;vertical-align:top;color:var(--sage);font-style:normal}
+.rev-author{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,248,242,.65)}
+.rev-dots{display:flex;justify-content:center;gap:10px;margin-top:40px}
+.rev-dot{width:24px;height:2px;background:rgba(250,248,242,.25);cursor:pointer;transition:background .3s}
+.rev-dot.active{background:var(--sage)}
+.rev-note{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(250,248,242,.45);margin-top:24px}
+
+/* ============================================================
+   Booking
+   ============================================================ */
+#booking{background:var(--ivory)}
+.book-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(30px,5vw,80px);align-items:start}
+.book-content h2{font-family:var(--serif);font-size:clamp(36px,5.5vw,76px);line-height:1;letter-spacing:-.02em;margin:18px 0 24px}
+.book-content h2 .it{font-style:italic}
+.book-content>p{font-size:16px;line-height:1.7;color:var(--grey);font-weight:300;max-width:42ch;margin-bottom:30px}
+.book-points{display:flex;flex-direction:column;gap:14px;margin-top:30px}
+.book-point{display:flex;align-items:flex-start;gap:14px;font-size:14px;color:var(--charcoal-soft)}
+.book-point svg{width:18px;height:18px;stroke:var(--forest);stroke-width:1.5;fill:none;flex-shrink:0;margin-top:2px}
+.book-form{background:var(--mist);border:1px solid var(--line);padding:clamp(28px,4vw,48px);border-radius:var(--r-md)}
+.book-form .bf-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+.book-form .bf-head .bf-t{font-family:var(--serif);font-size:26px}
+.book-form .bf-head .bf-l{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey)}
+.bf-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+.bf-row.single{grid-template-columns:1fr}
+.bf-field{display:flex;flex-direction:column;gap:8px;position:relative}
+.bf-field label{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey);font-weight:500}
+.bf-field input,.bf-field select{border:1px solid var(--line);background:var(--ivory);padding:14px 16px;font-size:15px;color:var(--charcoal);border-radius:var(--r);transition:border-color .3s,background .3s;width:100%;font-weight:500}
+.bf-field input:focus,.bf-field select:focus{border-color:var(--forest);outline:none;background:var(--mist)}
+.bf-field input.err,.bf-field select.err{border-color:#a8443a;background:#f7ecea}
+.bf-field .bf-err{font-size:11px;color:#a8443a;display:none;margin-top:2px}
+.bf-field.invalid .bf-err{display:block}
+.bf-guest{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);background:var(--ivory);border-radius:var(--r);padding:0 16px;height:50px}
+.bf-guest button{width:30px;height:30px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--charcoal);transition:all .3s}
+.bf-guest button:hover{background:var(--charcoal);color:var(--mist);border-color:var(--charcoal)}
+.bf-guest .bf-gv{font-size:15px;font-weight:600;color:var(--charcoal);min-width:24px;text-align:center}
+.bf-submit{width:100%;margin-top:24px;padding:18px;font-size:14px;letter-spacing:.06em}
+.bf-result{margin-top:22px;padding:22px;border-radius:var(--r);display:none;border:1px solid}
+.bf-result.show{display:block;animation:fadeUp .6s var(--ease) both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.bf-result.success{background:#eef2ea;border-color:#c4d0b8}
+.bf-result.error{background:#f7ecea;border-color:#e3c8c4}
+.bf-result .br-t{font-family:var(--serif);font-size:22px;margin-bottom:8px}
+.bf-result.success .br-t{color:var(--forest)}
+.bf-result.error .br-t{color:#8a3530}
+.bf-result .br-d{font-size:14px;line-height:1.6;color:var(--charcoal-soft)}
+.bf-result .br-rooms{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.bf-result .br-room{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:var(--ivory);border-radius:var(--r);font-size:14px}
+.bf-result .br-room .brr-s{font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:20px}
+.bf-result .br-room .brr-s.ok{background:#d4dfc8;color:var(--forest)}
+.bf-result .br-room .brr-s.few{background:#e8e0c4;color:var(--oak-deep)}
+.bf-result .br-room .brr-s.no{background:#ecdcda;color:#8a3530}
+@media (max-width:840px){.book-grid{grid-template-columns:1fr;gap:36px}}
+@media (max-width:520px){.bf-row{grid-template-columns:1fr;gap:14px}}
+
+/* ============================================================
+   Final section
+   ============================================================ */
+#final{position:relative;height:90svh;min-height:560px;overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--mist);text-align:center;background:var(--charcoal)}
+#final .final-media{position:absolute;inset:0;z-index:1}
+#final .final-media img{width:100%;height:100%;object-fit:cover}
+#final .final-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,18,16,.5) 0%,rgba(20,18,16,.35) 50%,rgba(20,18,16,.7) 100%)}
+#final .final-content{position:relative;z-index:2;padding:0 var(--gutter);max-width:900px}
+#final .f-label{font-size:11px;letter-spacing:.24em;text-transform:uppercase;opacity:.8;margin-bottom:24px}
+#final h2{font-family:var(--serif);font-size:clamp(32px,5.5vw,76px);line-height:1.05;letter-spacing:-.02em;margin-bottom:34px}
+#final h2 .it{font-style:italic}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+footer{background:var(--charcoal);color:var(--mist);padding:clamp(60px,8vw,100px) 0 32px}
+.foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:clamp(30px,4vw,60px);padding-bottom:clamp(50px,7vw,80px);border-bottom:1px solid rgba(250,248,242,.14)}
+.foot-brand .foot-logo{font-family:var(--serif);font-size:32px;letter-spacing:.28em;margin-bottom:20px;line-height:1;padding-right:.28em}
+.foot-brand p{font-size:14px;line-height:1.7;color:rgba(250,248,242,.6);font-weight:300;max-width:36ch;margin-bottom:24px}
+.foot-col h4{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);margin-bottom:22px;font-weight:500}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+.foot-col a{font-size:14px;color:rgba(250,248,242,.78);transition:color .3s;font-weight:300}
+.foot-col a:hover{color:var(--mist)}
+.foot-contact .fc-row{font-size:14px;color:rgba(250,248,242,.78);font-weight:300;line-height:1.6;margin-bottom:12px}
+.foot-contact .fc-row span{display:block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);margin-bottom:2px}
+.newsletter{margin-top:26px}
+.newsletter .nl-l{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);margin-bottom:12px}
+.nl-form{display:flex;border-bottom:1px solid rgba(250,248,242,.3);max-width:320px}
+.nl-form input{flex:1;background:none;border:none;padding:10px 0;font-size:14px;color:var(--mist)}
+.nl-form input::placeholder{color:rgba(250,248,242,.4)}
+.nl-form button{padding:10px 0 10px 12px;color:var(--mist);transition:color .3s}
+.nl-form button:hover{color:var(--sage)}
+.nl-msg{font-size:12px;margin-top:10px;color:var(--sage);min-height:16px;opacity:0;transition:opacity .3s}
+.nl-msg.show{opacity:1}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-top:28px;flex-wrap:wrap}
+.foot-bottom .fb-copy{font-size:12px;color:rgba(250,248,242,.5);letter-spacing:.02em}
+.foot-bottom .fb-links{display:flex;gap:24px;flex-wrap:wrap}
+.foot-bottom .fb-links a{font-size:12px;color:rgba(250,248,242,.5);transition:color .3s}
+.foot-bottom .fb-links a:hover{color:var(--mist)}
+.foot-social{display:flex;gap:14px;margin-top:14px}
+.foot-social a{width:36px;height:36px;border:1px solid rgba(250,248,242,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.foot-social a:hover{background:var(--mist);border-color:var(--mist)}
+.foot-social a:hover svg{stroke:var(--charcoal)}
+.foot-social svg{width:15px;height:15px;stroke:var(--mist);fill:none;stroke-width:1.4;transition:stroke .3s}
+@media (max-width:840px){
+  .foot-top{grid-template-columns:1fr 1fr;gap:36px}
+  .foot-brand{grid-column:span 2}
+}
+@media (max-width:520px){.foot-top{grid-template-columns:1fr}.foot-brand{grid-column:span 1}}
+
+/* ============================================================
+   Gallery modal (room)
+   ============================================================ */
+.gallery-modal .modal-card{max-width:1100px;background:var(--charcoal)}
+.gallery-modal .modal-body{padding:0}
+.gallery-stage{position:relative;aspect-ratio:16/10;overflow:hidden;background:#000}
+.gallery-stage img{width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .5s;position:absolute;inset:0}
+.gallery-stage img.active{opacity:1}
+.gallery-nav{position:absolute;top:50%;transform:translateY(-50%);width:50px;height:50px;border-radius:50%;background:rgba(244,241,234,.12);display:flex;align-items:center;justify-content:center;z-index:3;transition:background .3s;backdrop-filter:blur(4px)}
+.gallery-nav:hover{background:rgba(244,241,234,.25)}
+.gallery-nav svg{stroke:var(--mist);stroke-width:1.6;width:18px;height:18px;fill:none}
+.gallery-nav.prev{left:24px}
+.gallery-nav.next{right:24px}
+.gallery-thumbs{display:flex;gap:10px;padding:18px;overflow-x:auto}
+.gallery-thumbs button{flex-shrink:0;width:80px;height:60px;border:2px solid transparent;border-radius:var(--r);overflow:hidden;opacity:.6;transition:all .3s}
+.gallery-thumbs button.active{border-color:var(--mist);opacity:1}
+.gallery-thumbs button img{width:100%;height:100%;object-fit:cover}
+.gallery-close{position:absolute;top:20px;right:20px;width:42px;height:42px;border-radius:50%;background:rgba(20,18,16,.4);display:flex;align-items:center;justify-content:center;z-index:5;backdrop-filter:blur(4px)}
+.gallery-close svg{stroke:var(--mist);stroke-width:1.6;width:16px;height:16px}
+.gallery-info{position:absolute;top:24px;left:24px;z-index:4;color:var(--mist)}
+.gallery-info .gi-t{font-family:var(--serif);font-size:24px}
+.gallery-info .gi-c{font-size:11px;letter-spacing:.16em;opacity:.7;margin-top:4px}
+
+/* ============================================================
+   Toast
+   ============================================================ */
+#toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(120%);background:var(--charcoal);color:var(--mist);padding:14px 24px;border-radius:var(--r);font-size:13px;z-index:900;transition:transform .5s var(--ease-out);box-shadow:0 8px 30px rgba(0,0,0,.18);max-width:90vw}
+#toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ============================================================
+   Misc / utilities
+   ============================================================ */
+.h-id{scroll-margin-top:calc(var(--nav-h) + 20px)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.no-scroll{overflow:hidden}
+.v-text{writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey)}
+
+/* date input styling */
+input[type="date"]{font-family:var(--sans)}
+input[type="date"]::-webkit-calendar-picker-indicator{opacity:.5;cursor:pointer;filter:contrast(.8)}
+
+@media (max-width:980px){
+  nav.primary{display:none}
+  .menu-toggle{display:flex}
+  #booking-bar{display:none}
+  .header-tools .btn-cta{display:none}
+}
+@media (max-width:560px){
+  :root{--gutter:18px}
+  .hero-top{top:calc(var(--nav-h) + 16px)}
+  .hero-coord{font-size:10px}
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============ PRELOADER ============ -->
+<div id="preloader" aria-hidden="true">
+  <div class="preload-mark">
+    <svg viewBox="0 0 280 120" preserveAspectRatio="xMidYMid meet">
+      <path class="preload-line" d="M10 105 L60 45 L95 78 L130 30 L170 70 L210 38 L270 105"/>
+    </svg>
+  </div>
+  <div class="preload-word">MOUNT</div>
+  <div class="preload-sub">Северная Осетия · Кавказ</div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header id="header">
+  <div class="header-inner">
+    <a href="#hero" class="logo" aria-label="MOUNT — на главную">
+      <span class="logo-txt">MOUNT</span>
+    </a>
+    <nav class="primary" aria-label="Основная навигация">
+      <a href="#rooms" data-nav>Номера</a>
+      <a href="#experiences" data-nav>Впечатления</a>
+      <a href="#restaurant" data-nav>Ресторан</a>
+      <a href="#wellness" data-nav>Спа</a>
+      <a href="#location" data-nav>Локация</a>
+      <a href="#journal" data-nav>Журнал</a>
+    </nav>
+    <div class="header-tools">
+      <div class="lang-switch" role="group" aria-label="Выбор языка">
+        <button data-lang="ru" class="active" aria-pressed="true">RU</button>
+        <span class="sep">/</span>
+        <button data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a href="#booking" class="btn btn-cta" data-i18n="cta-check">Проверить наличие</a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ MOBILE NAV ============ -->
+<div id="mobile-nav" role="dialog" aria-modal="true" aria-label="Мобильная навигация">
+  <nav aria-label="Мобильная навигация">
+    <a href="#rooms" data-mclose><span>Номера</span><span class="m-num">01</span></a>
+    <a href="#viewfinder" data-mclose><span>Обзор</span><span class="m-num">02</span></a>
+    <a href="#experiences" data-mclose><span>Впечатления</span><span class="m-num">03</span></a>
+    <a href="#restaurant" data-mclose><span>Ресторан</span><span class="m-num">04</span></a>
+    <a href="#wellness" data-mclose><span>Спа</span><span class="m-num">05</span></a>
+    <a href="#architecture" data-mclose><span>Архитектура</span><span class="m-num">06</span></a>
+    <a href="#location" data-mclose><span>Локация</span><span class="m-num">07</span></a>
+    <a href="#journal" data-mclose><span>Журнал</span><span class="m-num">08</span></a>
+  </nav>
+  <div class="mobile-tools">
+    <div class="lang-switch" role="group" aria-label="Выбор языка">
+      <button data-lang="ru" class="active" aria-pressed="true">RU</button>
+      <span class="sep">/</span>
+      <button data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a href="#booking" class="btn btn-primary" data-mclose data-i18n="cta-check">Проверить наличие</a>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section id="hero" class="h-id">
+  <div id="hero-media">
+    <div class="hero-poster" style="background-image:url('/demos/mount/images/hero-dawn.png')"></div>
+    <video autoplay muted loop playsinline preload="auto" aria-hidden="true" poster="/demos/mount/images/hero-dawn.png">
+      <source src="/demos/mount/video/mount-hero.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="hero-top">
+    <div class="hero-label" data-i18n="hero-label">Северная Осетия — Кавказ</div>
+    <div class="hero-coord">
+      <span>42°45′N · 44°12′E</span>
+      <span data-i18n="hero-alt">Высота 1 680 м</span>
+    </div>
+  </div>
+
+  <div id="hero-content">
+    <h1 class="hero-headline"><span data-i18n="hero-h-1">Выше</span> <span class="it" data-i18n="hero-h-2">лишнего.</span></h1>
+    <p class="hero-sub" data-i18n="hero-sub">Уединённый архитектурный отель, созданный из камня, тишины и гор Северной Осетии.</p>
+    <div class="hero-ctas">
+      <a href="#booking" class="btn btn-light" data-i18n="cta-check">Проверить наличие <span class="arrow">→</span></a>
+      <a href="#brand" class="btn btn-secondary" style="color:var(--mist);border-color:rgba(244,241,234,.5)" data-i18n="cta-discover">Узнать о MOUNT</a>
+    </div>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="hero-season"><span class="dot"></span><span data-i18n="hero-season">Лето · +18–24°</span></div>
+    <div class="scroll-indicator">
+      <span data-i18n="scroll">Листайте</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+
+  <button class="sound-toggle muted" id="sound-toggle" aria-label="Включить звук видео" aria-pressed="false">
+    <span class="s-bars"><span></span><span></span><span></span></span>
+    <span class="st-txt" data-i18n="sound-on">Звук</span>
+  </button>
+</section>
+
+<!-- ============ STICKY BOOKING BAR ============ -->
+<div id="booking-bar" role="region" aria-label="Быстрое бронирование">
+  <div class="booking-bar-inner">
+    <div class="bb-field" onclick="document.getElementById('bb-arrival').showPicker?.()">
+      <label for="bb-arrival" data-i18n="f-arrival">Заезд</label>
+      <input type="date" id="bb-arrival">
+    </div>
+    <div class="bb-field">
+      <label for="bb-departure" data-i18n="f-departure">Выезд</label>
+      <input type="date" id="bb-departure">
+    </div>
+    <div class="bb-field">
+      <label data-i18n="f-guests">Гости</label>
+      <span class="bb-val" id="bb-guests-val">2 гостя</span>
+    </div>
+    <div class="bb-field">
+      <label data-i18n="f-room">Тип</label>
+      <span class="bb-val" id="bb-room-val" data-i18n="room-any">Любой</span>
+    </div>
+    <a href="#booking" class="btn btn-primary bb-cta" data-i18n="cta-check">Проверить</a>
+  </div>
+</div>
+
+<main>
+<!-- ============ BRAND INTRO ============ -->
+<section id="brand" class="section h-id">
+  <div class="wrap">
+    <div class="brand-grid">
+      <div class="brand-hero-img reveal-img">
+        <img src="/demos/mount/images/exterior-day.png" alt="Архитектура отеля MOUNT на склоне горы в мягком дневном свете" loading="lazy">
+      </div>
+      <div class="brand-side">
+        <div class="eyebrow" data-i18n="brand-eyebrow">Идея</div>
+        <h2 class="b-h reveal"><span data-i18n="brand-h-1">Гора — не фон.</span> <span class="it" data-i18n="brand-h-2">Это архитектура.</span></h2>
+        <p class="reveal" data-i18n="brand-p1">MOUNT спроектирован как тихое продолжение склона. Низкие каменные объёмы встроены в рельеф и почти не читаются на расстоянии — их замечаешь, только подойдя вплотную.</p>
+        <p class="reveal" data-i18n="brand-p2"><strong>Местный камень, тёплый дуб, матовая бронза и панорамное остекление</strong> держат одно правило: ничего лишнего между тобой и ландшафтом.</p>
+        <div class="brand-detail reveal-img">
+          <img src="/demos/mount/images/material-stone.png" alt="Деталь фасада: камень, бронзовая рама и остекление" loading="lazy">
+        </div>
+        <div class="topo-block reveal">
+          <div class="t-label" data-i18n="topo-l">Контуры склона · 1 680 м</div>
+          <svg viewBox="0 0 320 90" preserveAspectRatio="none">
+            <path class="topo-line" d="M0 70 Q80 50 160 60 T320 55"/>
+            <path class="topo-line" d="M0 55 Q90 30 170 42 T320 38" style="opacity:.4"/>
+            <path class="topo-line" d="M0 40 Q100 14 180 26 T320 22" style="opacity:.28"/>
+            <path class="topo-line" d="M0 25 Q110 2 190 12 T320 8" style="opacity:.18"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VIEW FINDER ============ -->
+<section id="viewfinder" class="section h-id">
+  <div class="vf-head">
+    <div class="left">
+      <div class="eyebrow" data-i18n="vf-eyebrow">02 · Обзор</div>
+      <h2 class="reveal"><span data-i18n="vf-h-1">Вид</span> <span class="it" data-i18n="vf-h-2">становится комнатой.</span></h2>
+    </div>
+    <div class="right reveal">
+      <p data-i18n="vf-intro">Двигайтесь вдоль горизонта — и проходите через отель. Каждый поворот открывает новую точку: долину, гребень, каменный дом, панорамную резиденцию.</p>
+    </div>
+  </div>
+
+  <div class="vf-stage" id="vf-stage" role="region" aria-label="Интерактивный выбор номера" tabindex="0">
+    <div class="vf-viewport">
+      <div class="vf-view active" data-view="0">
+        <img src="/demos/mount/images/room-valley.png" alt="Valley Suite с панорамным окном на долину">
+      </div>
+      <div class="vf-view" data-view="1">
+        <img src="/demos/mount/images/room-ridge.png" alt="Ridge Suite с террасой и видом на гребень">
+      </div>
+      <div class="vf-view" data-view="2">
+        <img src="/demos/mount/images/room-stonehouse.png" alt="Stone House — отдельная резиденция">
+      </div>
+      <div class="vf-view" data-view="3">
+        <img src="/demos/mount/images/room-panorama.png" alt="Panorama Residence с видом на долину">
+      </div>
+    </div>
+    <div class="vf-grain"></div>
+
+    <div class="vf-overlay">
+      <div class="vf-info" id="vf-info">
+        <div class="vf-num"><span class="vf-dot"></span><span id="vf-num-txt">01 / 04</span></div>
+        <h3 class="vf-name" id="vf-name">Valley Suite</h3>
+        <p class="vf-desc" id="vf-desc" data-i18n="vf-d0">Тихий интерьер, обращённый к нижней долине. Свет приходит медленно, вместе с туманом.</p>
+        <div class="vf-specs">
+          <div class="sp"><span class="sp-l" data-i18n="sp-size">Площадь</span><span class="sp-v" id="vf-size">42 м²</span></div>
+          <div class="sp"><span class="sp-l" data-i18n="sp-guests">Гости</span><span class="sp-v" id="vf-guests">2</span></div>
+          <div class="sp"><span class="sp-l" data-i18n="sp-view">Вид</span><span class="sp-v" id="vf-view">Долина</span></div>
+          <div class="sp"><span class="sp-l" data-i18n="sp-from">От</span><span class="sp-v" id="vf-price">₽ 28 000</span></div>
+        </div>
+        <a href="#booking" class="btn-ghost" data-i18n="vf-choose">Выбрать номер <span class="arrow">→</span></a>
+      </div>
+
+      <div class="vf-controls">
+        <div class="vf-rail" id="vf-rail">
+          <div class="vf-tab active" data-tab="0"><span class="vf-tab-n" data-i18n="rn-0">Valley Suite</span><span class="vf-tab-i">01</span></div>
+          <div class="vf-tab" data-tab="1"><span class="vf-tab-n" data-i18n="rn-1">Ridge Suite</span><span class="vf-tab-i">02</span></div>
+          <div class="vf-tab" data-tab="2"><span class="vf-tab-n" data-i18n="rn-2">Stone House</span><span class="vf-tab-i">03</span></div>
+          <div class="vf-tab" data-tab="3"><span class="vf-tab-n" data-i18n="rn-3">Panorama Residence</span><span class="vf-tab-i">04</span></div>
+        </div>
+        <div class="vf-progress"><div class="vf-bar" id="vf-bar"></div></div>
+        <div class="vf-hint">
+          <svg viewBox="0 0 30 14" fill="none"><path d="M2 7 H26 M22 3 L26 7 L22 11" stroke="rgba(250,248,242,.55)" stroke-width="1"/></svg>
+          <span data-i18n="vf-hint">Двигайте курсор · листайте на мобильном</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ROOMS ============ -->
+<section id="rooms" class="section h-id">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="left">
+        <div class="num-marker" data-i18n="rooms-eyebrow">03 · Номера и резиденции</div>
+        <h2 class="reveal"><span data-i18n="rooms-h-1">Четыре способа</span> <span class="it" data-i18n="rooms-h-2">встретить тишину.</span></h2>
+      </div>
+      <div class="right reveal"><p data-i18n="rooms-intro">Каждый номер — отдельная композиция из камня, дуба и света. Ни один не повторяет другой, все держат один язык.</p></div>
+    </div>
+
+    <!-- Valley Suite -->
+    <div class="room-row r-1">
+      <div class="room-media reveal-img">
+        <span class="room-tag" data-i18n="rn-0">Valley Suite</span>
+        <img src="/demos/mount/images/room-valley.png" alt="Valley Suite — интерьер с камином и видом на долину" loading="lazy">
+      </div>
+      <div class="room-info">
+        <div class="r-num" data-i18n="rooms-n1">Номер 01</div>
+        <h3 class="reveal" data-i18n="rn-0">Valley Suite</h3>
+        <p class="r-desc reveal" data-i18n="rd-0">Тихий интерьер, обращённый к нижней долине. Панорамное окно, камин, лёнён и тёплый дуб. Свет приходит медленно, вместе с туманом по утрам.</p>
+        <div class="room-specs">
+          <div class="sp"><span class="sp-l" data-i18n="sp-size">Площадь</span><span class="sp-v">42 <span class="small">м²</span></span></div>
+          <div class="sp"><span class="sp-l" data-i18n="sp-guests">Гости</span><span class="sp-v">2</span></div>
+          <div class="sp"><span class="sp-l" data-i18n="sp-view">Вид</span><span class="sp-v" data-i18n="view-valley">Долина</span></div>
+          <div class="sp"><span class="sp-l" data-i18n="sp-features">Особенности</span><span class="sp-v" data-i18n="rf-0">Камин · завтрак</span></div>
+        </div>
+        <div class="room-amenities">
+          <span class="am"><svg viewBox="0 0 24 24"><path d="M4 20 L12 6 L20 20 M8 14 H16"/></svg>Панорамное окно</span>
+          <span class="am"><svg viewBox="0 0 24 24"><path d="M12 3 C8 8 6 11 6 14 a6 6 0 0 0 12 0 c0-3-2-6-6-11Z"/></svg>Камин</span>
+          <span class="am"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="1"/><path d="M8 6 V4 M16 6 V4"/></svg>Завтрак включён</span>
+        </div>
+        <div class="room-cta-row">
+          <div class="room-price"><span class="from" data-i18n="sp-from">От</span>₽ 28 000 <span class="small" style="font-family:var(--sans);font-size:12px;color:var(--grey)" data-i18n="per-night">/ ночь</span></div>
+          <a href="#booking" class="btn btn-primary" data-i18n="cta-check">Проверить наличие</a>
+          <button class="btn-ghost" data-gallery="0" data-i18n="cta-gallery">Галерея <span class="arrow">→</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ridge Suite -->
+    <div class="room-row r-2">
+      <div class="room-media reveal-img">
+        <span class="room-tag" data-i18n="rn-1">Ridge Suite</span>
+        <img src="/demos/mount/images/room-ridge.png" alt="Ridge Suite — терраса и ванна с видом на гребень" loading="lazy">
+      </div>
+      <div class="room-info">
+        <div class="r-num" data-i18n="rooms-n2">Номер 02</div>
+        <h3 class="reveal" data-i18n="rn-1">Ridge Suite</h3>
+        <p class="r-desc reveal" data-i18n="rd-1">Выше по склону. Частная терраса, ванна, обращённая к гребню, и окно, в которое входит горный воздух.</p>
+        <div class="room-specs">
+          <div class="sp"><span class="sp-l" data-i18n="sp-size">Площадь</span><span class="sp-v">58 <span class="small">м²</span></span></div>
+          <div class="sp"><span class="sp-l" data-i18n="sp-guests">Гости</span><span class="sp-v">2</span></div>
+          <div class="sp"><span class="sp-l" data-i18n="sp-view">Вид</span><span class="sp-v" data-i18n="view-ridge">Гребень</span></div>
+          <div class="sp"><span class="sp-l" data-i18n="sp-features">Особенности</span><span class="sp-v" data-i18n="rf-1">Терраса · ванна</span></div>
+        </div>
+        <div class="room-amenities">
+          <span class="am"><svg viewBox="0 0 24 24"><path d="M3 18 H21 M5 18 V10 H19 V18 M9 18 V14 H15 V18"/></svg>Частная терраса</span>
+          <span class="am"><svg viewBox="0 0 24 24"><path d="M5 12 h14 v6 a3 3 0 0 1-3 3 H8 a3 3 0 0 1-3-3 Z M8 8 a2 2 0 0 1 4 0 M13 6 a2 2 0 0 1 3 0"/></svg>Ванна с видом</span>
+          <span class="am"><svg viewBox="0 0 24 24"><path d="M12 3 C8 8 6 11 6 14 a6 6 0 0 0 12 0 c0-3-2-6-6-11Z"/></svg>Камин</span>
+        </div>
+        <div class="room-cta-row">
+          <div class="room-price"><span class="from" data-i18n="sp-from">От</span>₽ 38 000 <span class="small" style="font-family:var(--sans);font-size:12px;color:var(--grey)" data-i18n="per-night">/ ночь</span></div>
+          <a href="#booking" class="btn btn-primary" data-i18n="cta-check">Проверить наличие</a>
+          <button class="btn-ghost" data-gallery="1" data-i18n="cta-gallery">Галерея <span class="arrow">→</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stone House -->
+    <div class="room-row r-3">
+      <div class="room-media reveal-img">
+        <span class="room-tag" data-i18n="rn-2">Stone House</span>
+        <img src="/demos/mount/images/room-stonehouse.png" alt="Stone House — гостиная с камином и кухней" loading="lazy">
+      </div>
+      <div class="room-info">
+        <div class="r-num" data-i18n="rooms-n3">Номер 03</div>
+        <h3 class="reveal" data-i18n="rn-2">Stone House</h3>
+        <p class="r-desc reveal" data-i18n="rd-2">Отдельная резиденция для семьи или небольшой компании. Две спальни, гостиная с камином, кухня и площадка с открытым огнём.</p>
+        <div class="room-specs">
+          <div class="sp"><span class="sp-l" data-i18n="sp-size">Площадь</span><span class="sp-v">96 <span class="small">м²</span></span></div>
+          <div class="sp"><span class="sp-l" data-i18n="sp-guests">Гости</span><span class="sp-v">4</span></div>
+          <div class="sp"><span class="sp-l" data-i18n="sp-bedrooms">Спальни</span><span class="sp-v">2</span></div>
+          <div class="sp"><span class="sp-l" data-i18n="sp-features">Особенности</span><span class="sp-v" data-i18n="rf-2">Кухня · очаг</span></div>
+        </div>
+        <div class="room-amenities">
+          <span class="am"><svg viewBox="0 0 24 24"><path d="M4 11 V20 H20 V11 M4 11 L12 4 L20 11"/></svg>Две спальни</span>
+          <span class="am"><svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="1"/><path d="M8 8 V5 H16 V8 M10 14 H14"/></svg>Гостиная + кухня</span>
+          <span class="am"><svg viewBox="0 0 24 24"><path d="M12 4 v6 M8 12 a4 4 0 0 1 8 0 v6 H8 Z"/></svg>Открытый очаг</span>
+        </div>
+        <div class="room-cta-row">
+          <div class="room-price"><span class="from" data-i18n="sp-from">От</span>₽ 64 000 <span class="small" style="font-family:var(--sans);font-size:12px;color:var(--grey)" data-i18n="per-night">/ ночь</span></div>
+          <a href="#booking" class="btn btn-primary" data-i18n="cta-check">Проверить наличие</a>
+          <button class="btn-ghost" data-gallery="2" data-i18n="cta-gallery">Галерея <span class="arrow">→</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panorama Residence -->
+    <div class="room-row r-4">
+      <div class="room-media reveal-img">
+        <span class="room-tag" data-i18n="rn-3">Panorama Residence</span>
+        <img src="/demos/mount/images/room-panorama.png" alt="Panorama Residence — угловая гостиная с видом на долину" loading="lazy">
+      </div>
+      <div class="room-info">
+        <div class="r-num" data-i18n="rooms-n4">Номер 04</div>
+        <h3 class="reveal" data-i18n="rn-3">Panorama Residence</h3>
+        <p class="r-desc reveal" data-i18n="rd-3">Самая уединённая резиденция. Полный вид на долину с двух сторон, частная сауна, терраса и персональный хост.</p>
+        <div class="room-specs">
+          <div class="sp"><span class="sp-l" data-i18n="sp-size">Площадь</span><span class="sp-v">128 <span class="small">м²</span></span></div>
+          <div class="sp"><span class="sp-l" data-i18n="sp-guests">Гости</span><span class="sp-v">4</span></div>
+          <div class="sp"><span class="sp-l" data-i18n="sp-view">Вид</span><span class="sp-v" data-i18n="view-panorama">Долина 180°</span></div>
+          <div class="sp"><span class="sp-l" data-i18n="sp-features">Особенности</span><span class="sp-v" data-i18n="rf-3">Сауна · хост</span></div>
+        </div>
+        <div class="room-amenities">
+          <span class="am"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12 H21 M12 3 V21"/></svg>Вид 180°</span>
+          <span class="am"><svg viewBox="0 0 24 24"><path d="M6 8 a3 3 0 0 1 12 0 v8 H6 Z M10 16 v2 M14 16 v2"/></svg>Частная сауна</span>
+          <span class="am"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 20 a7 7 0 0 1 14 0"/></svg>Персональный хост</span>
+        </div>
+        <div class="room-cta-row">
+          <div class="room-price"><span class="from" data-i18n="sp-from">От</span>₽ 92 000 <span class="small" style="font-family:var(--sans);font-size:12px;color:var(--grey)" data-i18n="per-night">/ ночь</span></div>
+          <a href="#booking" class="btn btn-primary" data-i18n="cta-check">Проверить наличие</a>
+          <button class="btn-ghost" data-gallery="3" data-i18n="cta-gallery">Галерея <span class="arrow">→</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SEASONS ============ -->
+<section id="seasons" class="section h-id">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="left">
+        <div class="num-marker" data-i18n="seasons-eyebrow">04 · Сезоны</div>
+        <h2 class="reveal"><span data-i18n="seasons-h-1">Четыре горы</span> <span class="it" data-i18n="seasons-h-2">в одном месте.</span></h2>
+      </div>
+      <div class="right reveal"><p data-i18n="seasons-intro">MOUNT меняется мягче, чем кажется. Снег, вода, цвет, тишина — каждый сезон просит своего ритма и своей длины пребывания.</p></div>
+    </div>
+  </div>
+
+  <div class="season-stage" id="season-stage">
+    <div class="season-img active" data-season="winter"><img src="/demos/mount/images/season-winter.png" alt="Зимний пейзаж Кавказа"></div>
+    <div class="season-img" data-season="spring"><img src="/demos/mount/images/season-spring.png" alt="Весенний пейзаж Кавказа с водопадом"></div>
+    <div class="season-img" data-season="summer"><img src="/demos/mount/images/season-summer.png" alt="Летний альпийский луг Кавказа"></div>
+    <div class="season-img" data-season="autumn"><img src="/demos/mount/images/season-autumn.png" alt="Осенний золотой лес Кавказа"></div>
+
+    <div class="season-content">
+      <h3 class="s-name" id="s-name"><span data-i18n="se-winter">Зима</span></h3>
+      <p class="s-atm" id="s-atm" data-i18n="se-winter-atm">Молчаливая белизна. Дороги тише, воздух суше, огонь ярче.</p>
+      <div class="season-meta">
+        <div class="sm"><span class="sm-l" data-i18n="se-temp">Температура</span><span class="sm-v" id="s-temp">−8 … +2°</span></div>
+        <div class="sm"><span class="sm-l" data-i18n="se-stay">Рекомендуем</span><span class="sm-v" id="s-stay">3–4 ночи</span></div>
+        <div class="sm"><span class="sm-l" data-i18n="se-pack">Соберите</span><span class="sm-v" id="s-pack" data-i18n="se-winter-pack">Тёплая обувь, layers</span></div>
+      </div>
+      <div class="season-exps" id="s-exps"></div>
+    </div>
+  </div>
+
+  <div class="wrap" style="padding-top:0">
+    <div class="season-tabs" role="tablist" aria-label="Выбор сезона">
+      <button class="season-tab active" data-stab="winter" role="tab" aria-selected="true"><span data-i18n="se-winter">Зима</span><span class="st-temp">−8 … +2°</span></button>
+      <button class="season-tab" data-stab="spring" role="tab" aria-selected="false"><span data-i18n="se-spring">Весна</span><span class="st-temp">+4 … +14°</span></button>
+      <button class="season-tab" data-stab="summer" role="tab" aria-selected="false"><span data-i18n="se-summer">Лето</span><span class="st-temp">+16 … +24°</span></button>
+      <button class="season-tab" data-stab="autumn" role="tab" aria-selected="false"><span data-i18n="se-autumn">Осень</span><span class="st-temp">+6 … +16°</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCES ============ -->
+<section id="experiences" class="section h-id">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="left">
+        <div class="num-marker" data-i18n="exp-eyebrow">05 · Впечатления</div>
+        <h2 class="reveal"><span data-i18n="exp-h-1">Кураторские</span> <span class="it" data-i18n="exp-h-2">прогулки.</span></h2>
+      </div>
+      <div class="right reveal"><p data-i18n="exp-intro">Не экскурсии, а медленные маршруты, собранные отелем вместе с местными проводниками. Каждый можно добавить к проживанию.</p></div>
+    </div>
+
+    <div class="exp-grid">
+      <div class="exp-card exp-c1 reveal-img">
+        <div class="exp-img"><img src="/demos/mount/images/hiking.png" alt="Прогулка по горным долинам" loading="lazy"></div>
+        <div class="exp-meta">
+          <div class="e-n" data-i18n="exp-01">01 · Полдня</div>
+          <div class="e-t" data-i18n="exp-01-t">Прогулка по горным долинам</div>
+          <div class="e-d" data-i18n="exp-01-d">Проводник ведёт по тихой тропе вдоль реки к смотровой точке над долиной.</div>
+        </div>
+      </div>
+      <div class="exp-card exp-c2 reveal-img">
+        <div class="exp-img"><img src="/demos/mount/images/season-autumn.png" alt="Каменные поселения" loading="lazy"></div>
+        <div class="exp-meta">
+          <div class="e-n" data-i18n="exp-02">02 · День</div>
+          <div class="e-t" data-i18n="exp-02-t">Каменные поселения</div>
+          <div class="e-d" data-i18n="exp-02-d">Маршрут к историческим каменным башням и поселениям региона с рассказом о местной культуре.</div>
+        </div>
+      </div>
+      <div class="exp-card exp-c3 reveal-img">
+        <div class="exp-img"><img src="/demos/mount/images/season-summer.png" alt="Завтрак над облаками" loading="lazy"></div>
+        <div class="exp-meta">
+          <div class="e-n" data-i18n="exp-03">03 · Утро</div>
+          <div class="e-t" data-i18n="exp-03-t">Завтрак над облаками</div>
+          <div class="e-d" data-i18n="exp-03-d">Ранний подъём к гребню, где утренний туман ложится ниже вас. Завтрак на открытом воздухе.</div>
+        </div>
+      </div>
+      <div class="exp-card exp-c4 reveal-img">
+        <div class="exp-img"><img src="/demos/mount/images/season-spring.png" alt="Пикник у горной реки" loading="lazy"></div>
+        <div class="exp-meta">
+          <div class="e-n" data-i18n="exp-04">04 · Полдня</div>
+          <div class="e-t" data-i18n="exp-04-t">Пикник у горной реки</div>
+          <div class="e-d" data-i18n="exp-04-d">Частный пикник на берегу горной реки с местными сырами, хлебом и травяным чаем.</div>
+        </div>
+      </div>
+      <div class="exp-card exp-c5 reveal-img">
+        <div class="exp-img"><img src="/demos/mount/images/season-winter.png" alt="Звёздное небо" loading="lazy"></div>
+        <div class="exp-meta">
+          <div class="e-n" data-i18n="exp-05">05 · Вечер</div>
+          <div class="e-t" data-i18n="exp-05-t">Наблюдение за звёздами</div>
+          <div class="e-d" data-i18n="exp-05-d">Тёмное небо на высоте без городского света. Телескоп и тёплый чай на террасе.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESTAURANT ============ -->
+<section id="restaurant" class="section h-id">
+  <div class="wrap">
+    <div class="rest-grid">
+      <div class="rest-media">
+        <div class="rest-main reveal-img">
+          <img src="/demos/mount/images/restaurant.png" alt="Панорамный ресторан KÆSAG на закате" loading="lazy">
+        </div>
+        <div class="rest-sub">
+          <div class="rs reveal-img"><img src="/demos/mount/images/dish-detail.png" alt="Сезонное блюдо: форель, травы, овощи" loading="lazy"></div>
+          <div class="rs reveal-img"><img src="/demos/mount/images/material-oak.png" alt="Деталь: дуб, бронза, лён" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="rest-content">
+        <div class="eyebrow" data-i18n="rest-eyebrow">06 · Ресторан</div>
+        <h2 class="reveal"><span data-i18n="rest-h-1">Ландшафт,</span> <span class="it" data-i18n="rest-h-2">поданный медленно.</span></h2>
+        <div class="rest-name">KÆSAG</div>
+        <p class="reveal" data-i18n="rest-p1">Сезонная кухня, которая читает ингредиенты и традиции Кавказа через современный язык. Местная форель, травы с луга, горный мёд, заквасочный хлеб и овощи с ближних полей.</p>
+        <p class="reveal" data-i18n="rest-p2">Открытый огонь и панорамное остекление. Завтрак начинается с тишины, ужин — с долгой дегустации.</p>
+        <div class="chef-block reveal">
+          <div class="cb-l" data-i18n="rest-chef-l">Шеф</div>
+          <div class="cb-n" data-i18n="rest-chef-n">Аслан Касаев</div>
+          <div class="cb-q" data-i18n="rest-chef-q">«Я не придумываю меню — я слушаю, что приносит гора в этом месяце».</div>
+        </div>
+        <div class="menu-toggle-row">
+          <button class="btn-ghost-light" id="menu-open" data-i18n="rest-menu">Сезонное меню <span class="arrow">→</span></button>
+          <span class="meta" data-i18n="rest-menu-note">Дегустационный сет · 7 подач</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WELLNESS ============ -->
+<section id="wellness" class="section h-id bg-mist">
+  <div class="wrap">
+    <div class="well-grid">
+      <div class="well-content">
+        <div class="eyebrow" data-i18n="well-eyebrow">07 · Спа</div>
+        <h2 class="reveal"><span data-i18n="well-h-1">Тепло</span> <span class="it" data-i18n="well-h-2">в масштабе горы.</span></h2>
+        <p class="reveal" data-i18n="well-p">Противоположность холодному воздуху снаружи. Камень, пар, вода и лён — медленно и в тишине, в часы, закрытые для остальных гостей по запросу.</p>
+        <div class="well-list">
+          <div class="well-item reveal"><span class="wi-n">01</span><span class="wi-t" data-i18n="well-1">Каменная сауна</span><span class="wi-d" data-i18n="well-1-d">Местный камень, мягкий пар</span></div>
+          <div class="well-item reveal"><span class="wi-n">02</span><span class="wi-t" data-i18n="well-2">Паровая</span><span class="wi-d" data-i18n="well-2-d">Травы с луга</span></div>
+          <div class="well-item reveal"><span class="wi-n">03</span><span class="wi-t" data-i18n="well-3">Термальный бассейн</span><span class="wi-d" data-i18n="well-3-d">Открытый, с видом</span></div>
+          <div class="well-item reveal"><span class="wi-n">04</span><span class="wi-t" data-i18n="well-4">Терраса с подогревом</span><span class="wi-d" data-i18n="well-4-d">Холодный воздух, тёплый камень</span></div>
+          <div class="well-item reveal"><span class="wi-n">05</span><span class="wi-t" data-i18n="well-5">Массаж и ритуалы</span><span class="wi-d" data-i18n="well-5-d">По записи</span></div>
+          <div class="well-item reveal"><span class="wi-n">06</span><span class="wi-t" data-i18n="well-6">Частные часы</span><span class="wi-d" data-i18n="well-6-d">Индивидуально</span></div>
+        </div>
+      </div>
+      <div class="well-media">
+        <div class="wm-tall reveal-img"><img src="/demos/mount/images/spa.png" alt="Каменная сауна MOUNT" loading="lazy"></div>
+        <div class="wm-stack">
+          <div class="wm reveal-img"><img src="/demos/mount/images/pool.png" alt="Термальный бассейн на холодном воздухе" loading="lazy"></div>
+          <div class="wm reveal-img"><img src="/demos/mount/images/room-bathroom.png" alt="Ванная с камнем и видом на горы" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ARCHITECTURE ============ -->
+<section id="architecture" class="section h-id">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="left">
+        <div class="num-marker" data-i18n="arch-eyebrow">08 · Архитектура</div>
+        <h2 class="reveal"><span data-i18n="arch-h-1">Встроен в контур,</span> <span class="it" data-i18n="arch-h-2">не поставлен над ним.</span></h2>
+      </div>
+      <div class="right reveal"><p data-i18n="arch-intro">MOUNT повторяет уклон склона. Объёмы ступенчато уходят вниз, удерживая юго-восточную ориентацию для мягкого утреннего света и естественной тени во второй половине дня.</p></div>
+    </div>
+
+    <div class="arch-grid">
+      <div class="arch-diagram">
+        <div class="ad-img reveal-img"><img src="/demos/mount/images/exterior-bluehour.png" alt="Отель MOUNT в сумерках" loading="lazy"></div>
+        <div class="arch-plan reveal">
+          <div class="ap-l"><span data-i18n="arch-plan-l">Разрез по склону</span><span>1:200</span></div>
+          <svg viewBox="0 0 360 180" preserveAspectRatio="none">
+            <path class="topo-line" d="M0 60 Q120 40 240 70 T360 90" style="opacity:.3"/>
+            <path class="topo-line" d="M0 90 Q120 70 240 100 T360 120" style="opacity:.3"/>
+            <path class="topo-line" d="M0 120 Q120 100 240 130 T360 150" style="opacity:.3"/>
+            <path d="M0 150 L360 60" stroke="var(--forest)" stroke-width="1" fill="none" opacity=".4"/>
+            <g stroke="var(--charcoal)" stroke-width="1.4" fill="none">
+              <rect x="60" y="95" width="50" height="22"/>
+              <rect x="120" y="108" width="60" height="24"/>
+              <rect x="195" y="122" width="55" height="22"/>
+              <rect x="270" y="138" width="60" height="20"/>
+            </g>
+            <g fill="var(--oak-deep)" opacity=".7">
+              <circle cx="85" cy="106" r="2"/><circle cx="150" cy="120" r="2"/><circle cx="222" cy="133" r="2"/><circle cx="300" cy="148" r="2"/>
+            </g>
+            <text x="10" y="170" class="loc-label" style="font-size:8px">1680м</text>
+            <text x="330" y="55" class="loc-label" style="font-size:8px">1540м</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="arch-content">
+        <p class="reveal" data-i18n="arch-p1">Несущие стены — из <strong>местного плитняка</strong>, добытого в радиусе 40 км. Дуб — сушеный на воздухе. Бронза — матовая, чтобы не бликовать на закате.</p>
+        <p class="reveal" data-i18n="arch-p2">Остекление собрано в тонких бронзовых рамах, которые почти исчезают в сумерках, когда изнутри загорается тёплый свет.</p>
+        <div class="arch-principles">
+          <div class="arch-principle reveal"><div class="ap-n">01</div><div class="ap-t" data-i18n="arch-pr1-t">Пассивная ориентация</div><div class="ap-d" data-i18n="arch-pr1-d">Юго-восток — мягкий утренний свет, тень после полудня.</div></div>
+          <div class="arch-principle reveal"><div class="ap-n">02</div><div class="ap-t" data-i18n="arch-pr2-t">Естественное затенение</div><div class="ap-d" data-i18n="arch-pr2-d">Глубокие каменные карнизы и террасы.</div></div>
+          <div class="arch-principle reveal"><div class="ap-n">03</div><div class="ap-t" data-i18n="arch-pr3-t">Местный камень</div><div class="ap-d" data-i18n="arch-pr3-d">Плитняк в радиусе 40 км, минимальная обработка.</div></div>
+          <div class="arch-principle reveal"><div class="ap-n">04</div><div class="ap-t" data-i18n="arch-pr4-t">Низкий силуэт</div><div class="ap-d" data-i18n="arch-pr4-d">Объёмы читаются только вблизи, не доминируют над ландшафтом.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="material-strip">
+      <div class="mat mat-stone reveal"><div class="mat-swatch"></div><div class="mat-l" data-i18n="mat-stone-l">Камень</div><div class="mat-n" data-i18n="mat-stone-n">Местный плитняк</div></div>
+      <div class="mat mat-oak reveal"><div class="mat-swatch"></div><div class="mat-l" data-i18n="mat-oak-l">Дерево</div><div class="mat-n" data-i18n="mat-oak-n">Тёплый дуб</div></div>
+      <div class="mat mat-bronze reveal"><div class="mat-swatch"></div><div class="mat-l" data-i18n="mat-bronze-l">Металл</div><div class="mat-n" data-i18n="mat-bronze-n">Матовая бронза</div></div>
+      <div class="mat mat-linen reveal"><div class="mat-swatch"></div><div class="mat-l" data-i18n="mat-linen-l">Ткань</div><div class="mat-n" data-i18n="mat-linen-n">Натуральный лён</div></div>
+      <div class="mat mat-glass reveal"><div class="mat-swatch"></div><div class="mat-l" data-i18n="mat-glass-l">Стекло</div><div class="mat-n" data-i18n="mat-glass-n">Панорамное</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOCATION ============ -->
+<section id="location" class="section h-id">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="left">
+        <div class="num-marker" data-i18n="loc-eyebrow">09 · Локация</div>
+        <h2 class="reveal"><span data-i18n="loc-h-1">Северная Осетия,</span> <span class="it" data-i18n="loc-h-2">сверху.</span></h2>
+      </div>
+      <div class="right reveal"><p data-i18n="loc-intro">Дорога к MOUNT — часть впечатления. Подъём идёт по серпантину через лес и перевал, после которого открывается долина.</p></div>
+    </div>
+
+    <div class="loc-grid">
+      <div class="loc-map reveal">
+        <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet" aria-label="Карта региона">
+          <!-- topo contours -->
+          <g class="loc-topo">
+            <path d="M-20 120 Q120 80 220 120 T440 130"/>
+            <path d="M-20 150 Q120 110 220 150 T440 160"/>
+            <path d="M-20 180 Q120 140 220 180 T440 190"/>
+            <path d="M-20 210 Q120 170 220 210 T440 220"/>
+            <path d="M-20 240 Q120 200 220 240 T440 250"/>
+            <path d="M-20 270 Q120 230 220 270 T440 280"/>
+            <path d="M-20 300 Q120 260 220 300 T440 310"/>
+          </g>
+          <!-- landmass -->
+          <path class="loc-land" d="M40 60 Q120 40 200 70 Q280 90 340 60 L350 340 Q280 360 200 340 Q120 320 50 350 Z"/>
+          <!-- river -->
+          <path class="loc-water" d="M320 30 Q300 120 270 180 Q240 240 200 300 Q180 340 170 380" stroke="#bccdd6" stroke-width="3" fill="none" opacity=".7"/>
+          <!-- region contour -->
+          <path class="loc-contour" d="M60 80 Q140 60 220 90 Q300 110 350 80 M60 80 Q70 180 90 250 Q120 320 160 360"/>
+          <!-- route from airport to hotel -->
+          <path class="loc-route" d="M70 340 Q120 280 160 220 Q190 170 220 130 Q240 110 250 100"/>
+          <!-- airport pin -->
+          <circle cx="70" cy="340" r="4" class="loc-pin" opacity=".6"/>
+          <text x="78" y="344" class="loc-label">Аэропорт</text>
+          <!-- hotel pin (destination) -->
+          <circle cx="250" cy="100" r="14" class="loc-pin-glow"/>
+          <circle cx="250" cy="100" r="5" class="loc-pin"/>
+          <text x="260" y="104" class="loc-label" style="font-weight:500;fill:var(--charcoal)">MOUNT</text>
+          <!-- labels -->
+          <text x="180" y="160" class="loc-label" data-i18n="map-valley">Долина</text>
+          <text x="300" y="200" class="loc-label" data-i18n="map-ridge">Гребень</text>
+          <text x="40" y="40" class="loc-label" data-i18n="map-n">С·С</text>
+          <text x="360" y="390" class="loc-label" data-i18n="map-s">Ю·В</text>
+        </svg>
+      </div>
+
+      <div class="loc-content">
+        <p class="reveal" data-i18n="loc-p">Отель стоит на восточном склоне, в часе серпантина от ближайшего аэропорта. Зимой участок дороги может требовать полноприводного трансфера — мы встречаем гостей и довозим до двери.</p>
+        <div class="loc-info">
+          <div class="loc-row reveal"><span class="lr-l" data-i18n="loc-airport">Аэропорт</span><span class="lr-v">Беслан (OGZ) <span class="lr-note" data-i18n="loc-airport-note">Ближайший · по запросу встречаем</span></span></div>
+          <div class="loc-row reveal"><span class="lr-l" data-i18n="loc-transfer">Трансфер</span><span class="lr-v" data-i18n="loc-transfer-v">~ 1 ч 20 мин <span class="lr-note">Частный, включён в проживание от 3 ночей</span></span></div>
+          <div class="loc-row reveal"><span class="lr-l" data-i18n="loc-heli">Вертолёт</span><span class="lr-v" data-i18n="loc-heli-v">По запросу <span class="lr-note" data-i18n="loc-heli-note">При наличии условий</span></span></div>
+          <div class="loc-row reveal"><span class="lr-l" data-i18n="loc-road">Дорога</span><span class="lr-v" data-i18n="loc-road-v">Серпантин, асфальт + грунт <span class="lr-note" data-i18n="loc-road-note">Зимой — полный привод</span></span></div>
+          <div class="loc-row reveal"><span class="lr-l" data-i18n="loc-access">Доступ</span><span class="lr-v" data-i18n="loc-access-v">Круглогодично <span class="lr-note" data-i18n="loc-access-note">Зависит от погоды — уточняйте заранее</span></span></div>
+        </div>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center">
+          <a href="#booking" class="btn btn-primary" data-i18n="loc-cta">Спланировать путь <span class="arrow">→</span></a>
+          <span class="meta" data-i18n="loc-note">Информация о трансфере — ориентировочная</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ JOURNAL ============ -->
+<section id="journal" class="section h-id">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="left">
+        <div class="num-marker" data-i18n="journal-eyebrow">10 · Журнал</div>
+        <h2 class="reveal"><span data-i18n="journal-h-1">Медленные</span> <span class="it" data-i18n="journal-h-2">тексты.</span></h2>
+      </div>
+      <div class="right reveal"><p data-i18n="journal-intro">Заметки о месте, архитектуре и горах — для тех, кто готовит пребывание заранее.</p></div>
+    </div>
+
+    <div class="journal-grid">
+      <article class="j-card j-c1 reveal">
+        <div class="j-img"><img src="/demos/mount/images/walking-mist.png" alt="Тишина в Северной Осетии" loading="lazy"></div>
+        <div class="j-cat"><span data-i18n="j-1-c">Гид</span><span class="j-date">· 6 мин</span></div>
+        <h3 data-i18n="j-1-t">Тихое путешествие по Северной Осетии</h3>
+        <p class="j-ex" data-i18n="j-1-d">Куда ехать, когда выключить телефон и не жалеть. Маршруты без толпы и точки, где гору слышно лучше всего.</p>
+        <div class="j-read"><span data-i18n="j-read">Читать</span><span class="arrow">→</span></div>
+      </article>
+
+      <article class="j-card j-c2 reveal">
+        <div class="j-img"><img src="/demos/mount/images/exterior-bluehour.png" alt="Архитектура и высота" loading="lazy"></div>
+        <div class="j-cat"><span data-i18n="j-2-c">Архитектура</span><span class="j-date">· 8 мин</span></div>
+        <h3 data-i18n="j-2-t">Архитектура, сформированная высотой</h3>
+        <p class="j-ex" data-i18n="j-2-d">Как контур склона диктует план, а камень диктует свет. Разговор о проектировании MOUNT.</p>
+        <div class="j-read"><span data-i18n="j-read">Читать</span><span class="arrow">→</span></div>
+      </article>
+
+      <article class="j-card j-c3 reveal">
+        <div class="j-img"><img src="/demos/mount/images/reading.png" alt="Четыре сезона" loading="lazy"></div>
+        <div class="j-cat"><span data-i18n="j-3-c">Сезоны</span><span class="j-date">· 5 мин</span></div>
+        <h3 data-i18n="j-3-t">Четыре сезона в MOUNT</h3>
+        <p class="j-ex" data-i18n="j-3-d">Чем один и тот же склон отличается в январе и в сентябре — и когда ехать за чем.</p>
+        <div class="j-read"><span data-i18n="j-read">Читать</span><span class="arrow">→</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section id="reviews" class="section h-id">
+  <div class="wrap wrap-tight">
+    <div class="eyebrow center no-line" style="justify-content:center;margin-bottom:40px;color:var(--sage)" data-i18n="rev-eyebrow">11 · Впечатления гостей</div>
+    <div class="rev-slider" id="rev-slider">
+      <div class="rev-slide active" data-rev="0">
+        <p class="rev-quote"><span class="r-mark">«</span><span data-i18n="rev-1-q">Тишина здесь физическая. За три дня я забыл, как звучит мой телефон.</span><span class="r-mark">»</span></p>
+        <div class="rev-author" data-i18n="rev-1-a">Ирина М. · Москва</div>
+      </div>
+      <div class="rev-slide" data-rev="1" style="display:none">
+        <p class="rev-quote"><span class="r-mark">«</span><span data-i18n="rev-2-q">Архитектура не спорит с горой. Она просто стоит рядом — и этого достаточно.</span><span class="r-mark">»</span></p>
+        <div class="rev-author" data-i18n="rev-2-a">Дмитрий К. · Санкт-Петербург</div>
+      </div>
+      <div class="rev-slide" data-rev="2" style="display:none">
+        <p class="rev-quote"><span class="r-mark">«</span><span data-i18n="rev-3-q">Ужин длился три часа, и я не заметил. Ландшафт на тарелке — не маркетинг, а правда.</span><span class="r-mark">»</span></p>
+        <div class="rev-author" data-i18n="rev-3-a">Анна и Сергей · Казань</div>
+      </div>
+    </div>
+    <div class="rev-dots" id="rev-dots" role="tablist">
+      <button class="rev-dot active" data-rdot="0" role="tab" aria-label="Отзыв 1"></button>
+      <button class="rev-dot" data-rdot="1" role="tab" aria-label="Отзыв 2"></button>
+      <button class="rev-dot" data-rdot="2" role="tab" aria-label="Отзыв 3"></button>
+    </div>
+    <div class="rev-note" data-i18n="rev-note">Отзывы — концептуальные placeholders</div>
+  </div>
+</section>
+
+<!-- ============ BOOKING ============ -->
+<section id="booking" class="section h-id bg-ivory">
+  <div class="wrap">
+    <div class="book-grid">
+      <div class="book-content">
+        <div class="eyebrow" data-i18n="book-eyebrow">12 · Бронирование</div>
+        <h2 class="reveal"><span data-i18n="book-h-1">Проверьте</span> <span class="it" data-i18n="book-h-2">наличие мест.</span></h2>
+        <p class="reveal" data-i18n="book-p">Выберите даты и тип номера. Мы покажем ориентировочную доступность — финальное подтверждение приходит от хоста в течение нескольких часов.</p>
+        <div class="book-points">
+          <div class="book-point reveal"><svg viewBox="0 0 24 24"><path d="M5 12 L10 17 L19 7"/></svg><span data-i18n="book-pt-1">Трансфер включён при проживании от 3 ночей</span></div>
+          <div class="book-point reveal"><svg viewBox="0 0 24 24"><path d="M5 12 L10 17 L19 7"/></svg><span data-i18n="book-pt-2">Гибкая отмена до 14 дней до заезда</span></div>
+          <div class="book-point reveal"><svg viewBox="0 0 24 24"><path d="M5 12 L10 17 L19 7"/></svg><span data-i18n="book-pt-3">Завтрак включён во все категории</span></div>
+          <div class="book-point reveal"><svg viewBox="0 0 24 24"><path d="M5 12 L10 17 L19 7"/></svg><span data-i18n="book-pt-4">Бесплатно — дети до 6 лет</span></div>
+        </div>
+      </div>
+
+      <form class="book-form reveal" id="book-form" novalidate>
+        <div class="bf-head">
+          <div class="bf-t" data-i18n="book-form-t">Проверить наличие</div>
+          <div class="bf-l" data-i18n="book-form-l">Демо-режим</div>
+        </div>
+        <div class="bf-row">
+          <div class="bf-field" id="ff-arrival">
+            <label for="bf-arrival" data-i18n="f-arrival">Заезд</label>
+            <input type="date" id="bf-arrival" required>
+            <span class="bf-err" data-i18n="err-date">Выберите дату</span>
+          </div>
+          <div class="bf-field" id="ff-departure">
+            <label for="bf-departure" data-i18n="f-departure">Выезд</label>
+            <input type="date" id="bf-departure" required>
+            <span class="bf-err" data-i18n="err-date">Выберите дату</span>
+          </div>
+        </div>
+        <div class="bf-row">
+          <div class="bf-field">
+            <label data-i18n="f-guests">Гости</label>
+            <div class="bf-guest">
+              <button type="button" id="g-minus" aria-label="Меньше гостей">−</button>
+              <span class="bf-gv" id="bf-guests">2</span>
+              <button type="button" id="g-plus" aria-label="Больше гостей">+</button>
+            </div>
+          </div>
+          <div class="bf-field" id="ff-room">
+            <label for="bf-room" data-i18n="f-room">Тип номера</label>
+            <select id="bf-room">
+              <option value="any" data-i18n="room-any">Любой</option>
+              <option value="0" data-i18n="rn-0">Valley Suite</option>
+              <option value="1" data-i18n="rn-1">Ridge Suite</option>
+              <option value="2" data-i18n="rn-2">Stone House</option>
+              <option value="3" data-i18n="rn-3">Panorama Residence</option>
+            </select>
+          </div>
+        </div>
+        <div class="bf-row single">
+          <div class="bf-field">
+            <label for="bf-promo" data-i18n="f-promo">Промокод (необязательно)</label>
+            <input type="text" id="bf-promo" placeholder="—">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary bf-submit" data-i18n="cta-check">Проверить наличие <span class="arrow">→</span></button>
+        <div class="bf-result" id="bf-result" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL ============ -->
+<section id="final" class="h-id">
+  <div class="final-media">
+    <img src="/demos/mount/images/hero-dawn.png" alt="Утренний туман в долине Кавказа" loading="lazy">
+  </div>
+  <div class="final-content">
+    <div class="f-label" data-i18n="final-label">Северная Осетия · Кавказ</div>
+    <h2><span data-i18n="final-h-1">Некоторые места дают больше.</span><br><span class="it" data-i18n="final-h-2">MOUNT оставляет меньше нести.</span></h2>
+    <a href="#booking" class="btn btn-light" data-i18n="final-cta">Спланировать пребывание <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="foot-logo">MOUNT</div>
+        <p data-i18n="foot-desc">Уединённый архитектурный отель на склоне в Северной Осетии–Алании. Камень, тишина, горы.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram" onclick="event.preventDefault();toast('Соцсеть — демонстрационная ссылка')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="Telegram" onclick="event.preventDefault();toast('Telegram — демонстрационная ссылка')"><svg viewBox="0 0 24 24"><path d="M21 5 L3 12 L9 14 L11 19 L14 15 L18 18 Z"/></svg></a>
+          <a href="#" aria-label="Pinterest" onclick="event.preventDefault();toast('Pinterest — демонстрационная ссылка')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M11 8 a4 4 0 1 0 2 8 M12 8 v8"/></svg></a>
+        </div>
+      </div>
+
+      <div class="foot-col">
+        <h4 data-i18n="foot-nav">Навигация</h4>
+        <ul>
+          <li><a href="#rooms" data-i18n="foot-nav-1">Номера</a></li>
+          <li><a href="#experiences" data-i18n="foot-nav-2">Впечатления</a></li>
+          <li><a href="#restaurant" data-i18n="foot-nav-3">Ресторан</a></li>
+          <li><a href="#wellness" data-i18n="foot-nav-4">Спа</a></li>
+          <li><a href="#architecture" data-i18n="foot-nav-5">Архитектура</a></li>
+          <li><a href="#journal" data-i18n="foot-nav-6">Журнал</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h4 data-i18n="foot-contact-h">Контакты</h4>
+        <div class="foot-contact">
+          <div class="fc-row"><span data-i18n="foot-phone">Телефон</span>+7 (000) 000-00-00</div>
+          <div class="fc-row"><span data-i18n="foot-email">Почта</span>stay@mount.example</div>
+          <div class="fc-row"><span data-i18n="foot-addr">Адрес</span><span data-i18n="foot-addr-v">Северная Осетия–Алания, РФ</span></div>
+          <div class="fc-row"><span data-i18n="foot-hours">Ресепшн</span><span data-i18n="foot-hours-v">Круглосуточно</span></div>
+        </div>
+        <div class="newsletter">
+          <div class="nl-l" data-i18n="foot-nl">Письмо раз в сезон</div>
+          <form class="nl-form" id="nl-form">
+            <input type="email" id="nl-email" placeholder="email" aria-label="Email для рассылки" required>
+            <button type="submit" aria-label="Подписаться"><span class="arrow">→</span></button>
+          </form>
+          <div class="nl-msg" id="nl-msg" data-i18n="foot-nl-ok">Спасибо. Письмо раз в сезон — и только.</div>
+        </div>
+      </div>
+
+      <div class="foot-col">
+        <h4 data-i18n="foot-legal">Документы</h4>
+        <ul>
+          <li><a href="#" onclick="event.preventDefault();toast('Демонстрационная страница')" data-i18n="foot-legal-1">Политика конфиденциальности</a></li>
+          <li><a href="#" onclick="event.preventDefault();toast('Демонстрационная страница')" data-i18n="foot-legal-2">Условия</a></li>
+          <li><a href="#" onclick="event.preventDefault();toast('Демонстрационная страница')" data-i18n="foot-legal-3">Правила бронирования</a></li>
+          <li><a href="#" onclick="event.preventDefault();toast('Демонстрационная страница')" data-i18n="foot-legal-4">Cookie</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <div class="fb-copy">© 2026 MOUNT · <span data-i18n="foot-rights">Все права защищены. Концептуальный проект.</span></div>
+      <div class="fb-links">
+        <div class="lang-switch" role="group" aria-label="Язык">
+          <button data-lang="ru" class="active" aria-pressed="true">RU</button>
+          <span class="sep">/</span>
+          <button data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a href="#hero" data-i18n="foot-top">Наверх ↑</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ MENU MODAL ============ -->
+<div class="modal" id="menu-modal" role="dialog" aria-modal="true" aria-labelledby="menu-modal-title">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card">
+    <button class="modal-close" data-close aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6 L18 18 M18 6 L6 18"/></svg></button>
+    <div class="modal-body">
+      <div class="modal-eyebrow" data-i18n="rest-eyebrow">06 · Ресторан</div>
+      <h3 class="modal-title" id="menu-modal-title">KÆSAG</h3>
+      <p class="modal-sub" data-i18n="menu-sub">Дегустационный сет из семи подач. Меню меняется по сезону и доступности. Указанные цены — ориентировочные.</p>
+
+      <div class="menu-course">
+        <div class="mc-h"><span class="mc-n" data-i18n="menu-c1">Холодные подачи</span><span class="mc-l" data-i18n="menu-start">Старт</span></div>
+        <div class="menu-item"><div class="mi-l"><div class="mi-n" data-i18n="menu-1-n">Тартар из горной форели</div><div class="mi-d" data-i18n="menu-1-d">Огуречник, укроп, масло лука-порея</div></div><div class="mi-p">₽ 1 200</div></div>
+        <div class="menu-item"><div class="mi-l"><div class="mi-n" data-i18n="menu-2-n">Сыр с луговыми травами</div><div class="mi-d" data-i18n="menu-2-d">Заквасочный хлеб, мёд, грецкий орех</div></div><div class="mi-p">₽ 900</div></div>
+        <div class="menu-item"><div class="mi-l"><div class="mi-n" data-i18n="menu-3-n">Корнеплоды с песто</div><div class="mi-d" data-i18n="menu-3-d">Дайкон, морковь, зелёный базилик</div></div><div class="mi-p">₽ 850</div></div>
+      </div>
+
+      <div class="menu-course">
+        <div class="mc-h"><span class="mc-n" data-i18n="menu-c2">Тёплое</span><span class="mc-l" data-i18n="menu-main">Основное</span></div>
+        <div class="menu-item"><div class="mi-l"><div class="mi-n" data-i18n="menu-4-n">Форель на открытом огне</div><div class="mi-d" data-i18n="menu-4-d">Копчёное масло, молодая зелень</div></div><div class="mi-p">₽ 2 400</div></div>
+        <div class="menu-item"><div class="mi-l"><div class="mi-n" data-i18n="menu-5-n">Тушёная оленина</div><div class="mi-d" data-i18n="menu-5-d">Можжевельник, корень, ягода</div></div><div class="mi-p">₽ 2 800</div></div>
+        <div class="menu-item"><div class="mi-l"><div class="mi-n" data-i18n="menu-6-n">Жареные корнеплоды</div><div class="mi-d" data-i18n="menu-6-d">Пастернак, топинамбур, пепел</div></div><div class="mi-p">₽ 1 600</div></div>
+      </div>
+
+      <div class="menu-course">
+        <div class="mc-h"><span class="mc-n" data-i18n="menu-c3">Сладкое</span><span class="mc-l" data-i18n="menu-dessert">Десерт</span></div>
+        <div class="menu-item"><div class="mi-l"><div class="mi-n" data-i18n="menu-7-n">Яблоко и горный мёд</div><div class="mi-d" data-i18n="menu-7-d">Карамель, тимьян</div></div><div class="mi-p">₽ 950</div></div>
+        <div class="menu-item"><div class="mi-l"><div class="mi-n" data-i18n="menu-8-n">Сорбет из луговых ягод</div><div class="mi-d" data-i18n="menu-8-d">Можжевельник, шиповник</div></div><div class="mi-p">₽ 700</div></div>
+      </div>
+
+      <div class="menu-foot" data-i18n="menu-foot">Дегустационный сет — ₽ 7 800 на гостя. Винное сопровождение — по запросу. Информация о блюдах — ориентировочная и отражает сезонную концепцию кухни.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ GALLERY MODAL ============ -->
+<div class="modal gallery-modal" id="gallery-modal" role="dialog" aria-modal="true" aria-labelledby="gallery-title">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card">
+    <button class="gallery-close" data-close aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6 L18 18 M18 6 L6 18"/></svg></button>
+    <div class="gallery-info">
+      <div class="gi-t" id="gallery-title">Valley Suite</div>
+      <div class="gi-c" id="gallery-count">01 / 04</div>
+    </div>
+    <div class="gallery-stage" id="gallery-stage"></div>
+    <button class="gallery-nav prev" id="g-prev" aria-label="Предыдущее"><svg viewBox="0 0 24 24" fill="none"><path d="M15 5 L9 12 L15 19"/></svg></button>
+    <button class="gallery-nav next" id="g-next" aria-label="Следующее"><svg viewBox="0 0 24 24" fill="none"><path d="M9 5 L15 12 L9 19"/></svg></button>
+    <div class="gallery-thumbs" id="gallery-thumbs"></div>
+  </div>
+</div>
+
+<!-- ============ TOAST ============ -->
+<div id="toast" role="status" aria-live="polite"></div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="/demos/mount/js/mount.js"></script>
+</body>
+</html>

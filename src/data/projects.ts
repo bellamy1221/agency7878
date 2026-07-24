@@ -1,14 +1,29 @@
-export type ProjectStatus = "Коммерческий проект" | "Концепт" | "Эксперимент";
+export type ProjectStatus =
+  | "Концепт"
+  | "Реализованный проект"
+  | "Эксперимент";
 
-export type ArchiveCategory = "Сайты" | "Telegram" | "Интерфейсы" | "Эксперименты";
+export type ArchiveCategory =
+  | "Сайты"
+  | "Мини-приложения Telegram"
+  | "Настольные приложения"
+  | "3D-коммерция";
 
-export type ProjectLayout = "full" | "split-left" | "split-right" | "compact" | "editorial";
+export type ProjectLayout =
+  | "full"
+  | "split-left"
+  | "split-right"
+  | "compact"
+  | "editorial";
 
 export interface Project {
   slug: string;
   title: string;
   shortTitle?: string;
+  previewTitle: string;
+  previewCategory: string;
   category: string;
+  projectType: string;
   archiveCategory: ArchiveCategory;
   year: number;
   status: ProjectStatus;
@@ -17,385 +32,621 @@ export interface Project {
   layout: ProjectLayout;
   accent: string;
   cover: string;
+  previewImage?: string;
+  coverPosition?: string;
+  coverZoom?: number;
+  previewFit?: "contain";
+  previewDevice?: "phone";
+  previewDevicePosition?: string;
+  previewDeviceSide?: "left";
+  previewVariant?: "fintech";
+  previewCopySide?: "left";
+  demoPath?: string;
   gallery: string[];
-  /** Short card blurb */
   summary: string;
-  /** Business context */
   context: string;
-  /** User / client problem */
   problem: string;
-  /** Project objective */
   objective: string;
-  /** Design solution */
   solution: string;
-  /** What the product does */
   functionality: string[];
-  /** What TSBLV delivered */
   contribution: string;
   services: string[];
   visualDirection: string;
   development: string;
   outcome: string;
   isConcept: boolean;
+  liveUrl?: string;
 }
 
 export const projects: Project[] = [
   {
-    slug: "sol-restaurant",
-    title: "Ресторан «Соль»",
-    shortTitle: "Соль",
-    category: "Сайт / Ресторан",
+    slug: "mount-hospitality",
+    title: "MOUNT",
+    previewTitle: "MOUNT",
+    previewCategory: "Архитектурный отель",
+    category: "Гостеприимство / отель",
+    projectType: "Концепт сайта",
     archiveCategory: "Сайты",
     year: 2026,
     status: "Концепт",
     featured: true,
     featuredOrder: 1,
     layout: "full",
-    accent: "#C65D3A",
-    cover: "https://picsum.photos/seed/tsblv-sol-dining/1600/1100",
+    accent: "#9C7A4A",
+    cover: "/projects/mount-hero-generated.png",
+    coverPosition: "center 48%",
+    demoPath: "/demos/mount/index.html",
     gallery: [
-      "https://picsum.photos/seed/tsblv-sol-interior/1400/900",
-      "https://picsum.photos/seed/tsblv-sol-menu/1400/900",
-      "https://picsum.photos/seed/tsblv-sol-mobile/900/1400",
+      "/projects/mount-exterior.svg",
+      "/projects/mount-room.svg",
     ],
     summary:
-      "Сайт ресторана: атмосфера, меню, события и бронь стола без лишних кликов.",
+      "Концепция сайта уединённого архитектурного отеля в Северной Осетии, построенная вокруг тишины, камня и горного ландшафта.",
     context:
-      "Небольшой городской ресторан с сезонной кухней. Гости узнают о месте из соцсетей и часто ищут меню и свободный стол с телефона.",
+      "MOUNT представлен как камерный архитектурный отель, встроенный в склон и рассчитанный на спокойный, созерцательный отдых.",
     problem:
-      "Старый сайт не передавал характер зала, меню было в PDF, а бронь уходила в переписку. События почти не замечали.",
+      "Обычная структура гостиничного сайта не передавала бы характер места и свела бы впечатление к каталогу номеров и форме бронирования.",
     objective:
-      "Показать атмосферу, удобно открыть меню, анонсировать вечера и упростить бронирование стола.",
+      "Соединить атмосферную презентацию локации с понятным выбором номера, инфраструктуры и сценария запроса дат.",
     solution:
-      "Тёплый editorial-сайт с крупными кадрами, живым меню по разделам, блоком событий и короткой формой брони на главной и в меню.",
+      "Редакционная композиция с топографической графикой, крупными сценами, обзором номеров, ресторана, спа и коротким путём к бронированию.",
     functionality: [
-      "Атмосферная главная с понятным следующим шагом",
-      "Меню с ценами и категориями",
-      "Анонсы вечеров и спецпредложений",
-      "Форма бронирования стола",
+      "Каталог номеров и резиденций",
+      "Обзор локации и инфраструктуры",
+      "Сезонные сценарии отдыха",
+      "Форма запроса доступности",
     ],
     contribution:
-      "Структура, дизайн, адаптивная вёрстка, форма брони с уведомлением и подготовка к публикации.",
-    services: ["Дизайн", "Вёрстка", "Меню", "Форма брони"],
+      "Концепция, информационная архитектура, визуальная система, адаптивный frontend и интерактивные сценарии.",
+    services: ["Art direction", "UX", "Web design", "Frontend"],
     visualDirection:
-      "Тёплый свет, крупные фото еды и зала, спокойная типографика, один яркий акцент на действиях.",
+      "Тёплая минеральная палитра, топографические линии, сдержанная типографика и большой объём воздуха.",
     development:
-      "Быстрый адаптивный сайт, оптимизация изображений, форма заявки без тяжёлой админки.",
+      "Статический адаптивный сайт с локальными медиа, интерактивными галереями и поддержкой reduced motion.",
     outcome:
-      "В результате получилась цельная дизайн-концепция с выразительной визуальной системой, понятной структурой и адаптивной реализацией.",
+      "Завершённая концепция hospitality-сайта с цельным визуальным языком и проработанным путём к бронированию.",
     isConcept: true,
   },
   {
-    slug: "hrebet-hotel",
-    title: "Отель «Хребет»",
-    shortTitle: "Хребет",
-    category: "Сайт / Отель",
+    slug: "elena-orlova",
+    title: "Elena Orlova",
+    previewTitle: "Елена Орлова",
+    previewCategory: "Личный сайт косметолога",
+    category: "Личный бренд / косметология",
+    projectType: "Концепт сайта",
     archiveCategory: "Сайты",
     year: 2026,
     status: "Концепт",
     featured: true,
     featuredOrder: 2,
-    layout: "split-left",
-    accent: "#3D4F5F",
-    cover: "https://picsum.photos/seed/tsblv-hrebet-mountain/1600/1100",
+    layout: "editorial",
+    accent: "#A9796B",
+    cover: "/projects/elena-live.png",
+    previewImage: "/projects/elena-portrait.webp",
+    coverPosition: "center 44%",
+    demoPath: "/demos/elena/index.html",
     gallery: [
-      "https://picsum.photos/seed/tsblv-hrebet-rooms/1400/900",
-      "https://picsum.photos/seed/tsblv-hrebet-lobby/1400/900",
-      "https://picsum.photos/seed/tsblv-hrebet-mobile/900/1400",
+      "/projects/elena-portrait.webp",
+      "/projects/elena-cover.webp",
     ],
     summary:
-      "Сайт горного отеля: номера, локация, ответы на частые вопросы и путь к брони.",
+      "Премиальный личный сайт независимого специалиста по эстетической косметологии с акцентом на доверие и естественный результат.",
     context:
-      "Небольшой отель у горного маршрута. Брони часто идут через сообщения, гости заранее спрашивают про дорогу, завтрак и разницу номеров.",
+      "Концепция персонального бренда специалиста, где важны деликатная визуальная подача, ясные услуги и спокойный сценарий записи.",
     problem:
-      "Информация размазана по чатам и устаревшей странице. Сложно сравнить номера и быстро оставить запрос на даты.",
+      "Типовые beauty-сайты часто перегружены обещаниями и не дают пользователю почувствовать подход конкретного специалиста.",
     objective:
-      "Показать номера и место, закрыть типовые вопросы и привести к запросу бронирования.",
+      "Передать профессиональный характер практики и собрать услуги, метод, профиль специалиста и запись в цельную историю.",
     solution:
-      "Спокойная структура: виды, номера, удобства, как добраться, FAQ и форма запроса дат на каждой карточке номера.",
+      "Одностраничный editorial-сайт с мягкой сменой светлых и тёмных сцен, выборочной serif-типографикой и выразительной макросъёмкой.",
     functionality: [
-      "Обзор отеля и локации",
-      "Каталог номеров с отличиями",
-      "Блок ответов на частые вопросы",
-      "Запрос бронирования по датам",
+      "Презентация специалиста и подхода",
+      "Каталог процедур",
+      "Раздел о методе и диагностике",
+      "Сценарий записи",
     ],
     contribution:
-      "Информационная архитектура, дизайн страниц, frontend и настройка форм запроса.",
-    services: ["Структура", "Дизайн", "Frontend", "FAQ"],
+      "Бренд-концепция, UX, визуальная система, адаптивная вёрстка и motion direction.",
+    services: ["Personal brand", "UX", "Web design", "Motion"],
     visualDirection:
-      "Широкий кадр, воздух в вёрстке, палитра камня и хвои, спокойный ритм без туристического шума.",
+      "Фарфоровые оттенки, графитовые сцены, приглушённая розовая медь и естественные текстуры кожи.",
     development:
-      "Многостраничный адаптивный сайт, галереи номеров, валидация дат в форме.",
+      "Семантический статический сайт с адаптивом, reduced motion и визуальным fallback для 3D-сцены.",
     outcome:
-      "Дизайн-концепция с ясной структурой: номера, ответы на вопросы и короткий путь к запросу бронирования.",
+      "Готовая концепция личного сайта, в которой доверие строится через структуру, тон и аккуратную детализацию.",
     isConcept: true,
   },
   {
-    slug: "alina-vesna",
-    title: "Алина Весна",
-    shortTitle: "Алина",
-    category: "Сайт / Косметолог",
-    archiveCategory: "Сайты",
+    slug: "forma-mini-app",
+    title: "FORMA",
+    previewTitle: "FORMA",
+    previewCategory: "Мини-приложение Telegram",
+    category: "Мини-приложение Telegram",
+    projectType: "Интерактивный продукт",
+    archiveCategory: "Мини-приложения Telegram",
     year: 2026,
     status: "Концепт",
     featured: true,
     featuredOrder: 3,
-    layout: "editorial",
-    accent: "#8B5E3C",
-    cover: "https://picsum.photos/seed/tsblv-alina-cosmo/1600/1100",
+    layout: "split-right",
+    accent: "#B58A63",
+    cover: "/projects/forma-live.png",
+    coverPosition: "72% center",
+    previewCopySide: "left",
+    demoPath: "/demos/forma/index.html",
     gallery: [
-      "https://picsum.photos/seed/tsblv-alina-services-cosmo/1400/900",
-      "https://picsum.photos/seed/tsblv-alina-trust/1400/900",
-      "https://picsum.photos/seed/tsblv-alina-booking/900/1400",
+      "/projects/forma-tools.jpg",
+      "/projects/forma-live.png",
     ],
     summary:
-      "Личный сайт косметолога: доверие, услуги, запись на приём и понятный следующий шаг.",
+      "Интерактивный Telegram Mini App для записи в барбершоп: мастер, услуга, живой слот, перенос визита и лояльность.",
     context:
-      "Частный косметолог ведёт приём и набор клиентов через Instagram. Люди спрашивают про услуги, цены и свободные окна в Direct.",
+      "FORMA объединяет презентационный лендинг и полностью кликабельный прототип записи внутри привычного интерфейса Telegram.",
     problem:
-      "В соцсетях красиво, но нет спокойной страницы, где понятны услуги, противопоказания и как записаться. Заявки теряются в переписке.",
+      "Запись через переписку требует повторных уточнений и не даёт клиенту быстро увидеть свободное время и управлять визитом.",
     objective:
-      "Собрать доверие, показать услуги и направить к короткой записи на консультацию или процедуру.",
+      "Собрать короткий самостоятельный сценарий записи и сохранить ощущение премиального сервиса на каждом шаге.",
     solution:
-      "Личный сайт с ясным оффером, списком услуг, блоком доверия и формой записи без лишней медицинской терминологии.",
+      "Девять интерактивных экранов с выбором услуги, мастера и времени, подтверждением, переносом, отменой и программой лояльности.",
     functionality: [
-      "Презентация специалиста",
-      "Каталог услуг",
-      "Блок доверия и ответов",
-      "Форма записи на приём",
+      "Запись за четыре шага",
+      "Выбор мастера и услуги",
+      "Перенос и отмена визита",
+      "Светлая и тёмная темы",
+      "Программа лояльности",
     ],
     contribution:
-      "Структура, дизайн, вёрстка, форма записи и подготовка к публикации.",
-    services: ["Личный сайт", "Услуги", "Запись", "Адаптив"],
+      "Продуктовый сценарий, UI-система, интерактивный прототип, адаптивная презентация и локальная сборка.",
+    services: ["Product UX", "UI", "Prototype", "Telegram Mini App"],
     visualDirection:
-      "Светлый спокойный тон, крупные портретные и процедурные кадры, акцент на доверии и ясности.",
+      "Тактильная мужская эстетика, крупная фотография, спокойная типографика и компактные продуктовые экраны.",
     development:
-      "Лёгкий сайт, адаптив, форма с уведомлением в Telegram.",
+      "Автономный статический пакет с локальными шрифтами, фотографиями и анимациями без внешнего backend.",
     outcome:
-      "Независимая концепция личного сайта: услуги, доверие и понятный сценарий записи без лишней переписки.",
+      "Завершённый интерактивный концепт полного сценария записи и управления визитом.",
     isConcept: true,
   },
   {
-    slug: "stol-mini",
-    title: "Стол",
-    shortTitle: "Стол",
-    category: "Mini App / Кафе",
-    archiveCategory: "Telegram",
+    slug: "hearth-macos",
+    title: "Hearth",
+    previewTitle: "Hearth",
+    previewCategory: "Рабочее пространство для macOS",
+    category: "Приложение для macOS",
+    projectType: "Настольное приложение",
+    archiveCategory: "Настольные приложения",
     year: 2026,
-    status: "Концепт",
+    status: "Реализованный проект",
     featured: true,
     featuredOrder: 4,
-    layout: "split-right",
-    accent: "#2F6FED",
-    cover: "https://picsum.photos/seed/tsblv-stol-telegram/1600/1100",
-    gallery: [
-      "https://picsum.photos/seed/tsblv-stol-flow/1400/900",
-      "https://picsum.photos/seed/tsblv-stol-screens/1400/900",
-      "https://picsum.photos/seed/tsblv-stol-mobile/900/1400",
-    ],
+    layout: "split-left",
+    accent: "#4D8191",
+    cover: "/projects/hearth-cover-fixed.png",
+    previewImage: "/projects/hearth-cover-fixed.png",
+    coverPosition: "center top",
+    demoPath: "/demos/hearth/index.html",
+    gallery: ["/projects/hearth-cover-fixed.png"],
     summary:
-      "Mini App для локального кафе: бронь стола, заказ навынос и простая программа лояльности.",
+      "Спокойное персональное рабочее пространство для macOS, объединяющее задачи, заметки, планирование, календарь, фокус и базу знаний.",
     context:
-      "Городское кафе принимает бронь и заказы в Telegram-чате. Постоянные гости просят «как в прошлый раз», а администратор тонет в сообщениях.",
+      "Hearth существует как настольное Electron-приложение для локальной работы с повседневными задачами и связанными знаниями.",
     problem:
-      "Заявки приходят текстом без структуры. Сложно видеть занятость, статусы заказа и накопленные бонусы.",
+      "Разделение задач, календаря, заметок и целей между разными инструментами создаёт лишние переключения и теряет контекст.",
     objective:
-      "Собрать бронь, заказ и лояльность в одном Mini App рядом с привычным чатом.",
+      "Собрать ежедневное планирование и личную базу знаний в одном спокойном, последовательно организованном приложении.",
     solution:
-      "Компактное приложение внутри Telegram: выбор сценария, короткие формы, статусы и карта лояльности без отдельного сайта.",
+      "Единая desktop-среда с Today, Timeline, Notes, Tables, Canvas, Atlas, Goals, Focus и Archive, дополненная командной строкой.",
     functionality: [
-      "Бронь стола на дату и время",
-      "Заказ навынос с составом",
-      "Статусы для гостя",
-      "Простая карта лояльности",
+      "Задачи и временная шкала",
+      "Markdown-заметки и wiki-ссылки",
+      "Календарь и цели",
+      "Canvas и граф связей Atlas",
+      "Focus-режим и локальное хранение",
     ],
     contribution:
-      "Сценарии, UI Mini App, адаптация под Telegram и связка уведомлений для администратора.",
-    services: ["UX", "UI", "Telegram Mini App"],
+      "Продуктовая архитектура, дизайн интерфейса, компоненты, локальное состояние и упаковка приложения для macOS.",
+    services: ["Product design", "Desktop UI", "Electron", "Local data"],
     visualDirection:
-      "Плотный, спокойный интерфейс в духе мессенджера: без декоративного шума, с ясными кнопками действий.",
+      "Светлая рабочая поверхность, тихие цветовые маркеры, тонкая иерархия и интерфейс, рассчитанный на долгую работу.",
     development:
-      "Интерфейс Mini App, валидация форм, прототип статусов и уведомлений.",
+      "Electron-приложение для macOS с локальным хранением и сборкой в DMG. В портфолио показан case study без ложной web-demo ссылки.",
     outcome:
-      "Концепт Mini App: структурированные сценарии брони, заказа и лояльности рядом с привычным чатом.",
-    isConcept: true,
+      "Рабочее desktop-приложение с завершённой системой ключевых экранов и инструментов продуктивности.",
+    isConcept: false,
   },
   {
-    slug: "primerochnaya",
-    title: "Примерочная",
-    shortTitle: "Примерочная",
-    category: "Веб-сервис / Конфигуратор",
-    archiveCategory: "Интерфейсы",
+    slug: "stanza-3d",
+    title: "STANZA",
+    previewTitle: "STANZA",
+    previewCategory: "3D-конфигуратор мебели",
+    category: "3D-коммерция / мебель",
+    projectType: "Интерактивный веб-проект",
+    archiveCategory: "3D-коммерция",
     year: 2026,
     status: "Концепт",
     featured: true,
     featuredOrder: 5,
-    layout: "compact",
-    accent: "#8B6914",
-    cover: "https://picsum.photos/seed/tsblv-primer-room/1600/1100",
+    layout: "full",
+    accent: "#8B735B",
+    cover: "/projects/stanza-configurator-cover-v2.png",
+    coverPosition: "center",
+    demoPath: "/demos/stanza/studio/index.html",
     gallery: [
-      "https://picsum.photos/seed/tsblv-primer-catalog/1400/900",
-      "https://picsum.photos/seed/tsblv-primer-materials/1400/900",
-      "https://picsum.photos/seed/tsblv-primer-mobile/900/1400",
+      "/projects/stanza-editorial.webp",
+      "/projects/stanza-room.webp",
     ],
     summary:
-      "Интерактивный конфигуратор, в котором пользователь собирает комнату, добавляет мебель, меняет материалы и получает ориентировочную стоимость.",
+      "Интерактивная 3D-commerce система для мебели: каталог, конфигурация комнаты, материалы, живая стоимость, сохранение и заявка.",
     context:
-      "Мебельная студия показывает каталог на сайте, но клиенту сложно представить набор в своей комнате. Заявки часто приходят без понимания бюджета и состава.",
+      "STANZA соединяет премиальный мебельный каталог с Room Studio, где пользователь собирает и настраивает собственное пространство.",
     problem:
-      "Клиент листает фото, но не собирает своё решение. Менеджер тратит время на уточнения, которые можно было закрыть на экране.",
+      "Статичные карточки товара не помогают оценить масштаб, сочетание материалов и итоговую композицию мебели в комнате.",
     objective:
-      "Помочь мебельной студии вовлечь клиента в выбор, наглядно показать будущий интерьер и получить более подготовленную заявку.",
+      "Перенести ключевую часть консультации в интерактивный web-сценарий без разрыва между вдохновением, настройкой и запросом цены.",
     solution:
-      "Конфигуратор комнаты: план, каталог мебели, материалы, живая оценка стоимости и сохранение сценария перед заявкой. В портфолио показано превью интерфейса, не полный продукт.",
+      "Параметрический 3D-конфигуратор с шаблонами комнат, каталогом, инспектором материалов, photo mode, live pricing и сохранением проекта.",
     functionality: [
-      "План комнаты",
-      "Каталог мебели",
-      "Перетаскивание объектов",
-      "Поворот и масштаб",
-      "Выбор материалов и цвета",
-      "Живая оценка стоимости",
-      "Сохранённая конфигурация",
-      "Отправка заявки",
+      "Параметрическая 3D-мебель",
+      "Шаблоны комнат и photo mode",
+      "Материалы и размеры",
+      "Живая стоимость и корзина",
+      "Локальное сохранение и share links",
     ],
     contribution:
-      "Проектирование сценария, интерфейс конфигуратора, слои экранов и каркас взаимодействия для дизайн-концепции.",
-    services: ["Интерфейс продукта", "Конфигуратор", "Frontend-концепт"],
+      "Продуктовая система, e-commerce UX, визуальный дизайн, React Three Fiber сцены и архитектура конфигуратора.",
+    services: ["3D UX", "Commerce", "R3F", "Product design"],
     visualDirection:
-      "Светлый продуктовый интерфейс, спокойная сетка, акценты на инструментах и превью комнаты.",
+      "Тихая интерьерная редакционность, натуральные материалы и утилитарный интерфейс поверх полноценной 3D-сцены.",
     development:
-      "Слои интерфейса и интерактивное превью без полной логики конфигуратора. Акцент на ясности сценария.",
+      "Next.js-приложение с React Three Fiber, процедурной геометрией, локальной персистентностью и статическим экспортом.",
     outcome:
-      "Дизайн-концепция, показывающая, как студия может вовлечь клиента в выбор и получить более точную заявку.",
+      "Завершённая техническая концепция, связывающая мебельный каталог с глубоким интерактивным конфигуратором.",
     isConcept: true,
   },
   {
-    slug: "type-rhythm",
-    title: "Ритм набора",
-    category: "Эксперимент / Типографика",
-    archiveCategory: "Эксперименты",
-    year: 2026,
-    status: "Эксперимент",
-    featured: false,
-    layout: "compact",
-    accent: "#141413",
-    cover: "https://picsum.photos/seed/tsblv-type-rhythm/1200/900",
-    gallery: ["https://picsum.photos/seed/tsblv-type-rhythm-2/1200/900"],
-    summary: "Эксперимент с крупной типографикой и модульными отступами для лендингов.",
-    context: "Внутренний визуальный эксперимент.",
-    problem: "Нужно проверить читаемость крупного текста на телефоне.",
-    objective: "Собрать рабочие приёмы шкалы и интерлиньяжа.",
-    solution: "Серия экранов с разными ритмами строк.",
-    functionality: ["Типографические модули"],
-    contribution: "Исследовательский набор приёмов.",
-    services: ["Эксперимент"],
-    visualDirection: "Монохром, акцент на ритме.",
-    development: "Статичные экраны.",
-    outcome: "Набор приёмов для будущих лендингов.",
-    isConcept: true,
-  },
-  {
-    slug: "ugol-cafe",
-    title: "Кафе «Угол»",
-    category: "Сайт / Локальный бизнес",
+    slug: "aera-dentistry",
+    title: "AERA",
+    previewTitle: "AERA",
+    previewCategory: "Сайт стоматологии",
+    category: "Медицина / стоматология",
+    projectType: "Концепт сайта",
     archiveCategory: "Сайты",
     year: 2026,
     status: "Концепт",
     featured: false,
-    layout: "compact",
-    accent: "#8B5E3C",
-    cover: "https://picsum.photos/seed/tsblv-cafe-ugol/1200/900",
-    gallery: ["https://picsum.photos/seed/tsblv-cafe-ugol-2/1200/900"],
-    summary: "Короткий сайт локального кафе: меню, часы, карта.",
-    context: "Небольшое кафе в жилом районе.",
-    problem: "Устаревшая одностраничка без актуального меню.",
-    objective: "Быстрая понятная страница вместо хаоса.",
-    solution: "Один экран с меню и контактами.",
-    functionality: ["Меню", "Часы работы", "Контакты"],
-    contribution: "Дизайн и вёрстка мини-сайта.",
-    services: ["Лендинг"],
-    visualDirection: "Тёплый локальный характер.",
-    development: "Статический лендинг.",
-    outcome: "Компактная дизайн-концепция для локального места.",
+    layout: "editorial",
+    accent: "#315F58",
+    cover: "/projects/aera-cover.jpg",
+    coverPosition: "center 45%",
+    demoPath: "/demos/aera/index.html",
+    gallery: ["/projects/aera-cover.jpg"],
+    summary:
+      "Спокойный сайт стоматологии с понятными услугами, врачами, ценами, кейсами и записью на консультацию.",
+    context: "Концепция цифрового представительства современной стоматологии.",
+    problem: "Медицинские сайты часто перегружены тревожной подачей и сложной навигацией.",
+    objective: "Сделать путь к информации и записи спокойным и прозрачным.",
+    solution: "Светлая editorial-система с ясной структурой услуг и доверительной подачей.",
+    functionality: ["Каталог услуг", "Профили врачей", "Цены", "Запись"],
+    contribution: "UX, визуальная концепция, адаптивный frontend.",
+    services: ["UX", "Web design", "Frontend"],
+    visualDirection: "Тёплый ivory, глубокий зелёный и мягкая медицинская фотография.",
+    development: "Автономная responsive web-концепция.",
+    outcome: "Полностью собранная концепция сайта стоматологии без заявленных коммерческих результатов.",
     isConcept: true,
   },
   {
-    slug: "status-cards",
-    title: "Карточки статуса",
-    category: "Telegram / Эксперимент",
-    archiveCategory: "Эксперименты",
+    slug: "anna-volkova",
+    title: "Anna Volkova",
+    previewTitle: "Анна Волкова",
+    previewCategory: "Частная недвижимость",
+    category: "Личный бренд / недвижимость",
+    projectType: "Концепт сайта",
+    archiveCategory: "Сайты",
     year: 2026,
-    status: "Эксперимент",
+    status: "Концепт",
     featured: false,
-    layout: "compact",
-    accent: "#2F6FED",
-    cover: "https://picsum.photos/seed/tsblv-status-cards/1200/900",
-    gallery: ["https://picsum.photos/seed/tsblv-status-cards-2/1200/900"],
-    summary: "Эксперимент со статусами заказа внутри Telegram.",
-    context: "Прототип для будущих Mini App.",
-    problem: "Клиенты спрашивают статус вручную.",
-    objective: "Показать ясный статус без длинного текста.",
-    solution: "Короткие карточки статусов.",
-    functionality: ["Список статусов"],
-    contribution: "UI-прототип.",
-    services: ["Прототип"],
-    visualDirection: "Плотный утилитарный интерфейс.",
-    development: "Статичный прототип.",
-    outcome: "Заготовка сценария для Mini App.",
+    layout: "split-left",
+    accent: "#8A6A4A",
+    cover: "/projects/anna-volkova-cover.webp",
+    coverPosition: "center 42%",
+    demoPath: "/demos/anna-volkova/index.html",
+    gallery: ["/projects/anna-volkova-cover.webp"],
+    summary:
+      "Личный сайт частного риелтора с объектами, услугами, многошаговой оценкой и понятным сценарием обращения.",
+    context: "Демонстрационная концепция персонального сайта специалиста по недвижимости.",
+    problem: "Пользователю сложно оценить подход специалиста и быстро сформулировать запрос.",
+    objective: "Соединить доверительную презентацию, объекты и первичную квалификацию заявки.",
+    solution: "Спокойный сайт с портретной подачей, фильтрами объектов и пошаговой формой оценки.",
+    functionality: ["Каталог объектов", "Фильтры", "Форма оценки", "Контактные сценарии"],
+    contribution: "Структура, UI, адаптивная вёрстка и интерактивные состояния.",
+    services: ["Personal brand", "UX", "Frontend"],
+    visualDirection: "Тёплая нейтральная палитра и архитектурная фотография.",
+    development: "Статический сайт с локальными ассетами и демонстрационными формами.",
+    outcome: "Готовая к презентации концепция личного сайта риелтора.",
     isConcept: true,
   },
   {
-    slug: "form-states",
-    title: "Состояния форм",
-    category: "Интерфейс / Система",
-    archiveCategory: "Интерфейсы",
+    slug: "elan-events",
+    title: "Élan Events",
+    previewTitle: "Élan",
+    previewCategory: "События и свадьбы",
+    category: "События / гостеприимство",
+    projectType: "Концепт сайта",
+    archiveCategory: "Сайты",
     year: 2026,
-    status: "Эксперимент",
+    status: "Концепт",
+    featured: false,
+    layout: "editorial",
+    accent: "#9A7568",
+    cover: "/projects/elan-cover.jpg",
+    coverPosition: "center",
+    demoPath: "/demos/elan-events/index.html",
+    gallery: ["/projects/elan-cover.jpg"],
+    summary:
+      "Editorial-сайт boutique event studio для свадеб, частных событий и международных проектов.",
+    context: "Концепция сайта студии камерных и destination-событий.",
+    problem: "Типовой каталог услуг не передаёт режиссуру, атмосферу и масштаб работы студии.",
+    objective: "Показать визуальный мир бренда и направить к содержательному запросу.",
+    solution: "Фотографическая история с услугами, направлениями, процессом и формой обращения.",
+    functionality: ["Портфолио событий", "Услуги", "География", "Inquiry form"],
+    contribution: "Art direction, структура, responsive design и motion.",
+    services: ["Art direction", "Editorial web", "Motion"],
+    visualDirection: "Мягкая event-фотография, тёплые нейтралы и выразительная serif-типографика.",
+    development: "Статический сайт с оптимизированной фотографией и inline-интеракциями.",
+    outcome: "Цельная concept presentation для event-бренда.",
+    isConcept: true,
+  },
+  {
+    slug: "gran-education",
+    title: "GRAN",
+    previewTitle: "GRAN",
+    previewCategory: "Образовательный центр",
+    category: "Образование",
+    projectType: "Концепт сайта",
+    archiveCategory: "Сайты",
+    year: 2026,
+    status: "Концепт",
+    featured: false,
+    layout: "split-right",
+    accent: "#5E7896",
+    cover: "/projects/gran-cover.jpg",
+    coverPosition: "center 42%",
+    demoPath: "/demos/gran/index.html",
+    gallery: ["/projects/gran-cover.jpg"],
+    summary:
+      "Сайт образовательного центра с программами, методом, преподавателями, пространством и записью на консультацию.",
+    context: "Концепция цифровой платформы современного образовательного центра.",
+    problem: "Большой объём программ и доверительных блоков легко превращается в перегруженную витрину.",
+    objective: "Выстроить ясную и визуально собранную историю обучения.",
+    solution: "Модульный сайт с программами, методом, командой, пространством и формой записи.",
+    functionality: ["Программы", "Метод", "Преподаватели", "Запись"],
+    contribution: "Информационная архитектура, visual design, 3D-акценты и frontend.",
+    services: ["UX", "Web design", "3D direction"],
+    visualDirection: "Тёплый белый, песочный, приглушённый синий и редакционная фотография.",
+    development: "Статический адаптивный сайт с локальными медиа и reduced motion.",
+    outcome: "Завершённая концепция сайта образовательного центра.",
+    isConcept: true,
+  },
+  {
+    slug: "lumen-card",
+    title: "Lumen Card",
+    previewTitle: "Lumen Card",
+    previewCategory: "Финтех в Telegram",
+    category: "Финтех / Telegram",
+    projectType: "Интерактивный продукт",
+    archiveCategory: "Мини-приложения Telegram",
+    year: 2026,
+    status: "Концепт",
     featured: false,
     layout: "compact",
-    accent: "#C65D3A",
-    cover: "https://picsum.photos/seed/tsblv-form-states/1200/900",
-    gallery: ["https://picsum.photos/seed/tsblv-form-states-2/1200/900"],
-    summary: "Набор аккуратных состояний полей и кнопок для клиентских сайтов.",
-    context: "Внутренний UI-эксперимент.",
-    problem: "Формы на сайтах часто выглядят чужеродно.",
-    objective: "Единый язык ошибок, фокуса и успеха.",
-    solution: "Компонентный набор состояний.",
-    functionality: ["Поля", "Ошибки", "Успех"],
-    contribution: "Переиспользуемый UI-слой.",
-    services: ["UI"],
-    visualDirection: "Светлый editorial-интерфейс.",
-    development: "Компоненты без бэкенда.",
-    outcome: "База для форм в будущих проектах.",
+    accent: "#C9E85B",
+    cover: "/projects/lumen-cover.jpg",
+    coverPosition: "center 42%",
+    coverZoom: 1.26,
+    previewDevice: "phone",
+    previewDevicePosition: "center 46%",
+    previewVariant: "fintech",
+    demoPath: "/demos/lumen-card/index.html",
+    gallery: ["/projects/lumen-cover.jpg"],
+    summary:
+      "Кликабельный Telegram Mini App для виртуальной crypto-карты с балансом, обменом, оплатой и историей операций.",
+    context: "Интерактивный fintech-концепт на локальных демонстрационных данных.",
+    problem: "Финансовые сценарии внутри Mini App требуют плотного, но понятного мобильного интерфейса.",
+    objective: "Собрать ключевые операции карты в одном последовательном продукте.",
+    solution: "Mobile-first приложение с четырьмя разделами и интерактивными денежными сценариями.",
+    functionality: ["Баланс", "Пополнение", "Обмен", "Оплата", "История"],
+    contribution: "Product UX, UI-система, состояния и интерактивный прототип.",
+    services: ["Fintech UX", "Telegram UI", "Prototype"],
+    visualDirection: "Тёмный графит, тёплый белый и точечный lime-акцент.",
+    development: "React/Vite single-file build с локальными mock-данными.",
+    outcome: "Полностью кликабельный product concept без реальных финансовых операций.",
+    isConcept: true,
+  },
+  {
+    slug: "morozov-renovation",
+    title: "Morozov",
+    previewTitle: "Morozov",
+    previewCategory: "Сайт для ремонта",
+    category: "Услуги / ремонт",
+    projectType: "Концепт сайта",
+    archiveCategory: "Сайты",
+    year: 2026,
+    status: "Концепт",
+    featured: false,
+    layout: "split-left",
+    accent: "#A36D45",
+    cover: "/projects/morozov-cover.jpg",
+    coverPosition: "center",
+    demoPath: "/demos/morozov/index.html",
+    gallery: ["/projects/morozov-cover.jpg"],
+    summary:
+      "Сайт частного мастера по ремонту с услугами, портфолио до и после, калькулятором и формой заявки.",
+    context: "Концепция сайта сервисного специалиста с большим объёмом практической информации.",
+    problem: "Разрозненные фотографии и списки услуг не объясняют процесс и не помогают оценить задачу.",
+    objective: "Сделать предложение понятным и провести пользователя от примеров к расчёту.",
+    solution: "Структурированный сайт с услугами, проектами, калькулятором и формой заявки.",
+    functionality: ["Услуги", "До и после", "Калькулятор", "Форма заявки"],
+    contribution: "Структура, визуальный дизайн, адаптив и frontend-интеракции.",
+    services: ["UX", "Web design", "Calculator"],
+    visualDirection: "Тёплые интерьерные кадры и практичная, спокойная типографика.",
+    development: "Статический сайт с локальными изображениями и демонстрационной формой.",
+    outcome: "Готовая concept presentation для частного специалиста.",
+    isConcept: true,
+  },
+  {
+    slug: "sfera-travel",
+    title: "SFERA",
+    previewTitle: "SFERA",
+    previewCategory: "Авторские путешествия",
+    category: "Путешествия / гостеприимство",
+    projectType: "Концепт сайта",
+    archiveCategory: "Сайты",
+    year: 2026,
+    status: "Концепт",
+    featured: false,
+    layout: "full",
+    accent: "#7B8068",
+    cover: "/projects/sfera-cover.jpg",
+    coverPosition: "center",
+    demoPath: "/demos/sfera/index.html",
+    gallery: ["/projects/sfera-cover.jpg"],
+    summary:
+      "Сайт boutique travel agency с авторскими маршрутами, форматами путешествий, историями и формой подбора.",
+    context: "Концепция сайта для небольшого агентства авторских путешествий.",
+    problem: "Каталог направлений без редакционного контекста не передаёт характер маршрутов и сопровождения.",
+    objective: "Соединить вдохновение, детали поездок и понятный запрос на подбор.",
+    solution: "Атмосферный сайт с маршрутами, форматами, историями и формой брифа.",
+    functionality: ["Маршруты", "Форматы", "Истории", "Форма подбора"],
+    contribution: "Art direction, UX, адаптивный frontend и motion.",
+    services: ["Editorial web", "Travel UX", "Motion"],
+    visualDirection: "Крупный ландшафт, глубокая природная палитра и сдержанная редакционная сетка.",
+    development: "Статический адаптивный сайт с локальной фотографией.",
+    outcome: "Завершённая концепция digital-презентации travel-бренда.",
+    isConcept: true,
+  },
+  {
+    slug: "levante-restaurant",
+    title: "LEVANTE",
+    previewTitle: "LEVANTE",
+    previewCategory: "Ресторан на Менорке",
+    category: "Ресторан / гостеприимство",
+    projectType: "Концепт сайта",
+    archiveCategory: "Сайты",
+    year: 2026,
+    status: "Концепт",
+    featured: false,
+    layout: "editorial",
+    accent: "#A0512D",
+    cover: "/projects/levante-cover.webp",
+    coverPosition: "center",
+    previewImage: "/demos/levante/assets/images/hero-poster.webp",
+    demoPath: "/demos/levante/index.html",
+    gallery: ["/projects/levante-cover.webp"],
+    summary: "Ресторанный сайт для концепта LEVANTE на побережье Менорки.",
+    context: "Концепция сайта ресторана с дневным меню и атмосферой средиземноморского побережья.",
+    problem: "Подача ресторана должна передавать свет, место и ритм одного дневного сервиса.",
+    objective: "Собрать меню, пространство и бронирование в короткую выразительную историю.",
+    solution: "Редакционный сайт с кинематографичным первым экраном, блюдами и сценарием бронирования.",
+    functionality: ["Меню", "Бронирование", "История ресторана"],
+    contribution: "Концепция, визуальная система, адаптивная вёрстка и интеракции.",
+    services: ["Art direction", "Web design", "Frontend"],
+    visualDirection: "Тёплый известняк, морской свет, терракотовый акцент и редакционная типографика.",
+    development: "Статический сайт с локальными изображениями, видео и reduced motion.",
+    outcome: "Завершённая концепция сайта ресторана.",
+    isConcept: true,
+  },
+  {
+    slug: "umbra-restaurant",
+    title: "UMBRA",
+    previewTitle: "UMBRA",
+    previewCategory: "Ресторан над облаками",
+    category: "Ресторан / гостеприимство",
+    projectType: "Концепт сайта",
+    archiveCategory: "Сайты",
+    year: 2026,
+    status: "Концепт",
+    featured: false,
+    layout: "editorial",
+    accent: "#E09A48",
+    cover: "/projects/umbra-cover.png",
+    coverPosition: "center",
+    demoPath: "/demos/umbra/index.html",
+    gallery: ["/projects/umbra-cover.png"],
+    summary:
+      "Иммерсивная концепция сайта ресторана на вулканическом хребте: одна посадка на закате, сезонное меню и атмосфера затмения.",
+    context:
+      "UMBRA задуман как камерный ресторан высокой кухни над облаками с тщательно выстроенным вечерним сценарием.",
+    problem:
+      "Обычная ресторанная витрина не передаёт ощущение места, времени и редкости одного вечернего сервиса.",
+    objective:
+      "Соединить историю локации, меню и путь к бронированию в цельное цифровое впечатление.",
+    solution:
+      "Кинематографичный сайт с тёмной палитрой, астрономическими мотивами, меню-пассажами и сценариями бронирования.",
+    functionality: [
+      "Подача меню по этапам вечера",
+      "Информация о времени посадки",
+      "История команды и винной карты",
+      "Сценарий бронирования стола",
+    ],
+    contribution:
+      "Концепция, арт-дирекшн, интерфейсные сценарии и адаптивная презентация.",
+    services: ["Art direction", "Editorial web", "Motion"],
+    visualDirection:
+      "Графитовая палитра, пепельные фактуры, янтарный свет и деликатная кинематографичная анимация.",
+    development:
+      "Статическая интерактивная концепция с адаптивной компоновкой и поддержкой reduced motion.",
+    outcome:
+      "Цельная презентация ресторанного бренда, связывающая атмосферу локации с бронированием.",
     isConcept: true,
   },
 ];
 
 export function getFeaturedProjects(): Project[] {
   return projects
-    .filter((p) => p.featured)
-    .sort((a, b) => (a.featuredOrder ?? 99) - (b.featuredOrder ?? 99));
+    .filter((project) => project.featured)
+    .sort(
+      (first, second) =>
+        (first.featuredOrder ?? 99) - (second.featuredOrder ?? 99),
+    );
+}
+
+export function getArchiveProjects(): Project[] {
+  const archiveOrder = [
+    "mount-hospitality",
+    "forma-mini-app",
+    "hearth-macos",
+    "stanza-3d",
+    "elena-orlova",
+    "lumen-card",
+    "aera-dentistry",
+    "anna-volkova",
+    "elan-events",
+    "gran-education",
+    "morozov-renovation",
+    "sfera-travel",
+    "levante-restaurant",
+    "umbra-restaurant",
+  ];
+  const ranks = new Map(archiveOrder.map((slug, index) => [slug, index]));
+
+  return [...projects].sort(
+    (first, second) =>
+      (ranks.get(first.slug) ?? Number.MAX_SAFE_INTEGER) -
+      (ranks.get(second.slug) ?? Number.MAX_SAFE_INTEGER),
+  );
 }
 
 export function getProjectBySlug(slug: string): Project | undefined {
-  return projects.find((p) => p.slug === slug);
+  return projects.find((project) => project.slug === slug);
 }
 
 export function getAdjacentProjects(slug: string): {
   prev: Project | null;
   next: Project | null;
 } {
-  const featured = getFeaturedProjects();
-  const index = featured.findIndex((p) => p.slug === slug);
-  if (index === -1) {
-    const allIndex = projects.findIndex((p) => p.slug === slug);
-    return {
-      prev: allIndex > 0 ? projects[allIndex - 1] : null,
-      next: allIndex < projects.length - 1 ? projects[allIndex + 1] : null,
-    };
-  }
+  const index = projects.findIndex((project) => project.slug === slug);
+
   return {
-    prev: index > 0 ? featured[index - 1] : null,
-    next: index < featured.length - 1 ? featured[index + 1] : null,
+    prev: index > 0 ? projects[index - 1] : null,
+    next: index >= 0 && index < projects.length - 1 ? projects[index + 1] : null,
   };
 }
